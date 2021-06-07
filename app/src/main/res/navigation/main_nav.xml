@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/dashbordFragment">
+
+    <fragment
+        android:id="@+id/dashbordFragment"
+        android:name="com.example.sandoughentezar.ui.nav_view.DashbordFragment"
+        android:label="fragment_dashbord"
+        tools:layout="@layout/fragment_dashbord" >
+        <action
+            android:id="@+id/action_dashbordFragment_to_loanFragment"
+            app:destination="@id/loanFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_dashbordFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.example.sandoughentezar.ui.nav_view.ReportFragment"
+        android:label="fragment_report"
+        tools:layout="@layout/fragment_report" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.sandoughentezar.ui.nav_view.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/statemetFragment"
+        android:name="com.example.sandoughentezar.ui.nav_view.StatemetFragment"
+        android:label="fragment_statemet"
+        tools:layout="@layout/fragment_statemet" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.sandoughentezar.ui.nav_view.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.example.sandoughentezar.ui.nav_view.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="com.example.sandoughentezar.ui.nav_view.ContactUsFragment"
+        android:label="fragment_contact_us"
+        tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/aboutAppFragment"
+        android:name="com.example.sandoughentezar.ui.nav_view.AboutAppFragment"
+        android:label="fragment_about_app"
+        tools:layout="@layout/fragment_about_app" />
+    <fragment
+        android:id="@+id/loanFragment"
+        android:name="com.example.sandoughentezar.ui.dashbord_action.LoanFragment"
+        android:label="fragment_loan"
+        tools:layout="@layout/fragment_loan" />
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.sandoughentezar.ui.dashbord_action.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" />
+</navigation>

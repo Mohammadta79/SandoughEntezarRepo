@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.nav_view.DashbordFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="2dp"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/vazir_medium"
+                android:text="امتیاز من"
+                android:textColor="@color/PrimaryText"></TextView>
+
+            <TextView
+                android:id="@+id/txt_my_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/vazir_bold"
+                android:text="0"
+                android:textColor="@color/DarkPrimaryColor"
+                android:textSize="18dp"></TextView>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginRight="2dp"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/cardView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/vazir_medium"
+                android:text="پرداختی من"
+                android:textColor="@color/PrimaryText"></TextView>
+
+            <TextView
+                android:id="@+id/txt_my_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/vazir_bold"
+                android:text="0 تومان"
+                android:textColor="@color/DarkPrimaryColor"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:id="@+id/more_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_my_pay"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/vazir_medium"
+                android:text="جزییات بیشتر"
+                android:textColor="@color/PrimaryColor"></TextView>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="2dp"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/cardView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView3"
+        app:layout_constraintWidth_percent="0.5">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/vazir_medium"
+                android:text="جایگاه من"
+                android:textColor="@color/PrimaryText"></TextView>
+
+            <TextView
+                android:id="@+id/txt_my_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/vazir_bold"
+                android:text="0"
+                android:textColor="@color/DarkPrimaryColor"
+                android:textSize="18dp"></TextView>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView4"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintWidth_percent="0.5">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/vazir_medium"
+                android:text="اقساط من"
+                android:textColor="@color/PrimaryText"></TextView>
+
+            <TextView
+                android:id="@+id/txt_my_installment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/vazir_bold"
+                android:text="قسط نداری!"
+                android:textColor="@color/DarkPrimaryColor"
+                android:textSize="18dp"></TextView>
+
+            <TextView
+                android:id="@+id/txt_more_installment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_my_installment"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/vazir_medium"
+                android:text="جزییات بیشتر"
+                android:textColor="@color/PrimaryColor"></TextView>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اقساط معوقه"
+                android:layout_alignParentRight="true"
+                android:layout_margin="8dp"
+                android:textColor="@color/PrimaryText"
+                android:fontFamily="@font/vazir_medium"></TextView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/installmentRV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/textview"
+                android:layout_margin="4dp"></androidx.recyclerview.widget.RecyclerView>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

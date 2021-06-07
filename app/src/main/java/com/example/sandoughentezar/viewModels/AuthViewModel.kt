@@ -30,7 +30,7 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
             repo.login(params)
                 .flowOn(Dispatchers.IO)
                 .catch {
-                    loginRes.postValue(Resource.failure(this.toString()))
+                    loginRes.postValue(Resource.failure(it.toString()))
                 }
                 .collect {
                     loginRes.postValue(Resource.success(it))
@@ -46,7 +46,7 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
             repo.register(params)
                 .flowOn(Dispatchers.IO)
                 .catch {
-                    registerRes.postValue(Resource.failure(this.toString()))
+                    registerRes.postValue(Resource.failure(it.toString()))
                 }
                 .collect {
                     registerRes.postValue(Resource.success(it))
@@ -62,7 +62,7 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
             repo.validatePhone(params)
                 .flowOn(Dispatchers.IO)
                 .catch {
-                    validatePhoneRes.postValue(Resource.failure(this.toString()))
+                    validatePhoneRes.postValue(Resource.failure(it.toString()))
                 }
                 .collect {
                     validatePhoneRes.postValue(Resource.success(it))

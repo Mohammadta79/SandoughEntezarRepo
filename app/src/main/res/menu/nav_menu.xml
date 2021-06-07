@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/dashbordFragment"
+        android:icon="@drawable/ic_dashbord"
+        android:title="داشبورد"></item>
+    <item
+        android:id="@+id/reportFragment"
+        android:icon="@drawable/ic_report"
+        android:title="گزارشات"></item>
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_person"
+        android:title="پروفایل"></item>
+    <item
+        android:id="@+id/statemetFragment"
+        android:icon="@drawable/ic_asist"
+        android:title="شرایط و ضوابط"></item>
+    <item
+        android:id="@+id/newsFragment"
+        android:icon="@drawable/ic_mails"
+        android:title="اطلاعیه ها"></item>
+    <item
+        android:id="@+id/aboutUsFragment"
+        android:icon="@drawable/ic_about_us"
+        android:title="درباره ما"></item>
+    <item
+        android:id="@+id/contactUsFragment"
+        android:icon="@drawable/ic_phone"
+        android:title="تماس با ما"></item>
+    <item
+        android:id="@+id/aboutAppFragment"
+        android:icon="@drawable/ic_mobile"
+        android:title="اطلاعات نرم افزار"></item>
+
+</menu>
