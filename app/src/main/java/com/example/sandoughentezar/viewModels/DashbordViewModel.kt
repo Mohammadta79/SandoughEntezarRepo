@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.sandoughentezar.api.state.Resource
 import com.example.sandoughentezar.models.InstallmentModel
 import com.example.sandoughentezar.models.ScoreResponseModel
+import com.example.sandoughentezar.models.StringResponseModel
 import com.example.sandoughentezar.repo.DashbordRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,7 @@ import javax.inject.Inject
 class DashbordViewModel @Inject constructor(var repo: DashbordRepo) : ViewModel() {
     private var myScoreLD = MutableLiveData<Resource<ScoreResponseModel>>()
     private var deffearedInstllment = MutableLiveData<Resource<ArrayList<InstallmentModel>>>()
+    private var installmentPayLD = MutableLiveData<Resource<StringResponseModel>>()
 
     fun getMyScore(params: HashMap<String, String>): LiveData<Resource<ScoreResponseModel>> {
         viewModelScope.launch {
@@ -42,5 +44,17 @@ class DashbordViewModel @Inject constructor(var repo: DashbordRepo) : ViewModel(
         }
         return deffearedInstllment
     }
+
+    fun installmentPay(params: HashMap<String, String>): LiveData<Resource<StringResponseModel>> {
+        viewModelScope.launch {
+            installmentPayLD.postValue(Resource.loading())
+            repo.installmentPay(params)
+                .flowOn(Dispatchers.IO)
+                .catch { installmentPayLD.postValue(Resource.failure(it.toString())) }
+                .collect { installmentPayLD.postValue(Resource.success(it)) }
+        }
+        return installmentPayLD
+    }
+
 
 }

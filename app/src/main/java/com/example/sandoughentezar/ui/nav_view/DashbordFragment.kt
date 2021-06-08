@@ -7,18 +7,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sandoughentezar.R
+import com.example.sandoughentezar.adapters.DeafreadInstallmentAdapter
+
 import com.example.sandoughentezar.api.state.Status
 import com.example.sandoughentezar.databinding.FragmentDashbordBinding
+import com.example.sandoughentezar.interfaces.OnInstallmentClickListener
+import com.example.sandoughentezar.models.InstallmentModel
 import com.example.sandoughentezar.viewModels.DashbordViewModel
+import com.example.sandoughentezar.viewModels.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DashbordFragment : Fragment(), View.OnClickListener {
+class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickListener {
     private lateinit var binding: FragmentDashbordBinding
     private val dashbordViewModel by viewModels<DashbordViewModel>()
+    private val userViewModel by viewModels<UserViewModel>()
     private var sharedPref: SharedPreferences? = null
     private lateinit var user_id: String
     override fun onCreateView(
@@ -57,12 +66,15 @@ class DashbordFragment : Fragment(), View.OnClickListener {
         sharedPref!!.let {
             user_id = it.getString("user_id", null).toString()
         }
+
         getMyScore()
+        getDeffearedInstallment()
+        setNavHeader()
 
     }
 
-    fun getMyScore() {
-        dashbordViewModel.getMyScore(getParams()).observe(viewLifecycleOwner) {
+    private fun getMyScore() {
+        dashbordViewModel.getMyScore(getUserParams()).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.Success -> {
                     it.data!!.let { _data ->
@@ -80,9 +92,94 @@ class DashbordFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    fun getParams(): HashMap<String, String> {
+    override fun onDeffearedInstallmentClick(data: InstallmentModel) {
+        installmentPay(data.id)
+    }
+
+    private fun getDeffearedInstallment() {
+        dashbordViewModel.getDeffearedInstllment(getDeaffearedParams())
+            .observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.Success -> {
+                        binding.installmentRV.apply {
+                            adapter = DeafreadInstallmentAdapter(
+                                requireContext(),
+                                it.data!!,
+                                this@DashbordFragment
+                            )
+                            layoutManager =
+                                LinearLayoutManager(
+                                    requireContext(),
+                                    LinearLayoutManager.VERTICAL,
+                                    false
+                                )
+                        }
+                    }
+                    Status.Failure -> {
+
+                    }
+                    Status.Loading -> {
+                        //TODO : Show progressbar
+                    }
+                }
+            }
+    }
+
+    private fun installmentPay(id: String) {
+        dashbordViewModel.installmentPay(getPaymentParams(id)).observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.Success -> {
+                    Toast.makeText(requireContext(), "پرداخت با موفقیت انجام شد", Toast.LENGTH_LONG)
+                        .show()
+                }
+                Status.Failure -> {
+                    Toast.makeText(requireContext(), "خطا در پرداخت", Toast.LENGTH_LONG).show()
+                }
+                Status.Loading -> {
+                    //TODO : Show progressbar
+                }
+            }
+        }
+    }
+
+    private fun setNavHeader() {
+        var txtName = activity?.findViewById<TextView>(R.id.txt_header_name)
+        var txtAccountNumber = activity?.findViewById<TextView>(R.id.txt_header_account_number)
+        userViewModel.getUSerInfo(getUserParams()).observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.Success -> {
+                    txtName!!.text = it.data!!.name
+                    txtAccountNumber!!.text = it.data!!.account_number
+                }
+                Status.Failure -> {
+
+                }
+                Status.Loading -> {
+                    //TODO : Show progressbar
+                }
+            }
+        }
+    }
+
+
+    //params
+    private fun getUserParams(): HashMap<String, String> {
         var params: HashMap<String, String> = HashMap()
         params["user_id"] = user_id
         return params
     }
+
+    private fun getDeaffearedParams(): HashMap<String, String> {
+        var params: HashMap<String, String> = HashMap()
+        params["user_id"] = user_id
+        return params
+    }
+
+    private fun getPaymentParams(id: String): HashMap<String, String> {
+        var params: HashMap<String, String> = HashMap()
+        params["id"] = id
+        return params
+    }
+
+
 }

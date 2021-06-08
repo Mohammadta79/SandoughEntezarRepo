@@ -1,14 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.dashbord_action.LoanFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/root_loan"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="8dp"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/vazir_medium"
+                android:gravity="center"
+                android:text="ردیف"
+                android:textColor="@color/PrimaryText"
+                android:textSize="12dp"></TextView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="@font/vazir_medium"
+                android:gravity="center"
+                android:text="تاریخ شروع \nاقساط"
+                android:textColor="@color/PrimaryText"
+                android:textSize="12dp"></TextView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="@font/vazir_medium"
+                android:gravity="center"
+                android:text="مبلغ"
+                android:textColor="@color/PrimaryText"
+                android:textSize="12dp"></TextView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="@font/vazir_medium"
+                android:gravity="center"
+                android:text="تاریخ پایان\nاقساط"
+                android:textColor="@color/PrimaryText"
+                android:textSize="12dp"></TextView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="@font/vazir_medium"
+                android:gravity="center"
+                android:text="وضعیت"
+                android:textColor="@color/PrimaryText"
+                android:textSize="12dp"></TextView>
+        </LinearLayout>
+    <TextView
+        android:id="@+id/txt_no_loan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="شما تا کنون تسهیلاتی دریافت نکرده اید"
+        android:fontFamily="@font/vazir_bold"
+        android:textColor="@color/DarkPrimaryColor"
+        android:layout_centerInParent="true"
+        android:textSize="16sp"></TextView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/loanRV"
+        android:layout_below="@id/root_loan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+</RelativeLayout>

@@ -8,8 +8,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.sandoughentezar.R
 import com.example.sandoughentezar.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(),View.OnClickListener{
     private lateinit var binding: ActivityMainBinding
 

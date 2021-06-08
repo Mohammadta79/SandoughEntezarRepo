@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
-            android:id="@+id/txt_name"
+            android:id="@+id/txt_header_name"
             android:text="محمد مهدی طاهری"
             android:layout_width="wrap_content"
             android:fontFamily="@font/vazir"
@@ -17,12 +17,12 @@
             android:layout_centerInParent="true"
             android:textColor="@color/white"></TextView>
         <TextView
-            android:id="@+id/txt_account_number"
+            android:id="@+id/txt_header_account_number"
             android:text="9378305857"
             android:layout_width="wrap_content"
             android:fontFamily="@font/vazir"
             android:textSize="16sp"
-            android:layout_below="@id/txt_name"
+            android:layout_below="@id/txt_header_name"
             android:layout_marginBottom="4dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

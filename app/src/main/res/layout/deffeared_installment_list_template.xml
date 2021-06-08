@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="3dp">
+
+    <Button
+        android:id="@+id/btn_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/shape_btn_pay"
+        android:fontFamily="@font/vazir_medium"
+        android:text="پرداخت"></Button>
+
+    <LinearLayout
+        android:id="@+id/linear_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:elevation="2dp"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_row"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/vazir_medium"
+            android:gravity="center"
+            android:textColor="@color/PrimaryText"
+            android:textSize="14dp"></TextView>
+
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:fontFamily="@font/vazir_medium"
+            android:gravity="center"
+            android:textColor="@color/PrimaryText"
+            android:textSize="14dp"></TextView>
+
+        <TextView
+            android:id="@+id/txt_amount"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:fontFamily="@font/vazir_medium"
+            android:gravity="center"
+            android:textColor="@color/PrimaryText"
+            android:textSize="14dp"></TextView>
+
+        <TextView
+            android:id="@+id/txt_status"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:fontFamily="@font/vazir_medium"
+            android:gravity="center"
+            android:textColor="@color/PrimaryText"
+            android:textSize="14dp"></TextView>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

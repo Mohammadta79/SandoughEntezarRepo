@@ -20,4 +20,19 @@ class ApiServiceResult @Inject constructor(var apiService: ApiService) {
 
     suspend fun getDeferredinstallments(params: HashMap<String, String>): Flow<ArrayList<InstallmentModel>> =
         apiService.getDeferredinstallments(params)
+
+    suspend fun installmentPay(params: HashMap<String, String>): Flow<StringResponseModel> =
+        apiService.installmentPay(params)
+
+    suspend fun getUserInfo(params: HashMap<String, String>): Flow<UserModel> =
+        apiService.getUSerInfo(params)
+
+    suspend fun getRecordPayment(params: HashMap<String, String>): Flow<ArrayList<PaymentModel>> =
+        apiService.getRecordPayment(params)
+
+    suspend fun newPayment(params: HashMap<String, String>): Flow<StringResponseModel> =
+        apiService.newPayment(params)
+
+    suspend fun getLoanRecord(params: HashMap<String, String>): Flow<ArrayList<LoanModel>> =
+        apiService.getLoanRecord(params)
 }

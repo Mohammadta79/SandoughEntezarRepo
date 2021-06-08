@@ -1,14 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.dashbord_action.PaymentFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.cardview.widget.CardView
+        android:id="@+id/payment_header"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_margin="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/vazir_medium"
+                android:gravity="center"
+                android:text="ردیف"
+                android:textColor="@color/PrimaryText"
+                android:textSize="12dp"></TextView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="@font/vazir_medium"
+                android:gravity="center"
+                android:text="تاریخ پرداخت"
+                android:textColor="@color/PrimaryText"
+                android:textSize="12dp"></TextView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="@font/vazir_medium"
+                android:gravity="center"
+                android:text="مبلغ"
+                android:textColor="@color/PrimaryText"
+                android:textSize="12dp"></TextView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="@font/vazir_medium"
+                android:gravity="center"
+                android:text="شناسه پرداخت"
+                android:textColor="@color/PrimaryText"
+                android:textSize="12dp"></TextView>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/paymentRecordsRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_above="@id/btn_new_pay"
+        android:layout_below="@id/payment_header"></androidx.recyclerview.widget.RecyclerView>
 
-</FrameLayout>
+    <Button
+        android:id="@+id/btn_new_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp"
+        android:background="@drawable/shape_btn_login_enable"
+        android:fontFamily="@font/vazir_bold"
+        android:text="پرداخت"></Button>
+
+    <TextView
+        android:id="@+id/txt_no_payment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/vazir_bold"
+        android:text="لیست پرداخت شما خالی است!"
+        android:textColor="@color/DarkPrimaryColor"></TextView>
+
+</RelativeLayout>
