@@ -1,14 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.nav_view.ProfileFragment">
+    android:orientation="vertical"
+    tools:context=".ui.auth.RegisterFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/txt_personal_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="8dp"
+            android:fontFamily="@font/vazir"
+            android:text="اطلاعات فردی"
+            android:textColor="@color/PrimaryText"
+            android:textSize="15sp"></TextView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_personal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edt_full_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/shape_edt_login"
+                    android:drawableLeft="@drawable/ic_person"
+                    android:fontFamily="@font/vazir_medium"
+                    android:gravity="center|right"
+                    android:hint="نام کامل *"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="16dp"
+                    android:textSize="14dp"></EditText>
+
+                <EditText
+                    android:id="@+id/edt_national_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/shape_edt_login"
+                    android:drawableLeft="@drawable/ic_card"
+                    android:fontFamily="@font/vazir_medium"
+                    android:gravity="right|center"
+                    android:hint="شماره ملی *"
+                    android:inputType="number"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="16dp"
+                    android:textSize="14dp"></EditText>
+
+                <EditText
+                    android:id="@+id/edt_mobile_number1"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/shape_edt_login"
+                    android:drawableLeft="@drawable/ic_mobile"
+                    android:fontFamily="@font/vazir_medium"
+                    android:gravity="right|center"
+                    android:hint=" شماره موبایل 1 *"
+                    android:inputType="phone"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="16dp"
+                    android:textSize="14dp"></EditText>
+
+                <EditText
+                    android:id="@+id/edt_mobile_number2"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/shape_edt_login"
+                    android:drawableLeft="@drawable/ic_mobile"
+                    android:fontFamily="@font/vazir_medium"
+                    android:gravity="center|right"
+                    android:hint=" شماره موبایل 2 "
+                    android:inputType="phone"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="16dp"
+                    android:textSize="14dp"></EditText>
+
+
+                <EditText
+                    android:id="@+id/edt_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/edt_national_id"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/shape_edt_login"
+                    android:drawableLeft="@drawable/ic_phone"
+                    android:fontFamily="@font/vazir_medium"
+                    android:gravity="right|center"
+                    android:hint="شماره تلفن ثابت"
+                    android:inputType="number"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="16dp"
+                    android:textSize="14dp"></EditText>
+
+                <EditText
+                    android:id="@+id/edt_postal_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/edt_national_id"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/shape_edt_login"
+                    android:drawableLeft="@drawable/ic_post"
+                    android:fontFamily="@font/vazir_medium"
+                    android:gravity="right|center"
+                    android:hint="کد پستی *"
+                    android:inputType="number"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="16dp"
+                    android:textSize="14dp"></EditText>
+
+                <EditText
+                    android:id="@+id/edt_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/shape_edt_login"
+                    android:drawableLeft="@drawable/ic_home"
+                    android:fontFamily="@font/vazir_medium"
+                    android:gravity="right|center"
+                    android:hint="آدرس *"
+                    android:inputType="textPostalAddress"
+                    android:lines="3"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="16dp"
+                    android:text=""
+                    android:textSize="14dp"></EditText>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/txt_account_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="8dp"
+            android:fontFamily="@font/vazir"
+            android:text="اطلاعات حساب"
+            android:textColor="@color/PrimaryText"
+            android:textSize="15sp"></TextView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edt_account_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/edt_national_id"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/shape_edt_login"
+                    android:drawableLeft="@drawable/ic_account_balance"
+                    android:fontFamily="@font/vazir_medium"
+                    android:gravity="right|center"
+                    android:hint="شماره حساب"
+                    android:inputType="number"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="16dp"
+                    android:textSize="14dp"></EditText>
+
+                <EditText
+                    android:id="@+id/edt_card_number1"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/edt_national_id"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/shape_edt_login"
+                    android:drawableLeft="@drawable/ic_card"
+                    android:fontFamily="@font/vazir_medium"
+                    android:gravity="right|center"
+                    android:hint="شماره کارت 1 *"
+                    android:inputType="number"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="16dp"
+                    android:textSize="14dp"></EditText>
+
+                <EditText
+                    android:id="@+id/edt_card_number2"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/shape_edt_login"
+                    android:drawableLeft="@drawable/ic_card"
+                    android:fontFamily="@font/vazir_medium"
+                    android:gravity="right|center"
+                    android:hint="شماره کارت 2 "
+                    android:inputType="number"
+                    android:lines="3"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="16dp"
+                    android:text=""
+                    android:textSize="14dp"></EditText>
+
+                <EditText
+                    android:id="@+id/edt_shaba"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/shape_edt_login"
+                    android:drawableLeft="@drawable/ic_account_balance"
+                    android:fontFamily="@font/vazir_medium"
+                    android:gravity="right|center"
+                    android:hint="شماره شبا *"
+                    android:inputType="textPostalAddress"
+                    android:lines="3"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="16dp"
+                    android:text=""
+                    android:textSize="14dp"></EditText>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_update"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edt_password"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_btn_login_enable"
+            android:elevation="8dp"
+            android:enabled="false"
+            android:fontFamily="@font/vazir_medium"
+            android:text="تغییر اظلاعات"
+            android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
+
+    </LinearLayout>
+
+</ScrollView>

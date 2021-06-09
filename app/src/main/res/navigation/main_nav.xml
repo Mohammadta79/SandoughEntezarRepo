@@ -22,15 +22,22 @@
             app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/reportFragment"
-        android:name="com.example.sandoughentezar.ui.nav_view.ReportFragment"
-        android:label="fragment_report"
-        tools:layout="@layout/fragment_report" />
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.sandoughentezar.ui.nav_view.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="com.example.sandoughentezar.ui.nav_view.MessageFragment"
+        android:label="fragment_message"
+        tools:layout="@layout/fragment_message" >
+        <action
+            android:id="@+id/action_messageFragment_to_messageDetailsFragment"
+            app:destination="@id/messageDetailsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/messageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/statemetFragment"
         android:name="com.example.sandoughentezar.ui.nav_view.StatemetFragment"
@@ -77,4 +84,10 @@
         android:name="com.example.sandoughentezar.ui.dashbord_action.LoanDetailsFragment"
         android:label="fragment_loan_details"
         tools:layout="@layout/fragment_loan_details" />
+    <fragment
+        android:id="@+id/messageDetailsFragment"
+        android:name="com.example.sandoughentezar.ui.message_action.MessageDetailsFragment"
+        android:label="fragment_message_details"
+        tools:layout="@layout/fragment_message_details" />
+
 </navigation>

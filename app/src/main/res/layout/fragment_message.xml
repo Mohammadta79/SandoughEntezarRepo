@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.nav_view.MessageFragment">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_new_message"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="12dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/shape_btn_login_enable"
+        android:elevation="10dp"
+        android:fontFamily="@font/vazir_medium"
+        android:text="ایجاد پیام جدید"
+        android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messagesRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/txt_no_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/vazir_bold"
+        android:text="صندوق پیام خالی است"
+        android:textColor="@color/DarkPrimaryColor"
+        android:textSize="16sp"></TextView>
+</RelativeLayout>

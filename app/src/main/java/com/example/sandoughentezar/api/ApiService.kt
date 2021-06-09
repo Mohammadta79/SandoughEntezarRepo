@@ -40,26 +40,43 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("getRecordPayment.php")
-    suspend fun getRecordPayment(@FieldMap params: HashMap<String, String>):Flow<ArrayList<PaymentModel>>
+    suspend fun getRecordPayment(@FieldMap params: HashMap<String, String>): Flow<ArrayList<PaymentModel>>
 
     @FormUrlEncoded
     @POST("newPayment.php")
-    suspend fun newPayment(@FieldMap params: HashMap<String, String>):Flow<StringResponseModel>
+    suspend fun newPayment(@FieldMap params: HashMap<String, String>): Flow<StringResponseModel>
 
     @FormUrlEncoded
     @POST("getLoanRecord.php")
-    suspend fun getLoanRecord(@FieldMap params: HashMap<String, String>):Flow<ArrayList<LoanModel>>
+    suspend fun getLoanRecord(@FieldMap params: HashMap<String, String>): Flow<ArrayList<LoanModel>>
 
     @FormUrlEncoded
     @POST("getLoanInstallment.php")
-    suspend fun getLoanInstallment(@FieldMap params: HashMap<String, String>):Flow<ArrayList<InstallmentModel>>
+    suspend fun getLoanInstallment(@FieldMap params: HashMap<String, String>): Flow<ArrayList<InstallmentModel>>
 
     @FormUrlEncoded
     @POST("getTotalPayment.php")
-    suspend fun getTotalPayment(@FieldMap params: HashMap<String, String>):Flow<TotalModel>
+    suspend fun getTotalPayment(@FieldMap params: HashMap<String, String>): Flow<TotalModel>
 
     @FormUrlEncoded
     @POST("getLastLoan.php")
-    suspend fun getLastLoan(@FieldMap params: HashMap<String, String>):Flow<TotalModel>
+    suspend fun getLastLoan(@FieldMap params: HashMap<String, String>): Flow<TotalModel>
 
+
+    @FormUrlEncoded
+    @POST("updateProfile.php")
+    suspend fun updateProfile(@FieldMap params: HashMap<String, String>): Flow<StringResponseModel>
+
+
+    @FormUrlEncoded
+    @POST("getMessage.php")
+    suspend fun getMessage(@FieldMap params: HashMap<String, String>): Flow<ArrayList<MessageModel>>
+
+    @FormUrlEncoded
+    @POST("newMessage.php")
+    suspend fun newMessage(@FieldMap params: HashMap<String, String>): Flow<StringResponseModel>
+
+    @FormUrlEncoded
+    @POST("replyMessage.php")
+    suspend fun replyMessage(@FieldMap params: HashMap<String, String>): Flow<StringResponseModel>
 }
