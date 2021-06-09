@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sandoughentezar.api.state.Resource
+import com.example.sandoughentezar.models.InstallmentModel
 import com.example.sandoughentezar.models.LoanModel
 import com.example.sandoughentezar.models.PaymentModel
 import com.example.sandoughentezar.repo.LoanRepo
@@ -20,6 +21,7 @@ import javax.inject.Inject
 class LoanViewModel @Inject constructor(var repo: LoanRepo) : ViewModel() {
 
     private var loanRecordLD = MutableLiveData<Resource<ArrayList<LoanModel>>>()
+    private var loanInstallmentLD = MutableLiveData<Resource<ArrayList<InstallmentModel>>>()
 
     fun getLoanRecord(params: HashMap<String, String>): LiveData<Resource<ArrayList<LoanModel>>> {
         viewModelScope.launch {
@@ -31,6 +33,18 @@ class LoanViewModel @Inject constructor(var repo: LoanRepo) : ViewModel() {
 
         }
         return loanRecordLD
+    }
+
+    fun getLoanInstallment(params: HashMap<String, String>): LiveData<Resource<ArrayList<InstallmentModel>>> {
+        viewModelScope.launch {
+            loanInstallmentLD.postValue(Resource.loading())
+            repo.getLoanInstallment(params)
+                .flowOn(Dispatchers.IO)
+                .catch { loanInstallmentLD.postValue(Resource.failure(it.toString())) }
+                .collect { loanInstallmentLD.postValue(Resource.success(it)) }
+
+        }
+        return loanInstallmentLD
     }
 
 }

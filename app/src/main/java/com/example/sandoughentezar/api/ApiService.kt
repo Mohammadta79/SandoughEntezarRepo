@@ -50,5 +50,16 @@ interface ApiService {
     @POST("getLoanRecord.php")
     suspend fun getLoanRecord(@FieldMap params: HashMap<String, String>):Flow<ArrayList<LoanModel>>
 
+    @FormUrlEncoded
+    @POST("getLoanInstallment.php")
+    suspend fun getLoanInstallment(@FieldMap params: HashMap<String, String>):Flow<ArrayList<InstallmentModel>>
+
+    @FormUrlEncoded
+    @POST("getTotalPayment.php")
+    suspend fun getTotalPayment(@FieldMap params: HashMap<String, String>):Flow<TotalModel>
+
+    @FormUrlEncoded
+    @POST("getLastLoan.php")
+    suspend fun getLastLoan(@FieldMap params: HashMap<String, String>):Flow<TotalModel>
 
 }

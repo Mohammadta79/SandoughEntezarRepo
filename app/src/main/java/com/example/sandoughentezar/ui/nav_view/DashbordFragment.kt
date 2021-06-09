@@ -13,7 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sandoughentezar.R
-import com.example.sandoughentezar.adapters.DeafreadInstallmentAdapter
+import com.example.sandoughentezar.adapters.InstallmentAdapter
 
 import com.example.sandoughentezar.api.state.Status
 import com.example.sandoughentezar.databinding.FragmentDashbordBinding
@@ -70,6 +70,8 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
         getMyScore()
         getDeffearedInstallment()
         setNavHeader()
+        getLastLoan()
+        getMyTotalPay()
 
     }
 
@@ -92,7 +94,7 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
         }
     }
 
-    override fun onDeffearedInstallmentClick(data: InstallmentModel) {
+    override fun onInstallmentClick(data: InstallmentModel) {
         installmentPay(data.id)
     }
 
@@ -102,7 +104,7 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
                 when (it.status) {
                     Status.Success -> {
                         binding.installmentRV.apply {
-                            adapter = DeafreadInstallmentAdapter(
+                            adapter = InstallmentAdapter(
                                 requireContext(),
                                 it.data!!,
                                 this@DashbordFragment
@@ -161,6 +163,41 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
         }
     }
 
+    private fun getLastLoan() {
+        dashbordViewModel.getLastLoan(getUserParams()).observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.Success -> {
+                    if (it.data!!.status == "ok") {
+                        binding.txtMyLoan.text = it.data.amaount
+                    }
+                }
+                Status.Failure -> {
+
+                }
+                Status.Loading -> {
+                    //TODO : Show progressbar
+                }
+            }
+        }
+    }
+
+    private fun getMyTotalPay() {
+        dashbordViewModel.getTotalPayment(getUserParams()).observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.Success -> {
+                    if (it.data!!.status == "ok") {
+                        binding.txtMyPay.text = it.data.amaount
+                    }
+                }
+                Status.Failure -> {
+
+                }
+                Status.Loading -> {
+                    //TODO : Show progressbar
+                }
+            }
+        }
+    }
 
     //params
     private fun getUserParams(): HashMap<String, String> {
@@ -177,7 +214,7 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
 
     private fun getPaymentParams(id: String): HashMap<String, String> {
         var params: HashMap<String, String> = HashMap()
-        params["id"] = id
+        params["installment_id"] = id
         return params
     }
 

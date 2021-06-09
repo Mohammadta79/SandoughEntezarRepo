@@ -89,8 +89,7 @@ class LoanFragment : Fragment(), OnLoanItemClickListener {
 
     override fun onLoanItemClick(loan: LoanModel) {
         var bundle = Bundle()
-        var loan_reminder =
-            loan.amount.toInt() - loan.installment_amount.toInt() * loan.num_of_paid_installment.toInt()
+        bundle.putString("id", loan.id)
         bundle.putString("start_date", loan.start_date)
         bundle.putString("end_date", loan.end_date)
         bundle.putString("amount", loan.amount)
@@ -99,8 +98,6 @@ class LoanFragment : Fragment(), OnLoanItemClickListener {
         bundle.putString("installment", loan.num_of_installment)
         bundle.putString("due_date", loan.due_date)
         bundle.putString("installment_amount", loan.installment_amount)
-        //calculate this in next page
-        bundle.putString("loan_reminder", loan_reminder.toString())
         findNavController().navigate(R.id.action_loanFragment_to_loanDetailsFragment, bundle)
     }
 

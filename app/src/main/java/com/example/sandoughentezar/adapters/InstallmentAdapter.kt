@@ -5,20 +5,18 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.TranslateAnimation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sandoughentezar.R
-import com.example.sandoughentezar.api.state.Resource
 import com.example.sandoughentezar.databinding.DeffearedInstallmentListTemplateBinding
 import com.example.sandoughentezar.interfaces.OnInstallmentClickListener
 import com.example.sandoughentezar.models.InstallmentModel
 
-class DeafreadInstallmentAdapter(
+class InstallmentAdapter(
     var context: Context,
     var list: ArrayList<InstallmentModel>,
     var listener: OnInstallmentClickListener
 ) :
-    RecyclerView.Adapter<DeafreadInstallmentAdapter.DffearedInstallmentVH>() {
+    RecyclerView.Adapter<InstallmentAdapter.DffearedInstallmentVH>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DffearedInstallmentVH =
@@ -53,7 +51,7 @@ class DeafreadInstallmentAdapter(
                     binding.txtStatus.setTextColor(Color.RED)
                 }
             }
-            binding.btnPay.setOnClickListener { listener.onDeffearedInstallmentClick(data) }
+            binding.btnPay.setOnClickListener { listener.onInstallmentClick(data) }
             binding.linearRoot.setOnClickListener {
 
                 if (data.status == "پرداخت نشده") {

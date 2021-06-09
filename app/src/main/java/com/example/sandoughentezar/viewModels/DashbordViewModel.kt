@@ -8,6 +8,7 @@ import com.example.sandoughentezar.api.state.Resource
 import com.example.sandoughentezar.models.InstallmentModel
 import com.example.sandoughentezar.models.ScoreResponseModel
 import com.example.sandoughentezar.models.StringResponseModel
+import com.example.sandoughentezar.models.TotalModel
 import com.example.sandoughentezar.repo.DashbordRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +23,8 @@ class DashbordViewModel @Inject constructor(var repo: DashbordRepo) : ViewModel(
     private var myScoreLD = MutableLiveData<Resource<ScoreResponseModel>>()
     private var deffearedInstllment = MutableLiveData<Resource<ArrayList<InstallmentModel>>>()
     private var installmentPayLD = MutableLiveData<Resource<StringResponseModel>>()
+    private var lastLoanLD = MutableLiveData<Resource<TotalModel>>()
+    private var totalPaymentLD = MutableLiveData<Resource<TotalModel>>()
 
     fun getMyScore(params: HashMap<String, String>): LiveData<Resource<ScoreResponseModel>> {
         viewModelScope.launch {
@@ -54,6 +57,28 @@ class DashbordViewModel @Inject constructor(var repo: DashbordRepo) : ViewModel(
                 .collect { installmentPayLD.postValue(Resource.success(it)) }
         }
         return installmentPayLD
+    }
+
+    fun getTotalPayment(params: HashMap<String, String>): LiveData<Resource<TotalModel>> {
+        viewModelScope.launch {
+            totalPaymentLD.postValue(Resource.loading())
+            repo.getTotalPayment(params)
+                .flowOn(Dispatchers.IO)
+                .catch { totalPaymentLD.postValue(Resource.failure(it.toString())) }
+                .collect { totalPaymentLD.postValue(Resource.success(it)) }
+        }
+        return totalPaymentLD
+    }
+
+    fun getLastLoan(params: HashMap<String, String>): LiveData<Resource<TotalModel>> {
+        viewModelScope.launch {
+            lastLoanLD.postValue(Resource.loading())
+            repo.getLastLoan(params)
+                .flowOn(Dispatchers.IO)
+                .catch { lastLoanLD.postValue(Resource.failure(it.toString())) }
+                .collect { lastLoanLD.postValue(Resource.success(it)) }
+        }
+        return lastLoanLD
     }
 
 

@@ -35,4 +35,14 @@ class ApiServiceResult @Inject constructor(var apiService: ApiService) {
 
     suspend fun getLoanRecord(params: HashMap<String, String>): Flow<ArrayList<LoanModel>> =
         apiService.getLoanRecord(params)
+
+    suspend fun getLoanInstallment(params: HashMap<String, String>): Flow<ArrayList<InstallmentModel>> =
+        apiService.getLoanInstallment(params)
+
+    suspend fun getTotalPayment(params: HashMap<String, String>): Flow<TotalModel> =
+        apiService.getTotalPayment(params)
+
+    suspend fun getLastLoan(params: HashMap<String, String>): Flow<TotalModel> =
+        apiService.getLastLoan(params)
 }
+

@@ -150,7 +150,7 @@
                 android:textColor="@color/PrimaryText"></TextView>
 
             <TextView
-                android:id="@+id/txt_my_installment"
+                android:id="@+id/txt_my_loan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -163,7 +163,7 @@
                 android:id="@+id/txt_more_installment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txt_my_installment"
+                android:layout_below="@id/txt_my_loan"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/vazir_medium"
