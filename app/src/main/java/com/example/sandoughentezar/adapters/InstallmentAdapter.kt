@@ -41,20 +41,21 @@ class InstallmentAdapter(
         fun bindData(data: InstallmentModel) {
             binding.txtAmount.text = data.amount
             binding.txtRow.text = data.id
-            binding.txtStatus.text = data.status
             binding.txtDate.text = data.date
             when (data.status) {
-                "پرداخت شده" -> {
+                "1" -> {
+                    binding.txtStatus.text = "پرداخت شده"
                     binding.txtStatus.setTextColor(Color.GREEN)
                 }
-                "پرداخت نشده" -> {
+                "0" -> {
+                    binding.txtStatus.text = "پرداخت نشده"
                     binding.txtStatus.setTextColor(Color.RED)
                 }
             }
             binding.btnPay.setOnClickListener { listener.onInstallmentClick(data) }
             binding.linearRoot.setOnClickListener {
 
-                if (data.status == "پرداخت نشده") {
+                if (data.status == "0") {
                     binding.linearRoot.animate().translationX(300f).setDuration(1000).start()
                 }
 

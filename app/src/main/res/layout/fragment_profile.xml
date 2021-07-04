@@ -286,7 +286,7 @@
             android:elevation="8dp"
             android:enabled="false"
             android:fontFamily="@font/vazir_medium"
-            android:text="تغییر اظلاعات"
+            android:text="تغییر اطلاعات"
             android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
 
     </LinearLayout>

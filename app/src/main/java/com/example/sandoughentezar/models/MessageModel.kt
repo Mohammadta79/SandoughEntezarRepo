@@ -6,5 +6,4 @@ data class MessageModel(
     var date: String,
     var message: String,
     var sender: String,
-
     )

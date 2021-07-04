@@ -1,5 +1,6 @@
 package com.example.sandoughentezar.viewModels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,33 +26,37 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
     private val validatePhoneRes = MutableLiveData<Resource<ValidatePhoneResponseModel>>()
 
     fun login(params: HashMap<String, String>): LiveData<Resource<LoginResponseModel>> {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO){
+            val response =  repo.login(params)
             loginRes.postValue(Resource.loading())
-            repo.login(params)
-                .flowOn(Dispatchers.IO)
-                .catch {
-                    loginRes.postValue(Resource.failure(it.toString()))
-                }
-                .collect {
-                    loginRes.postValue(Resource.success(it))
-                }
 
+            try {
+                if (response.isSuccessful && response.body()!=null){
+                    loginRes.postValue(Resource.success(response.body()) as Resource<LoginResponseModel>?)
+                }else{
+                   loginRes.postValue(Resource.failure(response.errorBody().toString()))
+                }
+            }catch (e:Exception){
+                loginRes.postValue(Resource.failure(e.toString()))
+            }
         }
         return loginRes
     }
 
     fun register(params: HashMap<String, String>): LiveData<Resource<StringResponseModel>> {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO){
+            val response =  repo.register(params)
             registerRes.postValue(Resource.loading())
-            repo.register(params)
-                .flowOn(Dispatchers.IO)
-                .catch {
-                    registerRes.postValue(Resource.failure(it.toString()))
-                }
-                .collect {
-                    registerRes.postValue(Resource.success(it))
-                }
 
+            try {
+                if (response.isSuccessful && response.body()!=null){
+                    registerRes.postValue(Resource.success(response.body()) as Resource<StringResponseModel>)
+                }else{
+                    registerRes.postValue(Resource.failure(response.errorBody().toString()))
+                }
+            }catch (e:Exception){
+                registerRes.postValue(Resource.failure(e.toString()))
+            }
         }
         return registerRes
     }

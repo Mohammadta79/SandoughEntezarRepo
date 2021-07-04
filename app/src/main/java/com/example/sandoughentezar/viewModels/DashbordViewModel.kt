@@ -38,12 +38,18 @@ class DashbordViewModel @Inject constructor(var repo: DashbordRepo) : ViewModel(
     }
 
     fun getDeffearedInstllment(params: HashMap<String, String>): LiveData<Resource<ArrayList<InstallmentModel>>> {
-        viewModelScope.launch {
-            deffearedInstllment.postValue(Resource.loading())
-            repo.getDeferredinstallments(params)
-                .flowOn(Dispatchers.IO)
-                .catch { deffearedInstllment.postValue(Resource.failure(it.toString())) }
-                .collect { deffearedInstllment.postValue(Resource.success(it)) }
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                deffearedInstllment.postValue(Resource.loading())
+                val response = repo.getDeferredinstallments(params)
+                if (response.isSuccessful && response.body() != null) {
+                    deffearedInstllment.postValue(Resource.success(response.body()) as Resource<ArrayList<InstallmentModel>>?)
+                } else {
+                    deffearedInstllment.postValue(Resource.failure(response.errorBody().toString()))
+                }
+            } catch (e: Exception) {
+                deffearedInstllment.postValue(Resource.failure(e.toString()))
+            }
         }
         return deffearedInstllment
     }

@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.example.sandoughentezar.R
 import com.example.sandoughentezar.api.state.Status
 import com.example.sandoughentezar.databinding.FragmentProfileBinding
 import com.example.sandoughentezar.viewModels.UserViewModel
@@ -53,9 +52,9 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         setData(
                             user.name,
                             user.national_id,
-                            user.mobile,
+                            user.mobile1,
                             user.mobile2,
-                            user.tell_number,
+                            user.phone,
                             user.address,
                             user.postal_code,
                             user.account_number,

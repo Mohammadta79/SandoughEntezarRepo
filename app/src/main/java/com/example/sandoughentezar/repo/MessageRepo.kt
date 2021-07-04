@@ -15,5 +15,5 @@ class MessageRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
         apiServiceResult.newMessage(params)
 
     suspend fun replyMessage(params: HashMap<String, String>): Flow<StringResponseModel> =
-        apiServiceResult.newMessage(params)
+        apiServiceResult.replyMessage(params)
 }

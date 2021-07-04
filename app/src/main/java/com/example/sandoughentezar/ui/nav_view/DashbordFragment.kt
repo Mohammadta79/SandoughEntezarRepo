@@ -3,6 +3,7 @@ package com.example.sandoughentezar.ui.nav_view
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -67,11 +68,11 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
             user_id = it.getString("user_id", null).toString()
         }
 
-        getMyScore()
+        //  getMyScore()
         getDeffearedInstallment()
         setNavHeader()
-        getLastLoan()
-        getMyTotalPay()
+        //   getLastLoan()
+        //    getMyTotalPay()
 
     }
 
@@ -118,6 +119,7 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
                         }
                     }
                     Status.Failure -> {
+                        Log.d("getDeffearedInstallment", it.msg)
 
                     }
                     Status.Loading -> {
@@ -145,20 +147,22 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
     }
 
     private fun setNavHeader() {
-        var txtName = activity?.findViewById<TextView>(R.id.txt_header_name)
-        var txtAccountNumber = activity?.findViewById<TextView>(R.id.txt_header_account_number)
+
         userViewModel.getUSerInfo(getUserParams()).observe(viewLifecycleOwner) {
+
             when (it.status) {
                 Status.Success -> {
-                    txtName!!.text = it.data!!.name
-                    txtAccountNumber!!.text = it.data!!.account_number
+                    activity?.findViewById<TextView>(R.id.txt_header_name)!!.text = it.data!!.name
+                    activity?.findViewById<TextView>(R.id.txt_header_account_number)!!.text =
+                        it.data!!.account_number
                 }
                 Status.Failure -> {
-
+                    Log.d("setNavHeader", it.msg)
                 }
                 Status.Loading -> {
                     //TODO : Show progressbar
                 }
+
             }
         }
     }
@@ -168,7 +172,7 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
             when (it.status) {
                 Status.Success -> {
                     if (it.data!!.status == "ok") {
-                        binding.txtMyLoan.text = it.data.amaount
+                        binding.txtMyLoan.text = it.data.amount
                     }
                 }
                 Status.Failure -> {
@@ -186,7 +190,7 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
             when (it.status) {
                 Status.Success -> {
                     if (it.data!!.status == "ok") {
-                        binding.txtMyPay.text = it.data.amaount
+                        binding.txtMyPay.text = it.data.amount
                     }
                 }
                 Status.Failure -> {

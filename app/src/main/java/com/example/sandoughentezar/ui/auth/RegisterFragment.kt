@@ -1,12 +1,14 @@
 package com.example.sandoughentezar.ui.auth
 
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Transformation
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,6 +16,7 @@ import com.example.sandoughentezar.R
 import com.example.sandoughentezar.api.state.Status
 import com.example.sandoughentezar.databinding.FragmentRegisterBinding
 import com.example.sandoughentezar.viewModels.AuthViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,6 +24,8 @@ class RegisterFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentRegisterBinding
     private val authViewModel by viewModels<AuthViewModel>()
+    var bottomSheetDialog: BottomSheetDialog? = null
+    var bottomSheetView: View? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +40,16 @@ class RegisterFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         selectedViews()
 
+    }
+
+    private fun setupWaitDialog() {
+        bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        bottomSheetView = layoutInflater.inflate(
+            R.layout.dialog_wait_for_accept,
+            requireActivity().findViewById<LinearLayout>(R.id.root_wait)
+        )
+        bottomSheetDialog!!.setContentView(bottomSheetView!!)
+        bottomSheetDialog!!.show()
     }
 
     private fun register() {
@@ -68,7 +83,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                     Status.Success -> {
                         when (it.data!!.status) {
                             "ok" -> {
-                                //TODO:Show dialog
+                                setupWaitDialog()
                             }
                             "exist" -> {
                                 Toast.makeText(
@@ -80,7 +95,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                             else -> {
                                 Toast.makeText(
                                     requireContext(),
-                                    "خطا",
+                                    it.data!!.status,
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
@@ -97,6 +112,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                             "خطا",
                             Toast.LENGTH_SHORT
                         ).show()
+                        Log.d("registerrr", it.data.toString())
                     }
                 }
             }
@@ -145,7 +161,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
 
     private fun getParams(): HashMap<String, String> {
         var params: HashMap<String, String> = HashMap()
-        params["fullname"] = binding.edtFullName.text.toString()
+        params["name"] = binding.edtFullName.text.toString()
         params["national_id"] = binding.edtNationalId.text.toString()
         params["mobile1"] = binding.edtMobileNumber1.text.toString()
         if (binding.edtMobileNumber2.text.isNotBlank()) {
