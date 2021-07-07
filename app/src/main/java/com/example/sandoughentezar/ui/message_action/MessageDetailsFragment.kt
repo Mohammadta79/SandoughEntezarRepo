@@ -24,20 +24,25 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MessageDetailsFragment : Fragment(), OnMessageClickListener, View.OnClickListener {
+class MessageDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentMessageDetailsBinding
     private var sharedPref: SharedPreferences? = null
     private lateinit var user_id: String
     private lateinit var message_id: String
+    private lateinit var title: String
+    private lateinit var message: String
+    private lateinit var date: String
     private val messageViewModel by viewModels<MessageViewModel>()
-    var bottomSheetDialog: BottomSheetDialog? = null
-    var bottomSheetView: View? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             message_id = it.get("message_id").toString()
+            title = it.get("title").toString()
+            message = it.get("message").toString()
+            date = it.get("date").toString()
         }
     }
 
@@ -53,98 +58,41 @@ class MessageDetailsFragment : Fragment(), OnMessageClickListener, View.OnClickL
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        selectedViews()
     }
 
-    private fun selectedViews() {
-        binding.btnReply.setOnClickListener(this)
-    }
 
-    private fun setupNewMessageDialog() {
-        bottomSheetView = layoutInflater.inflate(
-            R.layout.dialog_paymant,
-            requireActivity().findViewById<LinearLayout>(R.id.root_dialog_new_message)
-        )
-        bottomSheetView!!.findViewById<Button>(R.id.btn_create_message).setOnClickListener {
-            var title = bottomSheetView!!.findViewById<EditText>(R.id.txt_new_title).text.toString()
-            var message =
-                bottomSheetView!!.findViewById<EditText>(R.id.txt_new_message).text.toString()
-            newMessage(title, message)
-        }
-        bottomSheetDialog!!.setContentView(bottomSheetView!!)
-        bottomSheetDialog!!.show()
-    }
-
-    private fun getMessageParams(): HashMap<String, String> {
+    private fun getReplyParams(): HashMap<String, String> {
         var params = HashMap<String, String>()
-        params["message_id"] = user_id
-        return params
-    }
-
-    private fun getReplyMessageParams(title: String, message: String): HashMap<String, String> {
-        var params = HashMap<String, String>()
-        params["user_id"] = user_id
-        params["title"] = title
-        params["message"] = message
         params["message_id"] = message_id
         return params
     }
 
+
     private fun initViews() {
-        bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+
         sharedPref = activity?.getSharedPreferences("shp", Context.MODE_PRIVATE)
         sharedPref!!.getString("user_id", null).let {
             user_id = it.toString()
         }
-        getMessages()
+        setMessageData()
+        getReply()
     }
 
-    private fun getMessages() {
-        messageViewModel.getMessage(getMessageParams()).observe(viewLifecycleOwner) {
-            when (it.status) {
-                Status.Success -> {
-                    binding.messageRV.apply {
-                        adapter =
-                            MessageAdapter(requireContext(), it.data!!, this@MessageDetailsFragment)
-                        layoutManager = LinearLayoutManager(
-                            requireContext(),
-                            LinearLayoutManager.VERTICAL,
-                            false
-                        )
-                    }
 
-
-                }
-                Status.Failure -> {
-
-                }
-                Status.Loading -> {
-                    //TODO:Show progressbar
-                }
-            }
-
-        }
-    }
-
-    private fun newMessage(title: String, message: String) {
-        messageViewModel.replyMessage(getReplyMessageParams(title, message))
+    private fun getReply() {
+        messageViewModel.getReply(getReplyParams())
             .observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.Success -> {
-                        if (it.data!!.status == "ok") {
-                            Toast.makeText(
-                                requireContext(),
-                                "پاسخ با موفقیت ایجاد شد",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                        if (it.data != null) {
+                            binding.rootReply.visibility = View.VISIBLE
+                            binding.txtDateReply.text = it.data.date
+                            binding.txtTitleReply.text = it.data.title
+                            binding.txtMessageReply.text = it.data.message
                         }
                     }
                     Status.Failure -> {
-                        Toast.makeText(
-                            requireContext(),
-                            "خطا در ایجاد پیام",
-                            Toast.LENGTH_SHORT
-                        ).show()
+
                     }
                     Status.Loading -> {
                         //TODO:Show progressbar
@@ -154,16 +102,10 @@ class MessageDetailsFragment : Fragment(), OnMessageClickListener, View.OnClickL
             }
     }
 
-    override fun onMessageClick(data: MessageModel) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onClick(v: View?) {
-        when (v!!.id) {
-            binding.btnReply.id -> {
-                setupNewMessageDialog()
-            }
-        }
+    private fun setMessageData() {
+        binding.txtDate.text = date
+        binding.txtMessage.text = message
+        binding.txtTitle.text = title
     }
 
 

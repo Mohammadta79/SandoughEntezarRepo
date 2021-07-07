@@ -71,8 +71,8 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
         //  getMyScore()
         getDeffearedInstallment()
         setNavHeader()
-        //   getLastLoan()
-        //    getMyTotalPay()
+        getLastLoan()
+        getMyTotalPay()
 
     }
 

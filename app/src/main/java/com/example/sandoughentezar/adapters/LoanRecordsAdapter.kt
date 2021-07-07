@@ -32,7 +32,7 @@ class LoanRecordsAdapter(
         private val binding = LoanRecordListTemplateBinding.bind(itemView)
 
         fun bindData(data: LoanModel) {
-            binding.txtRow.text = data.row
+            binding.txtRow.text = (adapterPosition+1).toString()
             binding.txtAmount.text = data.amount
             binding.txtFirstDate.text = data.start_date
             binding.txtLastDate.text = data.end_date

@@ -1,8 +1,7 @@
 package com.example.sandoughentezar.adapters
 
 import android.content.Context
-import android.content.res.Resources
-import android.graphics.Color
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import com.example.sandoughentezar.R
 import com.example.sandoughentezar.databinding.MessageListTemplateBinding
 import com.example.sandoughentezar.interfaces.OnMessageClickListener
 import com.example.sandoughentezar.models.MessageModel
+
 
 class MessageAdapter(
     var context: Context,
@@ -35,12 +35,10 @@ class MessageAdapter(
         private var binding = MessageListTemplateBinding.bind(itemView)
 
         fun bindData(data: MessageModel) {
-            if (data.sender == "manager") {
-                binding.cardviewTitle.setCardBackgroundColor(Color.WHITE)
-            }
             binding.txtDate.text = data.date
             binding.txtTitle.text = data.title
             binding.txtMessage.text = data.message
+            binding.txtMessage.movementMethod = ScrollingMovementMethod()
             binding.rootMessage.setOnClickListener { listener.onMessageClick(data) }
         }
 

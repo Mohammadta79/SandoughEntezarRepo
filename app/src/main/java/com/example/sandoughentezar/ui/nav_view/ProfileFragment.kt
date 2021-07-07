@@ -112,6 +112,23 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private fun getUserParams(): HashMap<String, String> {
         var params: HashMap<String, String> = HashMap()
         params["user_id"] = user_id
+        params["name"] = binding.edtFullName.text.toString()
+        params["national_id"] = binding.edtNationalId.text.toString()
+        params["mobile1"] = binding.edtMobileNumber1.text.toString()
+        if (binding.edtMobileNumber2.text.isNotBlank()) {
+            params["mobile2"] = binding.edtMobileNumber2.text.toString()
+        }
+        if (binding.edtPhoneNumber.text.isNotBlank()) {
+            params["phone"] = binding.edtPhoneNumber.text.toString()
+        }
+        params["postal_code"] = binding.edtPostalCode.text.toString()
+        params["address"] = binding.edtAddress.text.toString()
+        params["account_number"] = binding.edtAccountNumber.text.toString()
+        params["card1"] = binding.edtCardNumber1.text.toString()
+        if (binding.edtCardNumber2.text.isNotBlank()) {
+            params["card2"] = binding.edtCardNumber2.text.toString()
+        }
+        params["shaba"] = binding.edtShaba.text.toString()
         return params
     }
 

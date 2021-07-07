@@ -329,7 +329,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/vazir_medium"
             android:gravity="center"
-            android:text="شناسه"
+            android:text="ردیف"
             android:textColor="@color/PrimaryText"
             android:textSize="12dp"></TextView>
 

@@ -20,9 +20,9 @@ class DashbordRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
     suspend fun installmentPay(params: HashMap<String, String>): Flow<StringResponseModel> =
         apiServiceResult.installmentPay(params)
 
-    suspend fun getTotalPayment(params: HashMap<String, String>): Flow<TotalModel> =
+    suspend fun getTotalPayment(params: HashMap<String, String>): Response<TotalModel> =
         apiServiceResult.getTotalPayment(params)
 
-    suspend fun getLastLoan(params: HashMap<String, String>): Flow<TotalModel> =
+    suspend fun getLastLoan(params: HashMap<String, String>): Response<TotalModel> =
         apiServiceResult.getLastLoan(params)
 }

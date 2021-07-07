@@ -3,6 +3,7 @@ package com.example.sandoughentezar.ui.nav_view
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -49,13 +50,13 @@ class MessageFragment : Fragment(), OnMessageClickListener, View.OnClickListener
 
     private fun getUserParams(): HashMap<String, String> {
         var params = HashMap<String, String>()
-        params["user_id"] = user_id
+        params["user_id"] = "1"
         return params
     }
 
     private fun getNewMessageParams(title: String, message: String): HashMap<String, String> {
         var params = HashMap<String, String>()
-        params["user_id"] = user_id
+        params["user_id"] = "1"
         params["title"] = title
         params["message"] = message
         return params
@@ -105,6 +106,9 @@ class MessageFragment : Fragment(), OnMessageClickListener, View.OnClickListener
     override fun onMessageClick(data: MessageModel) {
         var bundle = Bundle()
         bundle.putString("message_id", data.id)
+        bundle.putString("message",data.message)
+        bundle.putString("title",data.title)
+        bundle.putString("date",data.date)
         findNavController().navigate(R.id.action_messageFragment_to_messageDetailsFragment, bundle)
     }
 
@@ -122,7 +126,7 @@ class MessageFragment : Fragment(), OnMessageClickListener, View.OnClickListener
 
     private fun setupNewMessageDialog() {
         bottomSheetView = layoutInflater.inflate(
-            R.layout.dialog_paymant,
+            R.layout.dialog_new_message,
             requireActivity().findViewById<LinearLayout>(R.id.root_dialog_new_message)
         )
         bottomSheetView!!.findViewById<Button>(R.id.btn_create_message).setOnClickListener {
@@ -146,12 +150,19 @@ class MessageFragment : Fragment(), OnMessageClickListener, View.OnClickListener
                                 "پیام با موفقیت ایجاد شد",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            bottomSheetDialog!!.dismiss()
+                        }else{
+                            Toast.makeText(
+                                requireContext(),
+                                "خطا در ایجاد پیام",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                     Status.Failure -> {
                         Toast.makeText(
                             requireContext(),
-                            "خطا در ایجاد پیام",
+                            "خطا در برقراری ارتباط با سرور",
                             Toast.LENGTH_SHORT
                         ).show()
                     }

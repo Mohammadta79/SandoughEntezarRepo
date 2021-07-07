@@ -45,12 +45,19 @@ class UserViewModel @Inject constructor(var repo: UserRepo) : ViewModel() {
 
 
     fun updateUser(params: HashMap<String, String>): LiveData<Resource<StringResponseModel>> {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             updateUserLD.postValue(Resource.loading())
-            repo.updateProfile(params)
-                .flowOn(Dispatchers.IO)
-                .catch { updateUserLD.postValue(Resource.failure(it.toString())) }
-                .collect { updateUserLD.postValue(Resource.success(it)) }
+            try {
+                var response = repo.updateProfile(params)
+                if (response.isSuccessful && response.body()!=null){
+                    updateUserLD.postValue(Resource.success(response.body()) as Resource<StringResponseModel>?)
+                }else{
+                    updateUserLD.postValue(Resource.failure(response.message()))
+                }
+
+            }catch (e:Exception){
+                updateUserLD.postValue(Resource.failure(e.toString()))
+            }
 
         }
         return updateUserLD

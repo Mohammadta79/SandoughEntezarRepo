@@ -26,8 +26,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/shape_edt_login"
-        android:fontFamily="@font/vazir_medium"
+        android:fontFamily="@font/vazir_bold"
         android:gravity="right|center"
+        android:textSize="14sp"
         android:hint="عنوان پیام"
         android:paddingRight="10dp"></EditText>
 
@@ -37,6 +38,7 @@
         android:layout_height="150dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
+        android:textSize="12sp"
         android:layout_marginRight="10dp"
         android:background="@drawable/shape_edt_login"
         android:fontFamily="@font/vazir_medium"

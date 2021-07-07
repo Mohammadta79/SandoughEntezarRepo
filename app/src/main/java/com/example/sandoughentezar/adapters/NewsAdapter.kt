@@ -1,6 +1,7 @@
 package com.example.sandoughentezar.adapters
 
 import android.content.Context
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ class NewsAdapter(var context: Context, var list: ArrayList<NewsModel>) :
             binding.txtTitle.text = data.title
             binding.txtDate.text = data.date
             binding.txtNews.text = data.news
+            binding.txtNews.movementMethod = ScrollingMovementMethod()
         }
     }
 }

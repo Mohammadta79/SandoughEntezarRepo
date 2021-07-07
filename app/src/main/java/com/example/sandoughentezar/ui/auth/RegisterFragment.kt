@@ -140,24 +140,6 @@ class RegisterFragment : Fragment(), View.OnClickListener {
         return binding.edtPostalCode.text.trim().length == 10
     }
 
-    class ResizeAnimation(var view: View, val targetHeight: Int, var startHeight: Int) :
-        Animation() {
-        override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
-            val newHeight = (startHeight + targetHeight * interpolatedTime).toInt()
-            //to support decent animation, change new heigt as Nico S. recommended in comments
-            //int newHeight = (int) (startHeight+(targetHeight - startHeight) * interpolatedTime);
-            view.layoutParams.height = newHeight
-            view.requestLayout()
-        }
-
-        override fun initialize(width: Int, height: Int, parentWidth: Int, parentHeight: Int) {
-            super.initialize(width, height, parentWidth, parentHeight)
-        }
-
-        override fun willChangeBounds(): Boolean {
-            return true
-        }
-    }
 
     private fun getParams(): HashMap<String, String> {
         var params: HashMap<String, String> = HashMap()

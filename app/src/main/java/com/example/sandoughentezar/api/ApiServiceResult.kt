@@ -28,36 +28,36 @@ class ApiServiceResult @Inject constructor(var apiService: ApiService) {
     suspend fun getUserInfo(params: HashMap<String, String>): Response<UserModel> =
         apiService.getUSerInfo(params)
 
-    suspend fun getRecordPayment(params: HashMap<String, String>): Flow<ArrayList<PaymentModel>> =
+    suspend fun getRecordPayment(params: HashMap<String, String>): Response<ArrayList<PaymentModel>> =
         apiService.getRecordPayment(params)
 
     suspend fun newPayment(params: HashMap<String, String>): Flow<StringResponseModel> =
         apiService.newPayment(params)
 
-    suspend fun getLoanRecord(params: HashMap<String, String>): Flow<ArrayList<LoanModel>> =
+    suspend fun getLoanRecord(params: HashMap<String, String>): Response<ArrayList<LoanModel>> =
         apiService.getLoanRecord(params)
 
-    suspend fun getLoanInstallment(params: HashMap<String, String>): Flow<ArrayList<InstallmentModel>> =
+    suspend fun getLoanInstallment(params: HashMap<String, String>): Response<ArrayList<InstallmentModel>> =
         apiService.getLoanInstallment(params)
 
-    suspend fun getTotalPayment(params: HashMap<String, String>): Flow<TotalModel> =
+    suspend fun getTotalPayment(params: HashMap<String, String>): Response<TotalModel> =
         apiService.getTotalPayment(params)
 
-    suspend fun getLastLoan(params: HashMap<String, String>): Flow<TotalModel> =
+    suspend fun getLastLoan(params: HashMap<String, String>): Response<TotalModel> =
         apiService.getLastLoan(params)
 
-    suspend fun updateProfile(params: HashMap<String, String>): Flow<StringResponseModel> =
+    suspend fun updateProfile(params: HashMap<String, String>): Response<StringResponseModel> =
         apiService.updateProfile(params)
 
-    suspend fun getMessage(params: HashMap<String, String>): Flow<ArrayList<MessageModel>> =
+    suspend fun getMessage(params: HashMap<String, String>): Response<ArrayList<MessageModel>> =
         apiService.getMessage(params)
 
-    suspend fun newMessage(params: HashMap<String, String>): Flow<StringResponseModel> =
+    suspend fun newMessage(params: HashMap<String, String>): Response<StringResponseModel> =
         apiService.newMessage(params)
 
-    suspend fun replyMessage(params: HashMap<String, String>): Flow<StringResponseModel> =
-        apiService.replyMessage(params)
+    suspend fun getReply(params: HashMap<String, String>): Response<ReplyModel> =
+        apiService.getReply(params)
 
-    suspend fun getNews(): Flow<ArrayList<NewsModel>> = apiService.getNews()
+    suspend fun getNews(): Response<ArrayList<NewsModel>> = apiService.getNews()
 }
 

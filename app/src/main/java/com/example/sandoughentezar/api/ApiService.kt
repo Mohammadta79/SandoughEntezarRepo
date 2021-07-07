@@ -3,10 +3,7 @@ package com.example.sandoughentezar.api
 import com.example.sandoughentezar.models.*
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
-import retrofit2.http.FieldMap
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -29,52 +26,47 @@ interface ApiService {
     suspend fun getUSerInfo(@FieldMap params: HashMap<String, String>): Response<UserModel>
 
 
-
     @FormUrlEncoded
-    @POST("getRecordPayment.php")
-    suspend fun getRecordPayment(@FieldMap params: HashMap<String, String>): Flow<ArrayList<PaymentModel>>
-
-    @FormUrlEncoded
-    @POST("newPayment.php")
-    suspend fun newPayment(@FieldMap params: HashMap<String, String>): Flow<StringResponseModel>
-
-    @FormUrlEncoded
-    @POST("getLoanRecord.php")
-    suspend fun getLoanRecord(@FieldMap params: HashMap<String, String>): Flow<ArrayList<LoanModel>>
-
-    @FormUrlEncoded
-    @POST("getLoanInstallment.php")
-    suspend fun getLoanInstallment(@FieldMap params: HashMap<String, String>): Flow<ArrayList<InstallmentModel>>
-
-    @FormUrlEncoded
-    @POST("getTotalPayment.php")
-    suspend fun getTotalPayment(@FieldMap params: HashMap<String, String>): Flow<TotalModel>
-
-    @FormUrlEncoded
-    @POST("getLastLoan.php")
-    suspend fun getLastLoan(@FieldMap params: HashMap<String, String>): Flow<TotalModel>
+    @POST("paymentrecord/")
+    suspend fun getRecordPayment(@FieldMap params: HashMap<String, String>): Response<ArrayList<PaymentModel>>
 
 
     @FormUrlEncoded
-    @POST("updateProfile.php")
-    suspend fun updateProfile(@FieldMap params: HashMap<String, String>): Flow<StringResponseModel>
+    @POST("loanrecord/")
+    suspend fun getLoanRecord(@FieldMap params: HashMap<String, String>): Response<ArrayList<LoanModel>>
 
 
     @FormUrlEncoded
-    @POST("getMessage.php")
-    suspend fun getMessage(@FieldMap params: HashMap<String, String>): Flow<ArrayList<MessageModel>>
+    @POST("loaninstallment/")
+    suspend fun getLoanInstallment(@FieldMap params: HashMap<String, String>): Response<ArrayList<InstallmentModel>>
+
 
     @FormUrlEncoded
-    @POST("newMessage.php")
-    suspend fun newMessage(@FieldMap params: HashMap<String, String>): Flow<StringResponseModel>
+    @POST("totalpayment/")
+    suspend fun getTotalPayment(@FieldMap params: HashMap<String, String>): Response<TotalModel>
+
 
     @FormUrlEncoded
-    @POST("replyMessage.php")
-    suspend fun replyMessage(@FieldMap params: HashMap<String, String>): Flow<StringResponseModel>
+    @POST("lastopenloan/")
+    suspend fun getLastLoan(@FieldMap params: HashMap<String, String>): Response<TotalModel>
 
 
-    @GET("getNews.php")
-    suspend fun getNews(): Flow<ArrayList<NewsModel>>
+    @FormUrlEncoded
+    @POST("getmessages/")
+    suspend fun getMessage(@FieldMap params: HashMap<String, String>): Response<ArrayList<MessageModel>>
+
+    @FormUrlEncoded
+    @POST("getreply/")
+    suspend fun getReply(@FieldMap params: HashMap<String, String>): Response<ReplyModel>
+
+
+    @FormUrlEncoded
+    @POST("newmessage/")
+    suspend fun newMessage(@FieldMap params: HashMap<String, String>): Response<StringResponseModel>
+
+
+    @GET("news/")
+    suspend fun getNews(): Response<ArrayList<NewsModel>>
 
 
     @FormUrlEncoded
@@ -89,6 +81,16 @@ interface ApiService {
     @FormUrlEncoded
     @POST("installmentsPay.php")
     suspend fun installmentPay(@FieldMap params: HashMap<String, String>): Flow<StringResponseModel>
+
+    @FormUrlEncoded
+    @POST("newPayment.php")
+    suspend fun newPayment(@FieldMap params: HashMap<String, String>): Flow<StringResponseModel>
+
+
+
+    @FormUrlEncoded
+    @PUT("updateprofile/")
+    suspend fun updateProfile(@FieldMap params: HashMap<String, String>): Response<StringResponseModel>
 
 
 }

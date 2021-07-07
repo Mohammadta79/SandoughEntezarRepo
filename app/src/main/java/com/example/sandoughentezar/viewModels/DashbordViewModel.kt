@@ -66,23 +66,37 @@ class DashbordViewModel @Inject constructor(var repo: DashbordRepo) : ViewModel(
     }
 
     fun getTotalPayment(params: HashMap<String, String>): LiveData<Resource<TotalModel>> {
-        viewModelScope.launch {
-            totalPaymentLD.postValue(Resource.loading())
-            repo.getTotalPayment(params)
-                .flowOn(Dispatchers.IO)
-                .catch { totalPaymentLD.postValue(Resource.failure(it.toString())) }
-                .collect { totalPaymentLD.postValue(Resource.success(it)) }
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                totalPaymentLD.postValue(Resource.loading())
+                var response = repo.getTotalPayment(params)
+                if (response.isSuccessful && response.body() != null) {
+                    totalPaymentLD.postValue(Resource.success(response.body()) as Resource<TotalModel>?)
+                } else {
+                    totalPaymentLD.postValue(Resource.failure(response.message()))
+                }
+            }catch (e:Exception){
+                totalPaymentLD.postValue(Resource.failure(e.toString()))
+            }
         }
         return totalPaymentLD
     }
 
     fun getLastLoan(params: HashMap<String, String>): LiveData<Resource<TotalModel>> {
-        viewModelScope.launch {
-            lastLoanLD.postValue(Resource.loading())
-            repo.getLastLoan(params)
-                .flowOn(Dispatchers.IO)
-                .catch { lastLoanLD.postValue(Resource.failure(it.toString())) }
-                .collect { lastLoanLD.postValue(Resource.success(it)) }
+        viewModelScope.launch(Dispatchers.IO) {
+
+            try {
+                lastLoanLD.postValue(Resource.loading())
+                var response = repo.getLastLoan(params)
+                if (response.isSuccessful && response.body()!=null){
+                     lastLoanLD.postValue(Resource.success(response.body()) as Resource<TotalModel>?)
+                }else{
+                    lastLoanLD.postValue(Resource.failure(response.message()))
+                }
+            }catch (e:Exception){
+                lastLoanLD.postValue(Resource.failure(e.toString()))
+            }
+
         }
         return lastLoanLD
     }

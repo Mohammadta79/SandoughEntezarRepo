@@ -22,11 +22,6 @@
             app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.sandoughentezar.ui.nav_view.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
-    <fragment
         android:id="@+id/messageFragment"
         android:name="com.example.sandoughentezar.ui.nav_view.MessageFragment"
         android:label="fragment_message"

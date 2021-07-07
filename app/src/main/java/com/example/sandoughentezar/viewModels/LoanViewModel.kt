@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,25 +25,36 @@ class LoanViewModel @Inject constructor(var repo: LoanRepo) : ViewModel() {
     private var loanInstallmentLD = MutableLiveData<Resource<ArrayList<InstallmentModel>>>()
 
     fun getLoanRecord(params: HashMap<String, String>): LiveData<Resource<ArrayList<LoanModel>>> {
-        viewModelScope.launch {
-            loanRecordLD.postValue(Resource.loading())
-            repo.getLoanRecord(params)
-                .flowOn(Dispatchers.IO)
-                .catch { loanRecordLD.postValue(Resource.failure(it.toString())) }
-                .collect { loanRecordLD.postValue(Resource.success(it)) }
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                loanRecordLD.postValue(Resource.loading())
+                var response = repo.getLoanRecord(params)
+                if (response.isSuccessful && response.body() != null) {
+                    loanRecordLD.postValue(Resource.success(response.body()) as Resource<ArrayList<LoanModel>>?)
+                }else{
+                    loanRecordLD.postValue(Resource.failure(response.message()))
+                }
+            } catch (e: Exception) {
+                loanRecordLD.postValue(Resource.failure(e.toString()))
 
+            }
         }
         return loanRecordLD
     }
 
     fun getLoanInstallment(params: HashMap<String, String>): LiveData<Resource<ArrayList<InstallmentModel>>> {
         viewModelScope.launch {
-            loanInstallmentLD.postValue(Resource.loading())
-            repo.getLoanInstallment(params)
-                .flowOn(Dispatchers.IO)
-                .catch { loanInstallmentLD.postValue(Resource.failure(it.toString())) }
-                .collect { loanInstallmentLD.postValue(Resource.success(it)) }
-
+            try {
+                loanInstallmentLD.postValue(Resource.loading())
+                var response = repo.getLoanInstallment(params)
+                if (response.isSuccessful && response.body() != null) {
+                    loanInstallmentLD.postValue(Resource.success(response.body()) as Resource<ArrayList<InstallmentModel>>?)
+                }else{
+                    loanInstallmentLD.postValue(Resource.failure(response.message()))
+                }
+            }catch (e:Exception){
+                loanInstallmentLD.postValue(Resource.failure(e.toString()))
+            }
         }
         return loanInstallmentLD
     }

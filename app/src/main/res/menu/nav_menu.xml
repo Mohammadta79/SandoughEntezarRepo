@@ -7,12 +7,8 @@
         android:icon="@drawable/ic_dashbord"
         android:title="داشبورد"></item>
     <item
-        android:id="@+id/profileFragment"
-        android:icon="@drawable/ic_person"
-        android:title="پروفایل"></item>
-    <item
         android:id="@+id/messageFragment"
-        android:icon="@drawable/ic_person"
+        android:icon="@drawable/ic_email"
         android:title="صندوق پیام"></item>
     <item
         android:id="@+id/statemetFragment"

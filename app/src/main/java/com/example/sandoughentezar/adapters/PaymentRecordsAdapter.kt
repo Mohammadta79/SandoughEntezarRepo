@@ -35,7 +35,7 @@ class PaymentRecordsAdapter(
             binding.txtAmount.text = data.amount
             binding.txtAuthority.text = data.authority
             binding.txtDate.text = data.date
-            binding.txtRow.text = data.row
+            binding.txtRow.text = (adapterPosition+1).toString()
         }
     }
 

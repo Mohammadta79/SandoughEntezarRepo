@@ -2,7 +2,6 @@ package com.example.sandoughentezar.models
 
 data class LoanModel(
     var id: String,
-    var row: String,
     var start_date: String,
     var amount: String,
     var end_date: String,
@@ -11,5 +10,6 @@ data class LoanModel(
     var num_of_installment: String,
     var num_of_paid_installment: String,
     var num_of_unpaid_installment: String,
-    var installment_amount: String
+    var installment_amount: String,
+    var user_id:String
 )
