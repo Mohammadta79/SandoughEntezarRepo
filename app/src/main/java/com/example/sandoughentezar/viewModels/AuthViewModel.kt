@@ -26,17 +26,17 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
     private val validatePhoneRes = MutableLiveData<Resource<ValidatePhoneResponseModel>>()
 
     fun login(params: HashMap<String, String>): LiveData<Resource<LoginResponseModel>> {
-        viewModelScope.launch(Dispatchers.IO){
-            val response =  repo.login(params)
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = repo.login(params)
             loginRes.postValue(Resource.loading())
 
             try {
-                if (response.isSuccessful && response.body()!=null){
+                if (response.isSuccessful && response.body() != null) {
                     loginRes.postValue(Resource.success(response.body()) as Resource<LoginResponseModel>?)
-                }else{
-                   loginRes.postValue(Resource.failure(response.errorBody().toString()))
+                } else {
+                    loginRes.postValue(Resource.failure(response.errorBody().toString()))
                 }
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 loginRes.postValue(Resource.failure(e.toString()))
             }
         }
@@ -44,17 +44,17 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
     }
 
     fun register(params: HashMap<String, String>): LiveData<Resource<StringResponseModel>> {
-        viewModelScope.launch(Dispatchers.IO){
-            val response =  repo.register(params)
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = repo.register(params)
             registerRes.postValue(Resource.loading())
 
             try {
-                if (response.isSuccessful && response.body()!=null){
+                if (response.isSuccessful && response.body() != null) {
                     registerRes.postValue(Resource.success(response.body()) as Resource<StringResponseModel>)
-                }else{
+                } else {
                     registerRes.postValue(Resource.failure(response.errorBody().toString()))
                 }
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 registerRes.postValue(Resource.failure(e.toString()))
             }
         }
@@ -62,17 +62,18 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
     }
 
     fun validatePhone(params: HashMap<String, String>): LiveData<Resource<ValidatePhoneResponseModel>> {
-        viewModelScope.launch {
-            registerRes.postValue(Resource.loading())
-            repo.validatePhone(params)
-                .flowOn(Dispatchers.IO)
-                .catch {
-                    validatePhoneRes.postValue(Resource.failure(it.toString()))
+        viewModelScope.launch(Dispatchers.IO) {
+            validatePhoneRes.postValue(Resource.loading())
+            val response = repo.validatePhone(params)
+            try {
+                if (response.isSuccessful && response.body() != null) {
+                    validatePhoneRes.postValue(Resource.success(response.body()) as Resource<ValidatePhoneResponseModel>?)
+                } else {
+                    validatePhoneRes.postValue(Resource.failure(response.errorBody().toString()))
                 }
-                .collect {
-                    validatePhoneRes.postValue(Resource.success(it))
-                }
-
+            } catch (e: Exception) {
+                validatePhoneRes.postValue(Resource.failure(e.toString()))
+            }
         }
         return validatePhoneRes
     }

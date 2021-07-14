@@ -1,6 +1,7 @@
 package com.example.sandoughentezar.adapters
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,11 +33,17 @@ class LoanRecordsAdapter(
         private val binding = LoanRecordListTemplateBinding.bind(itemView)
 
         fun bindData(data: LoanModel) {
-            binding.txtRow.text = (adapterPosition+1).toString()
-            binding.txtAmount.text = data.amount
+            binding.txtAmount.text = data.amount + "تومان"
             binding.txtFirstDate.text = data.start_date
             binding.txtLastDate.text = data.end_date
-            binding.txtStatus.text = data.status
+            if (data.status == "0") {
+                binding.txtStatus.text = "باز"
+                binding.txtStatus.setTextColor(Color.GREEN)
+            } else {
+                binding.txtStatus.text = "بسته"
+                binding.txtStatus.setTextColor(Color.RED)
+            }
+
 
             itemView.setOnClickListener { listener.onLoanItemClick(data) }
         }

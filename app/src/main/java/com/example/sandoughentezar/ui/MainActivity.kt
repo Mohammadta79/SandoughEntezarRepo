@@ -11,7 +11,7 @@ import com.example.sandoughentezar.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(),View.OnClickListener{
+class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,22 +30,23 @@ class MainActivity : AppCompatActivity(),View.OnClickListener{
     }
 
     override fun onBackPressed() {
-        if (binding.drawerLayout.isDrawerOpen(Gravity.LEFT)){
-            binding.drawerLayout.closeDrawer(Gravity.LEFT)
-        }else {
+        if (binding.drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+            binding.drawerLayout.closeDrawer(Gravity.RIGHT)
+        } else {
             super.onBackPressed()
         }
     }
 
     override fun onClick(v: View?) {
-        when(v!!.id){
-            binding.imgMenu.id->{
-                binding.drawerLayout.openDrawer(Gravity.LEFT)
+        when (v!!.id) {
+            binding.imgOpenDrawer.id -> {
+                binding.drawerLayout.openDrawer(Gravity.RIGHT)
             }
         }
     }
-    private fun selectedViews(){
-        binding.imgMenu.setOnClickListener(this)
+
+    private fun selectedViews() {
+        binding.imgOpenDrawer.setOnClickListener(this)
     }
 
 }

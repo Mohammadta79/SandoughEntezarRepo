@@ -25,7 +25,7 @@ import com.example.sandoughentezar.viewModels.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickListener {
+class DashbordFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentDashbordBinding
     private val dashbordViewModel by viewModels<DashbordViewModel>()
     private val userViewModel by viewModels<UserViewModel>()
@@ -48,18 +48,26 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-            binding.morePay.id -> {
+            binding.cardMyPayments.id -> {
                 findNavController().navigate(R.id.action_dashbordFragment_to_paymentFragment)
             }
-            binding.txtMoreInstallment.id -> {
+            binding.cardMyLoan.id -> {
                 findNavController().navigate(R.id.action_dashbordFragment_to_loanFragment)
+            }
+            binding.cardDeffearedInstallment.id -> {
+                findNavController().navigate(R.id.action_dashbordFragment_to_deffearedInstallmentFragment)
+            }
+            binding.cardRules.id -> {
+                findNavController().navigate(R.id.action_dashbordFragment_to_statemetFragment)
             }
         }
     }
 
     private fun selectedViews() {
-        binding.morePay.setOnClickListener(this)
-        binding.txtMoreInstallment.setOnClickListener(this)
+        binding.cardMyPayments.setOnClickListener(this)
+        binding.cardMyLoan.setOnClickListener(this)
+        binding.cardDeffearedInstallment.setOnClickListener(this)
+        binding.cardRules.setOnClickListener(this)
     }
 
     private fun initViews() {
@@ -68,11 +76,9 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
             user_id = it.getString("user_id", null).toString()
         }
 
-        //  getMyScore()
-        getDeffearedInstallment()
-        setNavHeader()
-        getLastLoan()
+        getMyScore()
         getMyTotalPay()
+        setUserInfo()
 
     }
 
@@ -95,65 +101,15 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
         }
     }
 
-    override fun onInstallmentClick(data: InstallmentModel) {
-        installmentPay(data.id)
-    }
-
-    private fun getDeffearedInstallment() {
-        dashbordViewModel.getDeffearedInstllment(getDeaffearedParams())
-            .observe(viewLifecycleOwner) {
-                when (it.status) {
-                    Status.Success -> {
-                        binding.installmentRV.apply {
-                            adapter = InstallmentAdapter(
-                                requireContext(),
-                                it.data!!,
-                                this@DashbordFragment
-                            )
-                            layoutManager =
-                                LinearLayoutManager(
-                                    requireContext(),
-                                    LinearLayoutManager.VERTICAL,
-                                    false
-                                )
-                        }
-                    }
-                    Status.Failure -> {
-                        Log.d("getDeffearedInstallment", it.msg)
-
-                    }
-                    Status.Loading -> {
-                        //TODO : Show progressbar
-                    }
-                }
-            }
-    }
-
-    private fun installmentPay(id: String) {
-        dashbordViewModel.installmentPay(getPaymentParams(id)).observe(viewLifecycleOwner) {
-            when (it.status) {
-                Status.Success -> {
-                    Toast.makeText(requireContext(), "پرداخت با موفقیت انجام شد", Toast.LENGTH_LONG)
-                        .show()
-                }
-                Status.Failure -> {
-                    Toast.makeText(requireContext(), "خطا در پرداخت", Toast.LENGTH_LONG).show()
-                }
-                Status.Loading -> {
-                    //TODO : Show progressbar
-                }
-            }
-        }
-    }
-
-    private fun setNavHeader() {
+    private fun setUserInfo() {
 
         userViewModel.getUSerInfo(getUserParams()).observe(viewLifecycleOwner) {
 
             when (it.status) {
                 Status.Success -> {
-                    activity?.findViewById<TextView>(R.id.txt_header_name)!!.text = it.data!!.name
-                    activity?.findViewById<TextView>(R.id.txt_header_account_number)!!.text =
+                    //TODO:get mobile number
+                    binding.txtNameDashbord.text = it.data!!.name
+                    binding.txtAccountNumberDashbord.text =
                         it.data!!.account_number
                 }
                 Status.Failure -> {
@@ -167,30 +123,31 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
         }
     }
 
-    private fun getLastLoan() {
-        dashbordViewModel.getLastLoan(getUserParams()).observe(viewLifecycleOwner) {
-            when (it.status) {
-                Status.Success -> {
-                    if (it.data!!.status == "ok") {
-                        binding.txtMyLoan.text = it.data.amount
-                    }
-                }
-                Status.Failure -> {
 
-                }
-                Status.Loading -> {
-                    //TODO : Show progressbar
-                }
-            }
-        }
-    }
+//    private fun getLastLoan() {
+//        dashbordViewModel.getLastLoan(getUserParams()).observe(viewLifecycleOwner) {
+//            when (it.status) {
+//                Status.Success -> {
+//                    if (it.data!!.status == "ok") {
+//                        binding.txtMyLoan.text = it.data.amount
+//                    }
+//                }
+//                Status.Failure -> {
+//
+//                }
+//                Status.Loading -> {
+//                    //TODO : Show progressbar
+//                }
+//            }
+//        }
+//    }
 
     private fun getMyTotalPay() {
         dashbordViewModel.getTotalPayment(getUserParams()).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.Success -> {
                     if (it.data!!.status == "ok") {
-                        binding.txtMyPay.text = it.data.amount
+                        binding.txtMyPayment.text = it.data.amount
                     }
                 }
                 Status.Failure -> {
@@ -207,18 +164,6 @@ class DashbordFragment : Fragment(), View.OnClickListener, OnInstallmentClickLis
     private fun getUserParams(): HashMap<String, String> {
         var params: HashMap<String, String> = HashMap()
         params["user_id"] = user_id
-        return params
-    }
-
-    private fun getDeaffearedParams(): HashMap<String, String> {
-        var params: HashMap<String, String> = HashMap()
-        params["user_id"] = user_id
-        return params
-    }
-
-    private fun getPaymentParams(id: String): HashMap<String, String> {
-        var params: HashMap<String, String> = HashMap()
-        params["installment_id"] = id
         return params
     }
 

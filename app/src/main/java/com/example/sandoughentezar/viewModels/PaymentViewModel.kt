@@ -28,7 +28,7 @@ class PaymentViewModel @Inject constructor(var repo: PaymentRepo) : ViewModel() 
                 var response = repo.getRecordPayment(params)
                 if (response.isSuccessful && response.body() != null) {
                     paymentRecordLd.postValue(Resource.success(response.body()) as Resource<ArrayList<PaymentModel>>?)
-                }else{
+                } else {
                     paymentRecordLd.postValue(Resource.failure(response.message()))
                 }
             } catch (e: Exception) {
@@ -39,15 +39,22 @@ class PaymentViewModel @Inject constructor(var repo: PaymentRepo) : ViewModel() 
     }
 
     fun newPayment(params: HashMap<String, String>): LiveData<Resource<StringResponseModel>> {
-        viewModelScope.launch {
-            newPaymentLD.postValue(Resource.loading())
-            repo.newPayment(params)
-                .flowOn(Dispatchers.IO)
-                .catch { newPaymentLD.postValue(Resource.failure(it.toString())) }
-                .collect { newPaymentLD.postValue(Resource.success(it)) }
 
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                newPaymentLD.postValue(Resource.loading())
+                var response = repo.newPayment(params)
+                if (response.isSuccessful && response.body() != null) {
+                    newPaymentLD.postValue(Resource.success(response.body()) as Resource<StringResponseModel>?)
+                } else {
+                    newPaymentLD.postValue(Resource.failure(response.message()))
+                }
+            } catch (e: Exception) {
+                newPaymentLD.postValue(Resource.failure(e.toString()))
+            }
         }
         return newPaymentLD
+
     }
 
 }

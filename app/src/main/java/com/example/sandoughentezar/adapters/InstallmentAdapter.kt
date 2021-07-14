@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sandoughentezar.R
 import com.example.sandoughentezar.databinding.DeffearedInstallmentListTemplateBinding
@@ -39,8 +40,7 @@ class InstallmentAdapter(
         private var binding = DeffearedInstallmentListTemplateBinding.bind(itemView)
 
         fun bindData(data: InstallmentModel) {
-            binding.txtAmount.text = data.amount
-            binding.txtRow.text = data.id
+            binding.txtAmount.text = data.amount + "تومان"
             binding.txtDate.text = data.date
             when (data.status) {
                 "1" -> {
@@ -56,7 +56,14 @@ class InstallmentAdapter(
             binding.linearRoot.setOnClickListener {
 
                 if (data.status == "0") {
-                    binding.linearRoot.animate().translationX(300f).setDuration(1000).start()
+                    if (binding.linearRoot.translationX == 0f) {
+                        binding.linearRoot.animate().translationX(300f).setDuration(1000).start()
+                    } else {
+                        binding.linearRoot.animate().translationX(0f).setDuration(1000).start()
+                    }
+                } else {
+                    Toast.makeText(context, "قسط مورد نظر پرداخت شده است", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
             }

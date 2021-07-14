@@ -13,16 +13,16 @@ class ApiServiceResult @Inject constructor(var apiService: ApiService) {
     suspend fun register(params: HashMap<String, String>): Response<StringResponseModel> =
         apiService.register(params)
 
-    suspend fun validatePhone(params: HashMap<String, String>): Flow<ValidatePhoneResponseModel> =
+    suspend fun validatePhone(params: HashMap<String, String>): Response<ValidatePhoneResponseModel> =
         apiService.validatePhone(params)
 
-    suspend fun getMyScore(params: HashMap<String, String>): Flow<ScoreResponseModel> =
+    suspend fun getMyScore(params: HashMap<String, String>): Response<ScoreResponseModel> =
         apiService.getMyScore(params)
 
     suspend fun getDeferredinstallments(params: HashMap<String, String>): Response<ArrayList<InstallmentModel>> =
         apiService.getDeferredinstallments(params)
 
-    suspend fun installmentPay(params: HashMap<String, String>): Flow<StringResponseModel> =
+    suspend fun installmentPay(params: HashMap<String, String>): Response<StringResponseModel> =
         apiService.installmentPay(params)
 
     suspend fun getUserInfo(params: HashMap<String, String>): Response<UserModel> =
@@ -31,7 +31,7 @@ class ApiServiceResult @Inject constructor(var apiService: ApiService) {
     suspend fun getRecordPayment(params: HashMap<String, String>): Response<ArrayList<PaymentModel>> =
         apiService.getRecordPayment(params)
 
-    suspend fun newPayment(params: HashMap<String, String>): Flow<StringResponseModel> =
+    suspend fun newPayment(params: HashMap<String, String>): Response<StringResponseModel> =
         apiService.newPayment(params)
 
     suspend fun getLoanRecord(params: HashMap<String, String>): Response<ArrayList<LoanModel>> =

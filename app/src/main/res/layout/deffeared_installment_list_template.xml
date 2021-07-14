@@ -1,71 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="120dp"
     android:layout_margin="8dp"
+    android:elevation="10dp"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="3dp">
+    app:cardCornerRadius="20sp">
 
-    <Button
-        android:id="@+id/btn_pay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/shape_btn_pay"
-        android:fontFamily="@font/vazir_medium"
-        android:text="پرداخت"></Button>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <LinearLayout
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_pay"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/shape_btn_pay"
+            android:fontFamily="@font/vazir_medium"
+            android:text="پرداخت"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.AppCompatButton>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linear_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:elevation="2dp"
-        android:layoutDirection="rtl"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/txt_row"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/vazir_medium"
-            android:gravity="center"
+
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:fontFamily="@font/kalameh_bold"
+            android:text="تاریخ سررسید:"
             android:textColor="@color/PrimaryText"
-            android:textSize="14dp"></TextView>
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
 
         <TextView
             android:id="@+id/txt_date"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:fontFamily="@font/vazir_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:fontFamily="@font/kalameh_bold"
             android:gravity="center"
-            android:textColor="@color/PrimaryText"
-            android:textSize="14dp"></TextView>
+            android:text="2021/07/13"
+            android:textColor="@color/SecondaryText"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView3"
+            app:layout_constraintEnd_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toTopOf="@+id/textView3"></TextView>
 
         <TextView
             android:id="@+id/txt_amount"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:fontFamily="@font/vazir_medium"
+            android:fontFamily="@font/kalameh_bold"
             android:gravity="center"
+            android:text="5000000 تومان"
             android:textColor="@color/PrimaryText"
-            android:textSize="14dp"></TextView>
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
 
         <TextView
             android:id="@+id/txt_status"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
             android:layout_weight="2"
-            android:fontFamily="@font/vazir_medium"
+            android:fontFamily="@font/kalameh_bold"
             android:gravity="center"
-            android:textColor="@color/PrimaryText"
-            android:textSize="14dp"></TextView>
+            android:text="پرداخت نشده"
+            android:textColor="#FF0000"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"></TextView>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.cardview.widget.CardView>

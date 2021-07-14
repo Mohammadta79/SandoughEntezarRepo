@@ -27,12 +27,18 @@ class DashbordViewModel @Inject constructor(var repo: DashbordRepo) : ViewModel(
     private var totalPaymentLD = MutableLiveData<Resource<TotalModel>>()
 
     fun getMyScore(params: HashMap<String, String>): LiveData<Resource<ScoreResponseModel>> {
-        viewModelScope.launch {
-            myScoreLD.postValue(Resource.loading())
-            repo.getMyScore(params)
-                .flowOn(Dispatchers.IO)
-                .catch { myScoreLD.postValue(Resource.failure(it.toString())) }
-                .collect { myScoreLD.postValue(Resource.success(it)) }
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                myScoreLD.postValue(Resource.loading())
+                val response = repo.getMyScore(params)
+                if (response.isSuccessful && response.body() != null) {
+                    myScoreLD.postValue(Resource.success(response.body()) as Resource<ScoreResponseModel>?)
+                } else {
+                    myScoreLD.postValue(Resource.failure(response.errorBody().toString()))
+                }
+            } catch (e: Exception) {
+                myScoreLD.postValue(Resource.failure(e.toString()))
+            }
         }
         return myScoreLD
     }
@@ -55,12 +61,18 @@ class DashbordViewModel @Inject constructor(var repo: DashbordRepo) : ViewModel(
     }
 
     fun installmentPay(params: HashMap<String, String>): LiveData<Resource<StringResponseModel>> {
-        viewModelScope.launch {
-            installmentPayLD.postValue(Resource.loading())
-            repo.installmentPay(params)
-                .flowOn(Dispatchers.IO)
-                .catch { installmentPayLD.postValue(Resource.failure(it.toString())) }
-                .collect { installmentPayLD.postValue(Resource.success(it)) }
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                installmentPayLD.postValue(Resource.loading())
+                var response = repo.installmentPay(params)
+                if (response.isSuccessful && response.body() != null) {
+                    installmentPayLD.postValue(Resource.success(response.body()) as Resource<StringResponseModel>?)
+                } else {
+                    installmentPayLD.postValue(Resource.failure(response.message()))
+                }
+            } catch (e: Exception) {
+                installmentPayLD.postValue(Resource.failure(e.toString()))
+            }
         }
         return installmentPayLD
     }
@@ -75,7 +87,7 @@ class DashbordViewModel @Inject constructor(var repo: DashbordRepo) : ViewModel(
                 } else {
                     totalPaymentLD.postValue(Resource.failure(response.message()))
                 }
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 totalPaymentLD.postValue(Resource.failure(e.toString()))
             }
         }
@@ -88,12 +100,12 @@ class DashbordViewModel @Inject constructor(var repo: DashbordRepo) : ViewModel(
             try {
                 lastLoanLD.postValue(Resource.loading())
                 var response = repo.getLastLoan(params)
-                if (response.isSuccessful && response.body()!=null){
-                     lastLoanLD.postValue(Resource.success(response.body()) as Resource<TotalModel>?)
-                }else{
+                if (response.isSuccessful && response.body() != null) {
+                    lastLoanLD.postValue(Resource.success(response.body()) as Resource<TotalModel>?)
+                } else {
                     lastLoanLD.postValue(Resource.failure(response.message()))
                 }
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 lastLoanLD.postValue(Resource.failure(e.toString()))
             }
 

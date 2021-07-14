@@ -11,13 +11,13 @@ import javax.inject.Inject
 
 class DashbordRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
 
-    suspend fun getMyScore(params: HashMap<String, String>): Flow<ScoreResponseModel> =
+    suspend fun getMyScore(params: HashMap<String, String>): Response<ScoreResponseModel> =
         apiServiceResult.getMyScore(params)
 
     suspend fun getDeferredinstallments(params: HashMap<String, String>): Response<ArrayList<InstallmentModel>> =
         apiServiceResult.getDeferredinstallments(params)
 
-    suspend fun installmentPay(params: HashMap<String, String>): Flow<StringResponseModel> =
+    suspend fun installmentPay(params: HashMap<String, String>): Response<StringResponseModel> =
         apiServiceResult.installmentPay(params)
 
     suspend fun getTotalPayment(params: HashMap<String, String>): Response<TotalModel> =

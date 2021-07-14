@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sandoughentezar.R
 import com.example.sandoughentezar.adapters.InstallmentAdapter
-import com.example.sandoughentezar.adapters.LoanRecordsAdapter
 import com.example.sandoughentezar.api.state.Status
 import com.example.sandoughentezar.databinding.FragmentLoanDetailsBinding
 import com.example.sandoughentezar.interfaces.OnInstallmentClickListener

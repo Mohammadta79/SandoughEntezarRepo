@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.auth.LoginFragment">
 
-    <EditText
 
+    <EditText
         android:id="@+id/edt_national_id"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -14,11 +15,12 @@
         android:layout_marginLeft="70dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/shape_edt_login"
-        android:drawableLeft="@drawable/ic_card"
+        android:drawableRight="@drawable/ic_card"
+        android:drawablePadding="10dp"
         android:fontFamily="@font/vazir_medium"
+        android:gravity="right|center"
         android:hint="کد ملی"
         android:inputType="number"
-        android:gravity="right|center"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         android:textSize="14dp"></EditText>
@@ -32,10 +34,11 @@
         android:layout_marginLeft="70dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/shape_edt_login"
-        android:drawableLeft="@drawable/ic_pass"
+        android:drawableRight="@drawable/ic_pass"
+        android:drawablePadding="10dp"
         android:fontFamily="@font/vazir_medium"
-        android:hint="رمز عبور"
         android:gravity="right|center"
+        android:hint="رمز عبور"
         android:inputType="textPassword"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
@@ -46,14 +49,14 @@
         android:id="@+id/txt_forgot_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="بازیابی اطلاعات ورود"
         android:layout_below="@id/edt_password"
-        android:layout_marginTop="16sp"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="16sp"
         android:layout_marginRight="40dp"
+        android:fontFamily="@font/vazir_bold"
+        android:text="بازیابی اطلاعات ورود"
         android:textColor="@color/DarkPrimaryColor"
-        android:textSize="14dp"
-        android:fontFamily="@font/vazir_bold"></TextView>
+        android:textSize="14dp"></TextView>
 
 
     <androidx.appcompat.widget.AppCompatButton

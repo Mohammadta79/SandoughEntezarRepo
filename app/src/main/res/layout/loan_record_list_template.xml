@@ -2,70 +2,96 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="130dp"
     android:layout_margin="8dp"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="3dp">
+    app:cardCornerRadius="20sp">
 
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linear_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:elevation="2dp"
-        android:layoutDirection="rtl"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/txt_row"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/vazir_medium"
-            android:gravity="center"
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:fontFamily="@font/kalameh_bold"
+            android:text="تاریخ اخذ :"
             android:textColor="@color/PrimaryText"
-            android:textSize="14dp"></TextView>
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
 
         <TextView
             android:id="@+id/txt_first_date"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:fontFamily="@font/vazir_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kalameh_bold"
             android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:text="2021/7/13"
+            android:textColor="@color/SecondaryText"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView5"
+            app:layout_constraintTop_toTopOf="@+id/textView5"></TextView>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kalameh_bold"
+            android:text="تاریخ پایان :"
+            android:layout_marginBottom="15dp"
             android:textColor="@color/PrimaryText"
-            android:textSize="14dp"></TextView>
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/textView5"></TextView>
 
         <TextView
             android:id="@+id/txt_amount"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:fontFamily="@font/vazir_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kalameh_bold"
             android:gravity="center"
+            android:text="15000000 تومان"
             android:textColor="@color/PrimaryText"
-            android:textSize="14dp"></TextView>
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
 
         <TextView
             android:id="@+id/txt_last_date"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:fontFamily="@font/vazir_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kalameh_bold"
             android:gravity="center"
-            android:textColor="@color/PrimaryText"
-            android:textSize="14dp"></TextView>
+            android:text="2022/07/13"
+            android:textColor="@color/SecondaryText"
+            android:layout_marginRight="10dp"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView6"
+            app:layout_constraintTop_toTopOf="@+id/textView6"></TextView>
+
         <TextView
             android:id="@+id/txt_status"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:fontFamily="@font/vazir_medium"
+            android:layout_width="wrap_content"
+         android:layout_marginBottom="15dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kalameh_bold"
             android:gravity="center"
-            android:textColor="@color/PrimaryText"
-            android:textSize="14dp"></TextView>
-    </LinearLayout>
+            android:text="باز"
+            android:textColor="#FF0000"
+            android:layout_marginLeft="20sp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"></TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.cardview.widget.CardView>

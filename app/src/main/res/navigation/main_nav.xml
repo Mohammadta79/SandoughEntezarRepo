@@ -20,6 +20,16 @@
             app:destination="@id/paymentFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_dashbordFragment_to_deffearedInstallmentFragment"
+            app:destination="@id/deffearedInstallmentFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_dashbordFragment_to_statemetFragment"
+            app:destination="@id/statemetFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/messageFragment"
@@ -84,5 +94,10 @@
         android:name="com.example.sandoughentezar.ui.message_action.MessageDetailsFragment"
         android:label="fragment_message_details"
         tools:layout="@layout/fragment_message_details" />
+    <fragment
+        android:id="@+id/deffearedInstallmentFragment"
+        android:name="com.example.sandoughentezar.ui.dashbord_action.DeffearedInstallmentFragment"
+        android:label="fragment_deffeared_installment"
+        tools:layout="@layout/fragment_deffeared_installment" />
 
 </navigation>

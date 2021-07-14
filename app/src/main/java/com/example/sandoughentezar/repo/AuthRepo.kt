@@ -16,6 +16,6 @@ class AuthRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
     suspend fun register(params: HashMap<String, String>): Response<StringResponseModel> =
         apiServiceResult.register(params)
 
-    suspend fun validatePhone(params: HashMap<String, String>): Flow<ValidatePhoneResponseModel> =
+    suspend fun validatePhone(params: HashMap<String, String>): Response<ValidatePhoneResponseModel> =
         apiServiceResult.validatePhone(params)
 }

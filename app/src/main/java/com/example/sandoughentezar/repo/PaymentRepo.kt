@@ -12,6 +12,6 @@ class PaymentRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
     suspend fun getRecordPayment(params: HashMap<String, String>): Response<ArrayList<PaymentModel>> =
         apiServiceResult.getRecordPayment(params)
 
-    suspend fun newPayment(params: HashMap<String, String>): Flow<StringResponseModel> =
+    suspend fun newPayment(params: HashMap<String, String>): Response<StringResponseModel> =
         apiServiceResult.newPayment(params)
 }

@@ -5,43 +5,44 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="right"
     android:fitsSystemWindows="true"
+    android:layoutDirection="rtl"
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layoutDirection="ltr">
 
-        <Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/PrimaryColor">
-
-            <ImageView
-                android:id="@+id/img_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_menu"
-                app:tint="@color/white"></ImageView>
-        </Toolbar>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_view_fragmentContainer"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:defaultNavHost="true"
             android:layout_gravity="left"
+            app:defaultNavHost="true"
             app:navGraph="@navigation/main_nav" />
-    </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_open_drawer"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="12dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_drawer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></ImageView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="left"
+        android:layout_gravity="right"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_view_header"
         app:itemIconTint="@color/PrimaryColor"

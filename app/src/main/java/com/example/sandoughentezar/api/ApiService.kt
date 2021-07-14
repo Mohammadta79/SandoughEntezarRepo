@@ -70,21 +70,21 @@ interface ApiService {
 
 
     @FormUrlEncoded
-    @POST("validatePhone.php")
-    suspend fun validatePhone(@FieldMap params: HashMap<String, String>): Flow<ValidatePhoneResponseModel>
+    @POST("sms/")
+    suspend fun validatePhone(@FieldMap params: HashMap<String, String>): Response<ValidatePhoneResponseModel>
 
     @FormUrlEncoded
-    @POST("getMyScore.php")
-    suspend fun getMyScore(@FieldMap params: HashMap<String, String>): Flow<ScoreResponseModel>
+    @POST("score/")
+    suspend fun getMyScore(@FieldMap params: HashMap<String, String>): Response<ScoreResponseModel>
 
 
     @FormUrlEncoded
-    @POST("installmentsPay.php")
-    suspend fun installmentPay(@FieldMap params: HashMap<String, String>): Flow<StringResponseModel>
+    @POST("installmentpay/")
+    suspend fun installmentPay(@FieldMap params: HashMap<String, String>): Response<StringResponseModel>
 
     @FormUrlEncoded
-    @POST("newPayment.php")
-    suspend fun newPayment(@FieldMap params: HashMap<String, String>): Flow<StringResponseModel>
+    @POST("newpay/")
+    suspend fun newPayment(@FieldMap params: HashMap<String, String>): Response<StringResponseModel>
 
 
 

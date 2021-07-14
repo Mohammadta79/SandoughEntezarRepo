@@ -76,18 +76,46 @@ class LoginFragment : Fragment(), View.OnClickListener {
         authViewModel.login(getParams()).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.Success -> {
-                    if (it.data!!.status == "ok") {
-                        var bundle= Bundle()
-                        bundle.putString("user_id",it.data.user_id)
-                        bundle.putString("mobile",it.data.mobile)
-                        findNavController().navigate(R.id.action_authFragment_to_validatePhoneFragment2,bundle)
-                    } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "نام کاربری یا رمز عبور اشتباه است",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    when (it.data!!.status) {
+                        "ok" -> {
+                            var bundle = Bundle()
+                            bundle.putString("user_id", it.data.user_id)
+                            bundle.putString("mobile", it.data.mobile)
+                            findNavController().navigate(
+                                R.id.action_authFragment_to_validatePhoneFragment2,
+                                bundle
+                            )
+                        }
+                        "waiting" -> {
+                            Toast.makeText(
+                                requireContext(),
+                                "اطلاعات شما هنوز توسط مدیر تایید نشده است",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        "fail" -> {
+                            Toast.makeText(
+                                requireContext(),
+                                "کد ملی شما اشتباه است",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        "wrongpass" -> {
+                            Toast.makeText(
+                                requireContext(),
+                                "نام کاربری یا رمز عبور اشتباه است",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        else -> {
+                            Toast.makeText(
+                                requireContext(),
+                                "خطا در برقراری ارتباط با سرور",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
+
 
                 }
                 Status.Loading -> {
