@@ -4,45 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/DarkPrimaryColor"
     tools:context=".ui.nav_view.StatemetFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:fontFamily="@font/vazir_medium"
-        android:lines="3"
-        android:padding="10dp"
-        android:text="از لینک زیر میتوانید شرایط و ضوابط اساسنامه را مطالعه کنید"
-        android:textColor="@color/PrimaryText"
-        android:textSize="16sp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/kalameh_bold"
+        android:text="شرایط و ضوابط"
+        android:textColor="@color/white"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></TextView>
 
-    <TextView
-        android:id="@+id/txt_ruls"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/vazir_medium"
-        android:text="شرایط و ضوابط"
-        android:textColor="@color/PrimaryColor"
-        android:textSize="16sp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13"></TextView>
+        android:background="@drawable/shape_dashbord"
+        app:layout_constraintHeight_percent="0.9">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:drawableRight="@drawable/ic_copyright"
-        android:fontFamily="@font/vazir_medium"
-        android:text="تمامی حقوق نرم افزار متعلق به صندوق انتظار می باشد"
-        android:textColor="@color/SecondaryText"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/kalameh_bold"
+            android:lines="3"
+            android:padding="10dp"
+            android:text="از لینک زیر میتوانید شرایط و ضوابط اساسنامه را مطالعه کنید"
+            android:textColor="@color/PrimaryText"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
+
+        <TextView
+            android:id="@+id/txt_ruls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kalameh_bold"
+            android:text="شرایط و ضوابط"
+            android:textColor="@color/PrimaryColor"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textView"
+            app:layout_constraintVertical_bias="0.13"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="20sp"
+            android:drawableRight="@drawable/ic_copyright"
+            android:fontFamily="@font/kalameh_bold"
+            android:text="تمامی حقوق نرم افزار متعلق به صندوق انتظار می باشد"
+            android:textColor="@color/SecondaryText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

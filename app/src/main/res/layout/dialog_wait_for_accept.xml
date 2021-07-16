@@ -9,10 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/vazir_medium"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/kalameh_bold"
         android:gravity="center"
         android:text="اطلاعات شما برای بررسی به مدیریت ارسال شد.\n ظرف دو روز کاری اطلاعات شما بررسی می شود و پس از تایید، نام کاربری و رمز عبور برای شما پیامک می شود."
         android:textColor="@color/PrimaryText"
-        android:textSize="16sp"></TextView>
+        android:textSize="20sp"></TextView>
 </LinearLayout>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/payment_dialog_root"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/shape_bottom_sheet"
     android:gravity="top|center"
@@ -12,10 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:fontFamily="@font/vazir_bold"
+        android:fontFamily="@font/kalameh_bold"
         android:text="پرداخت جدید"
         android:textColor="@color/PrimaryText"
-        android:textSize="16sp"></TextView>
+        android:textSize="20sp"></TextView>
 
     <EditText
 
@@ -28,13 +28,13 @@
         android:layout_marginRight="35dp"
         android:background="@drawable/shape_edt_login"
         android:drawableLeft="@drawable/ic_money"
-        android:fontFamily="@font/vazir_medium"
+        android:fontFamily="@font/kalameh_bold"
         android:gravity="right|center"
-        android:hint="مبلغ (ریال)"
+        android:hint="مبلغ (تومان)"
         android:inputType="number"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
-        android:textSize="14dp"></EditText>
+        android:textSize="16sp"></EditText>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_dialog_payment"
@@ -43,11 +43,11 @@
         android:layout_below="@id/txt_forgot_pass"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/shape_btn_login_enable"
         android:elevation="10dp"
-        android:fontFamily="@font/vazir_medium"
+        android:fontFamily="@font/kalameh_bold"
         android:text="پرداخت"
-        android:layout_marginBottom="20dp"
         android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
 
 

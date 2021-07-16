@@ -87,8 +87,8 @@ class DashbordFragment : Fragment(), View.OnClickListener {
             when (it.status) {
                 Status.Success -> {
                     it.data!!.let { _data ->
-                        binding.txtMyLevel.text = _data.level
-                        binding.txtMyScore.text = _data.score
+                        binding.txtMyLevel.text = "رتبه" + _data.level
+                        binding.txtMyScore.text = _data.score + "امتیاز"
                     }
                 }
                 Status.Failure -> {
@@ -124,30 +124,12 @@ class DashbordFragment : Fragment(), View.OnClickListener {
     }
 
 
-//    private fun getLastLoan() {
-//        dashbordViewModel.getLastLoan(getUserParams()).observe(viewLifecycleOwner) {
-//            when (it.status) {
-//                Status.Success -> {
-//                    if (it.data!!.status == "ok") {
-//                        binding.txtMyLoan.text = it.data.amount
-//                    }
-//                }
-//                Status.Failure -> {
-//
-//                }
-//                Status.Loading -> {
-//                    //TODO : Show progressbar
-//                }
-//            }
-//        }
-//    }
-
     private fun getMyTotalPay() {
         dashbordViewModel.getTotalPayment(getUserParams()).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.Success -> {
                     if (it.data!!.status == "ok") {
-                        binding.txtMyPayment.text = it.data.amount
+                        binding.txtMyPayment.text = it.data.amount + "تومان"
                     }
                 }
                 Status.Failure -> {

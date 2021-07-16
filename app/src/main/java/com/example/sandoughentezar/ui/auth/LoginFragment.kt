@@ -33,12 +33,12 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews()
         selectViews()
     }
 
     private fun selectViews() {
         binding.btnLogin.setOnClickListener(this)
+        binding.txtForgotPass.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -55,6 +55,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
                     ).show()
                 }
             }
+            binding.txtForgotPass.id -> {
+                findNavController().navigate(R.id.action_authFragment_to_forgotPasswordFragment)
+            }
         }
     }
 
@@ -68,9 +71,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private fun checkInput(): Boolean =
         !(binding.edtNationalId.text.toString()
             .isBlank() || binding.edtPassword.text.toString().isBlank())
-
-    private fun initViews() {
-    }
 
     private fun login() {
         authViewModel.login(getParams()).observe(viewLifecycleOwner) {

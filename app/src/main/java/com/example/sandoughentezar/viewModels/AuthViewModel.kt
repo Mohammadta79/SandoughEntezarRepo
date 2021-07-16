@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sandoughentezar.api.state.Resource
+import com.example.sandoughentezar.models.ForgotPassModel
 import com.example.sandoughentezar.models.StringResponseModel
 import com.example.sandoughentezar.models.LoginResponseModel
 import com.example.sandoughentezar.models.ValidatePhoneResponseModel
@@ -24,6 +25,7 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
     private val loginRes = MutableLiveData<Resource<LoginResponseModel>>()
     private val registerRes = MutableLiveData<Resource<StringResponseModel>>()
     private val validatePhoneRes = MutableLiveData<Resource<ValidatePhoneResponseModel>>()
+    private val forgotPass = MutableLiveData<Resource<ForgotPassModel>>()
 
     fun login(params: HashMap<String, String>): LiveData<Resource<LoginResponseModel>> {
         viewModelScope.launch(Dispatchers.IO) {
@@ -76,6 +78,23 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
             }
         }
         return validatePhoneRes
+    }
+
+    fun forgotPass(params: HashMap<String, String>): LiveData<Resource<ForgotPassModel>> {
+        viewModelScope.launch(Dispatchers.IO) {
+            forgotPass.postValue(Resource.loading())
+            val response = repo.forgotPass(params)
+            try {
+                if (response.isSuccessful && response.body() != null) {
+                    forgotPass.postValue(Resource.success(response.body()) as Resource<ForgotPassModel>?)
+                } else {
+                    forgotPass.postValue(Resource.failure(response.errorBody().toString()))
+                }
+            } catch (e: Exception) {
+                forgotPass.postValue(Resource.failure(e.toString()))
+            }
+        }
+        return forgotPass
     }
 
 

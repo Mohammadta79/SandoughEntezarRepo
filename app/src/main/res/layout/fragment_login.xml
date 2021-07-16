@@ -17,13 +17,13 @@
         android:background="@drawable/shape_edt_login"
         android:drawableRight="@drawable/ic_card"
         android:drawablePadding="10dp"
-        android:fontFamily="@font/vazir_medium"
+        android:fontFamily="@font/kalameh_bold"
         android:gravity="right|center"
         android:hint="کد ملی"
         android:inputType="number"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
-        android:textSize="14dp"></EditText>
+        android:textSize="16dp"></EditText>
 
     <EditText
         android:id="@+id/edt_password"
@@ -36,13 +36,13 @@
         android:background="@drawable/shape_edt_login"
         android:drawableRight="@drawable/ic_pass"
         android:drawablePadding="10dp"
-        android:fontFamily="@font/vazir_medium"
+        android:fontFamily="@font/kalameh_bold"
         android:gravity="right|center"
         android:hint="رمز عبور"
         android:inputType="textPassword"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
-        android:textSize="14dp"></EditText>
+        android:textSize="16dp"></EditText>
 
 
     <TextView
@@ -51,12 +51,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/edt_password"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="16sp"
+        android:layout_marginTop="18sp"
         android:layout_marginRight="40dp"
-        android:fontFamily="@font/vazir_bold"
+        android:fontFamily="@font/kalameh_bold"
         android:text="بازیابی اطلاعات ورود"
         android:textColor="@color/DarkPrimaryColor"
-        android:textSize="14dp"></TextView>
+        android:textSize="16dp"></TextView>
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -68,8 +68,9 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/shape_btn_login_enable"
         android:elevation="10dp"
-        android:fontFamily="@font/vazir_medium"
+        android:fontFamily="@font/kalameh_bold"
         android:text="ورود"
-        android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
+        android:textColor="@color/white"
+        android:textSize="18sp"></androidx.appcompat.widget.AppCompatButton>
 
 </RelativeLayout>

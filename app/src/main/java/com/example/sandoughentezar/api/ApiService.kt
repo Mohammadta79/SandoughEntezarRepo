@@ -20,7 +20,6 @@ interface ApiService {
     suspend fun getDeferredinstallments(@FieldMap params: HashMap<String, String>): Response<ArrayList<InstallmentModel>>
 
 
-
     @FormUrlEncoded
     @POST("userinfo/")
     suspend fun getUSerInfo(@FieldMap params: HashMap<String, String>): Response<UserModel>
@@ -78,19 +77,18 @@ interface ApiService {
     suspend fun getMyScore(@FieldMap params: HashMap<String, String>): Response<ScoreResponseModel>
 
 
-    @FormUrlEncoded
-    @POST("installmentpay/")
+
+    @GET("installmentpay/")
     suspend fun installmentPay(@FieldMap params: HashMap<String, String>): Response<StringResponseModel>
 
-    @FormUrlEncoded
-    @POST("newpay/")
+
+    @GET("newpay/")
     suspend fun newPayment(@FieldMap params: HashMap<String, String>): Response<StringResponseModel>
 
 
-
     @FormUrlEncoded
-    @PUT("updateprofile/")
-    suspend fun updateProfile(@FieldMap params: HashMap<String, String>): Response<StringResponseModel>
+    @POST("forgotpass/")
+    suspend fun forgotPassword(@FieldMap params: HashMap<String, String>):Response<ForgotPassModel>
 
 
 }

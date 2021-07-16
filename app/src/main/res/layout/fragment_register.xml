@@ -53,12 +53,12 @@
                     android:background="@drawable/shape_edt_login"
                     android:drawableRight="@drawable/ic_person"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/vazir_medium"
+                    android:fontFamily="@font/kalameh_bold"
                     android:gravity="center|right"
                     android:hint="نام کامل *"
                     android:paddingLeft="12dp"
                     android:paddingRight="16dp"
-                    android:textSize="14dp"></EditText>
+                    android:textSize="16sp"></EditText>
 
                 <EditText
                     android:id="@+id/edt_national_id"
@@ -71,13 +71,13 @@
                     android:background="@drawable/shape_edt_login"
                     android:drawableRight="@drawable/ic_card"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/vazir_medium"
+                    android:fontFamily="@font/kalameh_bold"
                     android:gravity="right|center"
                     android:hint="شماره ملی *"
                     android:inputType="number"
                     android:paddingLeft="12dp"
                     android:paddingRight="16dp"
-                    android:textSize="14dp"></EditText>
+                    android:textSize="16sp"></EditText>
 
                 <EditText
                     android:id="@+id/edt_mobile_number1"
@@ -90,13 +90,13 @@
                     android:background="@drawable/shape_edt_login"
                     android:drawableRight="@drawable/ic_mobile"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/vazir_medium"
+                    android:fontFamily="@font/kalameh_bold"
                     android:gravity="right|center"
                     android:hint=" شماره موبایل 1 *"
                     android:inputType="phone"
                     android:paddingLeft="12dp"
                     android:paddingRight="16dp"
-                    android:textSize="14dp"></EditText>
+                    android:textSize="16sp"></EditText>
 
                 <EditText
                     android:id="@+id/edt_mobile_number2"
@@ -109,13 +109,13 @@
                     android:background="@drawable/shape_edt_login"
                     android:drawableRight="@drawable/ic_mobile"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/vazir_medium"
+                    android:fontFamily="@font/kalameh_bold"
                     android:gravity="center|right"
                     android:hint=" شماره موبایل 2 "
                     android:inputType="phone"
                     android:paddingLeft="12dp"
                     android:paddingRight="16dp"
-                    android:textSize="14dp"></EditText>
+                    android:textSize="16sp"></EditText>
 
 
                 <EditText
@@ -130,13 +130,13 @@
                     android:background="@drawable/shape_edt_login"
                     android:drawableRight="@drawable/ic_phone"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/vazir_medium"
+                    android:fontFamily="@font/kalameh_bold"
                     android:gravity="right|center"
                     android:hint="شماره تلفن ثابت"
                     android:inputType="number"
                     android:paddingLeft="12dp"
                     android:paddingRight="16dp"
-                    android:textSize="14dp"></EditText>
+                    android:textSize="16sp"></EditText>
 
                 <EditText
                     android:id="@+id/edt_postal_code"
@@ -150,13 +150,13 @@
                     android:background="@drawable/shape_edt_login"
                     android:drawableRight="@drawable/ic_post"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/vazir_medium"
+                    android:fontFamily="@font/kalameh_bold"
                     android:gravity="right|center"
                     android:hint="کد پستی *"
                     android:inputType="number"
                     android:paddingLeft="12dp"
                     android:paddingRight="16dp"
-                    android:textSize="14dp"></EditText>
+                    android:textSize="16sp"></EditText>
 
                 <EditText
                     android:id="@+id/edt_address"
@@ -169,7 +169,7 @@
                     android:background="@drawable/shape_edt_login"
                     android:drawableRight="@drawable/ic_home"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/vazir_medium"
+                    android:fontFamily="@font/kalameh_bold"
                     android:gravity="right|center"
                     android:hint="آدرس *"
                     android:inputType="textPostalAddress"
@@ -177,7 +177,7 @@
                     android:paddingLeft="12dp"
                     android:paddingRight="16dp"
                     android:text=""
-                    android:textSize="14dp"></EditText>
+                    android:textSize="16sp"></EditText>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -223,13 +223,13 @@
                     android:background="@drawable/shape_edt_login"
                     android:drawableRight="@drawable/ic_account_balance"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/vazir_medium"
+                    android:fontFamily="@font/kalameh_bold"
                     android:gravity="right|center"
                     android:hint="شماره حساب"
                     android:inputType="number"
                     android:paddingLeft="12dp"
                     android:paddingRight="16dp"
-                    android:textSize="14dp"></EditText>
+                    android:textSize="16sp"></EditText>
 
                 <EditText
                     android:id="@+id/edt_card_number1"
@@ -243,13 +243,13 @@
                     android:background="@drawable/shape_edt_login"
                     android:drawableRight="@drawable/ic_card"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/vazir_medium"
+                    android:fontFamily="@font/kalameh_bold"
                     android:gravity="right|center"
                     android:hint="شماره کارت 1 *"
                     android:inputType="number"
                     android:paddingLeft="12dp"
                     android:paddingRight="16dp"
-                    android:textSize="14dp"></EditText>
+                    android:textSize="16sp"></EditText>
 
                 <EditText
                     android:id="@+id/edt_card_number2"
@@ -261,7 +261,7 @@
                     android:background="@drawable/shape_edt_login"
                     android:drawableRight="@drawable/ic_card"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/vazir_medium"
+                    android:fontFamily="@font/kalameh_bold"
                     android:gravity="right|center"
                     android:hint="شماره کارت 2 "
                     android:inputType="number"
@@ -269,7 +269,7 @@
                     android:paddingLeft="12dp"
                     android:paddingRight="16dp"
                     android:text=""
-                    android:textSize="14dp"></EditText>
+                    android:textSize="16sp"></EditText>
 
                 <EditText
                     android:id="@+id/edt_shaba"
@@ -282,7 +282,7 @@
                     android:background="@drawable/shape_edt_login"
                     android:drawableRight="@drawable/ic_account_balance"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/vazir_medium"
+                    android:fontFamily="@font/kalameh_bold"
                     android:gravity="right|center"
                     android:hint="شماره شبا *"
                     android:inputType="textPostalAddress"
@@ -290,7 +290,7 @@
                     android:paddingLeft="12dp"
                     android:paddingRight="16dp"
                     android:text=""
-                    android:textSize="14dp"></EditText>
+                    android:textSize="16sp"></EditText>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -324,10 +324,10 @@
                         android:id="@+id/txt_ruls"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/vazir"
+                        android:fontFamily="@font/kalameh_bold"
                         android:text="قوانین و شرایط"
                         android:textColor="@color/PrimaryColor"
-                        android:textSize="14dp"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/agreement_chb"
                         app:layout_constraintTop_toTopOf="parent"></TextView>
@@ -335,10 +335,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/vazir"
+                        android:fontFamily="@font/kalameh_bold"
 
                         android:text=" استفاده از برنامه را می پذیرم."
                         android:textColor="@color/PrimaryText"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/txt_ruls"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -356,9 +357,10 @@
                     android:background="@drawable/shape_btn_login_disable"
                     android:elevation="8dp"
                     android:enabled="false"
-                    android:fontFamily="@font/vazir_medium"
+                    android:fontFamily="@font/kalameh_bold"
                     android:text="ثبت نام"
-                    android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
+                    android:textColor="@color/white"
+                    android:textSize="18sp"></androidx.appcompat.widget.AppCompatButton>
 
             </LinearLayout>
 

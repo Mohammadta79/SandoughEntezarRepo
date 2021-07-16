@@ -12,7 +12,4 @@ class UserRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
     suspend fun getUserInfo(params: HashMap<String, String>): Response<UserModel> =
         apiServiceResult.getUserInfo(params)
 
-
-    suspend fun updateProfile(params: HashMap<String, String>): Response<StringResponseModel> =
-        apiServiceResult.updateProfile(params)
 }

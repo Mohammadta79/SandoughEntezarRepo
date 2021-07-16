@@ -40,13 +40,22 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="right"
+        android:clipToPadding="false"
         android:fitsSystemWindows="true"
+        android:scrollbars="none"
         app:headerLayout="@layout/nav_view_header"
-        app:itemIconTint="@color/PrimaryColor"
+        app:itemBackground="@drawable/ripple_drawer"
+        app:itemIconSize="20dp"
+        app:itemIconTint="@color/drawer_item_color"
+        app:itemTextAppearance="@style/navigationViewFont"
+        app:itemTextColor="@color/drawer_item_color"
         app:menu="@menu/nav_menu" />
+
+
+
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

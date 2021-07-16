@@ -32,10 +32,9 @@ class PaymentRecordsAdapter(
         private var binding = PaymentRecordListTemplateBinding.bind(itemView)
 
         fun bindData(data: PaymentModel) {
-            binding.txtAmount.text = data.amount
+            binding.txtAmount.text = (data.amount + "تومان")
             binding.txtAuthority.text = data.authority
             binding.txtDate.text = data.date
-            binding.txtRow.text = (adapterPosition+1).toString()
         }
     }
 

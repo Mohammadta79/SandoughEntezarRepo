@@ -30,7 +30,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class ValidatePhoneFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentValidatePhoneBinding
-    private lateinit var mobile: String
     private lateinit var user_id: String
     private lateinit var code: String
     private val authViewModel by viewModels<AuthViewModel>()
@@ -40,7 +39,6 @@ class ValidatePhoneFragment : Fragment(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            mobile = it["mobile"].toString()
             user_id = it["user_id"].toString()
         }
     }

@@ -8,6 +8,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.sandoughentezar.R
 import com.example.sandoughentezar.databinding.ActivityMainBinding
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.shape.CornerFamily
+import com.google.android.material.shape.MaterialShapeDrawable
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,7 +22,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupNavigation()
+        cornerDrawer()
         selectedViews()
+    }
+    private fun cornerDrawer() {
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        val navViewBackground = navigationView.background as MaterialShapeDrawable
+        navViewBackground.shapeAppearanceModel = navViewBackground.shapeAppearanceModel
+            .toBuilder()
+            .setTopLeftCorner(CornerFamily.ROUNDED, 100f)
+            .setBottomLeftCorner(CornerFamily.ROUNDED, 100f)
+            .build()
     }
 
     private fun setupNavigation() {

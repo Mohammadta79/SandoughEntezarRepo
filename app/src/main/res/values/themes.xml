@@ -27,4 +27,12 @@
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/shape_bottom_sheet</item>
     </style>
+
+    <style name="navigationViewFont">
+        <item name="android:fontFamily">@font/kalameh_bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:drawablePadding">10dp</item>
+    </style>
+
 </resources>

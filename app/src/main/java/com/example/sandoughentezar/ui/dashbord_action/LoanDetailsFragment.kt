@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +19,7 @@ import com.example.sandoughentezar.interfaces.OnInstallmentClickListener
 import com.example.sandoughentezar.models.InstallmentModel
 import com.example.sandoughentezar.viewModels.DashbordViewModel
 import com.example.sandoughentezar.viewModels.LoanViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,6 +36,8 @@ class LoanDetailsFragment : Fragment(), OnInstallmentClickListener {
     private lateinit var due_date: String
     private lateinit var installment_amount: String
     private lateinit var loan_reminder: String
+    var bottomSheetDialog: BottomSheetDialog? = null
+    var bottomSheetView: View? = null
     private val loanViewModel by viewModels<LoanViewModel>()
     private val dashbordViewModel by viewModels<DashbordViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,19 +75,37 @@ class LoanDetailsFragment : Fragment(), OnInstallmentClickListener {
             (amount.toInt() - (installment_amount.toInt() * paid_installment.toInt())).toString()
         setTxtData()
         getLoanInstallment()
+        binding.txtMoreDetails.setOnClickListener {
+            setupDetailsDialog()
+        }
     }
 
     private fun setTxtData() {
         binding.txtAmount.text = amount
-        binding.txtEnDate.text = end_date
         binding.txtStartDate.text = start_date
-        binding.txtInstallmentAmount.text = installment_amount
-        binding.txtNumOfInstallment.text = num_of_installment
-        binding.txtNumOfInstallmentsPaid.text = paid_installment
-        binding.txtUnpaidInstallment.text = unpaid_installment
-        binding.txtReminderLoan.text = loan_reminder
-        binding.dueDate.text = due_date
     }
+
+    private fun setupDetailsDialog() {
+        bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        bottomSheetView = layoutInflater.inflate(
+            R.layout.dialog_loan_details,
+            requireActivity().findViewById<LinearLayout>(R.id.root_loan_details)
+        )
+        bottomSheetView!!.findViewById<TextView>(R.id.txt_end_date).text = end_date
+        bottomSheetView!!.findViewById<TextView>(R.id.txt_installment_amount).text =
+            installment_amount
+        bottomSheetView!!.findViewById<TextView>(R.id.txt_num_of_installment).text =
+            num_of_installment
+        bottomSheetView!!.findViewById<TextView>(R.id.txt_num_of_installments_paid).text =
+            paid_installment
+        bottomSheetView!!.findViewById<TextView>(R.id.txt_unpaid_installment).text =
+            unpaid_installment
+        bottomSheetView!!.findViewById<TextView>(R.id.txt_reminder_loan).text = loan_reminder
+        bottomSheetView!!.findViewById<TextView>(R.id.txt_date).text = due_date
+        bottomSheetDialog!!.setContentView(bottomSheetView!!)
+        bottomSheetDialog!!.show()
+    }
+
 
     private fun getLoanInstallment() {
         loanViewModel.getLoanInstallment(getLoanParams()).observe(viewLifecycleOwner) {

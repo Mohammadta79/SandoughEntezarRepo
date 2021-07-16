@@ -1,6 +1,7 @@
 package com.example.sandoughentezar.repo
 
 import com.example.sandoughentezar.api.ApiServiceResult
+import com.example.sandoughentezar.models.ForgotPassModel
 import com.example.sandoughentezar.models.StringResponseModel
 import com.example.sandoughentezar.models.LoginResponseModel
 import com.example.sandoughentezar.models.ValidatePhoneResponseModel
@@ -18,4 +19,7 @@ class AuthRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
 
     suspend fun validatePhone(params: HashMap<String, String>): Response<ValidatePhoneResponseModel> =
         apiServiceResult.validatePhone(params)
+
+    suspend fun forgotPass(params: HashMap<String, String>): Response<ForgotPassModel> =
+        apiServiceResult.forgotPass(params)
 }

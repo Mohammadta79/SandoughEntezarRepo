@@ -18,10 +18,28 @@
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"
             app:popUpTo="@id/auth_nav" />
+        <action
+            android:id="@+id/action_authFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/auth_nav" />
     </fragment>
     <fragment
         android:id="@+id/validatePhoneFragment"
         android:name="com.example.sandoughentezar.ui.auth.ValidatePhoneFragment"
         android:label="fragment_validate_phone"
         tools:layout="@layout/fragment_validate_phone" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.sandoughentezar.ui.auth.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_validatePhoneFragment"
+            app:destination="@id/validatePhoneFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/auth_nav" />
+    </fragment>
 </navigation>

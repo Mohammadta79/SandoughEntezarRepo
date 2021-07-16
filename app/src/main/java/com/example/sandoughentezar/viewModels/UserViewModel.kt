@@ -21,8 +21,6 @@ import javax.inject.Inject
 class UserViewModel @Inject constructor(var repo: UserRepo) : ViewModel() {
 
     private var userLD = MutableLiveData<Resource<UserModel>>()
-    private var updateUserLD = MutableLiveData<Resource<StringResponseModel>>()
-
     fun getUSerInfo(params: HashMap<String, String>): LiveData<Resource<UserModel>> {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -44,22 +42,5 @@ class UserViewModel @Inject constructor(var repo: UserRepo) : ViewModel() {
     }
 
 
-    fun updateUser(params: HashMap<String, String>): LiveData<Resource<StringResponseModel>> {
-        viewModelScope.launch(Dispatchers.IO) {
-            updateUserLD.postValue(Resource.loading())
-            try {
-                var response = repo.updateProfile(params)
-                if (response.isSuccessful && response.body()!=null){
-                    updateUserLD.postValue(Resource.success(response.body()) as Resource<StringResponseModel>?)
-                }else{
-                    updateUserLD.postValue(Resource.failure(response.message()))
-                }
 
-            }catch (e:Exception){
-                updateUserLD.postValue(Resource.failure(e.toString()))
-            }
-
-        }
-        return updateUserLD
-    }
 }

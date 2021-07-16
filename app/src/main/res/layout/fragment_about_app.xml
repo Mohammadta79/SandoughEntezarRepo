@@ -1,29 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/DarkPrimaryColor"
     tools:context=".ui.nav_view.AboutAppFragment">
 
-
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/vazir_medium"
-        android:gravity="center"
-        android:text="کلیه حقوق تولید و توسعه نرم افزار متعلق به شرکت پارسا پردازش شیراز می باشد"
-        android:textColor="@color/PrimaryText"
-        android:textSize="16sp" />
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/kalameh_bold"
+        android:text="اطلاعات نرم افزار"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/vazir_medium"
-        android:gravity="center"
-        android:text="v 1.0.0"
-        android:textColor="@color/SecondaryText"
-        android:textSize="12dp" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.9"
+        android:background="@drawable/shape_dashbord">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kalameh_bold"
+            android:gravity="center"
+            android:text="کلیه حقوق تولید و توسعه نرم افزار متعلق به شرکت پارسا پردازش شیراز می باشد"
+            android:textColor="@color/PrimaryText"
+            android:textSize="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kalameh_bold"
+            android:gravity="center"
+            android:text="v 1.0.0"
+            android:textColor="@color/SecondaryText"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
