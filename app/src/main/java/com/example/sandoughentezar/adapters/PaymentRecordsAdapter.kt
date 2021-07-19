@@ -33,7 +33,7 @@ class PaymentRecordsAdapter(
 
         fun bindData(data: PaymentModel) {
             binding.txtAmount.text = (data.amount + "تومان")
-            binding.txtAuthority.text = data.authority
+            binding.txtAuthority.text = data.authority.substring(30,36)
             binding.txtDate.text = data.date
         }
     }

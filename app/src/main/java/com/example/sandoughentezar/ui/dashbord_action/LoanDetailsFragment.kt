@@ -1,6 +1,8 @@
 package com.example.sandoughentezar.ui.dashbord_action
 
+import android.content.Intent
 import android.graphics.drawable.shapes.PathShape
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sandoughentezar.R
@@ -72,7 +75,7 @@ class LoanDetailsFragment : Fragment(), OnInstallmentClickListener {
 
     private fun initViews() {
         loan_reminder =
-            (amount.toInt() - (installment_amount.toInt() * paid_installment.toInt())).toString()
+            (amount.toLong() - (installment_amount.toLong() * paid_installment.toLong())).toString()
         setTxtData()
         getLoanInstallment()
         binding.txtMoreDetails.setOnClickListener {
@@ -89,7 +92,7 @@ class LoanDetailsFragment : Fragment(), OnInstallmentClickListener {
         bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
         bottomSheetView = layoutInflater.inflate(
             R.layout.dialog_loan_details,
-            requireActivity().findViewById<LinearLayout>(R.id.root_loan_details)
+            requireActivity().findViewById<ConstraintLayout>(R.id.root_loan_details)
         )
         bottomSheetView!!.findViewById<TextView>(R.id.txt_end_date).text = end_date
         bottomSheetView!!.findViewById<TextView>(R.id.txt_installment_amount).text =
@@ -101,7 +104,7 @@ class LoanDetailsFragment : Fragment(), OnInstallmentClickListener {
         bottomSheetView!!.findViewById<TextView>(R.id.txt_unpaid_installment).text =
             unpaid_installment
         bottomSheetView!!.findViewById<TextView>(R.id.txt_reminder_loan).text = loan_reminder
-        bottomSheetView!!.findViewById<TextView>(R.id.txt_date).text = due_date
+        bottomSheetView!!.findViewById<TextView>(R.id.due_date).text = due_date
         bottomSheetDialog!!.setContentView(bottomSheetView!!)
         bottomSheetDialog!!.show()
     }
@@ -140,20 +143,23 @@ class LoanDetailsFragment : Fragment(), OnInstallmentClickListener {
     }
 
     private fun installmentPay(id: String) {
-        dashbordViewModel.installmentPay(getPaymentParams(id)).observe(viewLifecycleOwner) {
-            when (it.status) {
-                Status.Success -> {
-                    Toast.makeText(requireContext(), "پرداخت با موفقیت انجام شد", Toast.LENGTH_LONG)
-                        .show()
-                }
-                Status.Failure -> {
-                    Toast.makeText(requireContext(), "خطا در پرداخت", Toast.LENGTH_LONG).show()
-                }
-                Status.Loading -> {
-                    //TODO : Show progressbar
-                }
-            }
-        }
+
+          val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.1.3:8080/api/installmentpay/?installment_id=$id"))
+                startActivity(browserIntent)
+//        dashbordViewModel.installmentPay(getPaymentParams(id)).observe(viewLifecycleOwner) {
+//            when (it.status) {
+//                Status.Success -> {
+//                    Toast.makeText(requireContext(), "پرداخت با موفقیت انجام شد", Toast.LENGTH_LONG)
+//                        .show()
+//                }
+//                Status.Failure -> {
+//                    Toast.makeText(requireContext(), "خطا در پرداخت", Toast.LENGTH_LONG).show()
+//                }
+//                Status.Loading -> {
+//                    //TODO : Show progressbar
+//                }
+//            }
+//        }
     }
 
     private fun getLoanParams(): HashMap<String, String> {

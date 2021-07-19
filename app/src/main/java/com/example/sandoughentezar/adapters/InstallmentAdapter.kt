@@ -57,7 +57,7 @@ class InstallmentAdapter(
 
                 if (data.status == "0") {
                     if (binding.linearRoot.translationX == 0f) {
-                        binding.linearRoot.animate().translationX(300f).setDuration(1000).start()
+                        binding.linearRoot.animate().translationX(500f).setDuration(1000).start()
                     } else {
                         binding.linearRoot.animate().translationX(0f).setDuration(1000).start()
                     }

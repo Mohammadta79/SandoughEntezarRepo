@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupNavigation()
         cornerDrawer()
+        setupNavigation()
         selectedViews()
     }
     private fun cornerDrawer() {
@@ -30,8 +30,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val navViewBackground = navigationView.background as MaterialShapeDrawable
         navViewBackground.shapeAppearanceModel = navViewBackground.shapeAppearanceModel
             .toBuilder()
-            .setTopLeftCorner(CornerFamily.ROUNDED, 100f)
-            .setBottomLeftCorner(CornerFamily.ROUNDED, 100f)
+            .setBottomLeftCorner(CornerFamily.ROUNDED, 150f)
             .build()
     }
 

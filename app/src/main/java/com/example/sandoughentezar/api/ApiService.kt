@@ -83,7 +83,7 @@ interface ApiService {
 
 
     @GET("newpay/")
-    suspend fun newPayment(@FieldMap params: HashMap<String, String>): Response<StringResponseModel>
+    suspend fun newPayment(@QueryMap params: HashMap<String, String>): Response<StringResponseModel>
 
 
     @FormUrlEncoded

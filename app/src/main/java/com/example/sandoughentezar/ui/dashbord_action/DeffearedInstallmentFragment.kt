@@ -1,7 +1,9 @@
 package com.example.sandoughentezar.ui.dashbord_action
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -93,20 +95,22 @@ class DeffearedInstallmentFragment : Fragment(), OnInstallmentClickListener {
     }
 
     private fun installmentPay(id: String) {
-        dashbordViewModel.installmentPay(getPaymentParams(id)).observe(viewLifecycleOwner) {
-            when (it.status) {
-                Status.Success -> {
-                    Toast.makeText(requireContext(), "پرداخت با موفقیت انجام شد", Toast.LENGTH_LONG)
-                        .show()
-                }
-                Status.Failure -> {
-                    Toast.makeText(requireContext(), "خطا در پرداخت", Toast.LENGTH_LONG).show()
-                }
-                Status.Loading -> {
-                    //TODO : Show progressbar
-                }
-            }
-        }
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.1.3:8080/api/installmentpay/?installment_id=$id"))
+        startActivity(browserIntent)
+//        dashbordViewModel.installmentPay(getPaymentParams(id)).observe(viewLifecycleOwner) {
+//            when (it.status) {
+//                Status.Success -> {
+//                    Toast.makeText(requireContext(), "پرداخت با موفقیت انجام شد", Toast.LENGTH_LONG)
+//                        .show()
+//                }
+//                Status.Failure -> {
+//                    Toast.makeText(requireContext(), "خطا در پرداخت", Toast.LENGTH_LONG).show()
+//                }
+//                Status.Loading -> {
+//                    //TODO : Show progressbar
+//                }
+//            }
+//        }
     }
 
     private fun getDeaffearedParams(): HashMap<String, String> {

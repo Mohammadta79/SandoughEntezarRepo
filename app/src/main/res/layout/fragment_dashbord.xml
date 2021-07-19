@@ -59,7 +59,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/kalameh_bold"
-                    android:text="محمدمهدی طاهری"
                     android:textColor="@color/PrimaryText"
                     android:textSize="22sp"></TextView>
 
@@ -71,7 +70,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/kalameh_black"
-                    android:text="637902052085"
+
                     android:textColor="@color/SecondaryText"
                     android:textSize="20dp"></TextView>
 
@@ -83,7 +82,6 @@
                     android:layout_alignParentBottom="true"
                     android:layout_margin="20dp"
                     android:fontFamily="@font/kalameh_black"
-                    android:text="5000000 تومان"
                     android:textColor="@color/PrimaryColor"
                     android:textSize="20dp"></TextView>
 
@@ -142,7 +140,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                     app:layout_constraintEnd_toStartOf="@+id/imageView2"
                     app:layout_constraintTop_toBottomOf="@+id/textView2"
-                    tools:text="5 امتیاز" />
+                    />
 
                 <TextView
                     android:id="@+id/txt_slash"
@@ -156,7 +154,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/txt_my_score"
                     app:layout_constraintEnd_toStartOf="@+id/txt_my_score"
                     app:layout_constraintTop_toTopOf="@+id/txt_my_score"
-                    tools:text="/" />
+                   />
 
                 <TextView
                     android:id="@+id/txt_my_level"
@@ -170,7 +168,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/txt_slash"
                     app:layout_constraintEnd_toStartOf="@+id/txt_slash"
                     app:layout_constraintTop_toTopOf="@+id/txt_slash"
-                    tools:text="رتبه 4" />
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 

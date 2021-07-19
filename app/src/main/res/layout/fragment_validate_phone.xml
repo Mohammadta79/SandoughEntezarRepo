@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/PrimaryColor"
+        android:background="@color/DarkPrimaryColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.27"
@@ -21,10 +21,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:fontFamily="@font/vazir_bold"
+            android:fontFamily="@font/kalameh_bold"
             android:text="به صندوق انتظار خوش آمدید"
             android:textColor="@color/white"
-            android:textSize="16sp"></TextView>
+            android:textSize="20sp"></TextView>
     </RelativeLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +34,7 @@
         android:background="@drawable/bg_login_pager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.78"
+        app:layout_constraintHeight_percent="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1">
@@ -46,11 +46,11 @@
             android:gravity="center"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:fontFamily="@font/vazir_medium"
+            android:fontFamily="@font/kalameh_bold"
             android:lines="3"
             android:text="لطفا کد تاییدی ارسال شده به شماره تماس خود را وارد نمایید."
             android:textColor="@color/PrimaryText"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

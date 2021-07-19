@@ -1,9 +1,11 @@
 package com.example.sandoughentezar.ui.dashbord_action
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +13,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.RequestQueue
+import com.android.volley.toolbox.Volley
 import com.example.sandoughentezar.R
 import com.example.sandoughentezar.adapters.PaymentRecordsAdapter
 import com.example.sandoughentezar.api.state.Status
@@ -20,6 +25,7 @@ import com.example.sandoughentezar.databinding.FragmentPaymentBinding
 import com.example.sandoughentezar.viewModels.PaymentViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class PaymentFragment : Fragment(), View.OnClickListener {
@@ -29,6 +35,7 @@ class PaymentFragment : Fragment(), View.OnClickListener {
     private var sharedPref: SharedPreferences? = null
     var bottomSheetDialog: BottomSheetDialog? = null
     var bottomSheetView: View? = null
+    private var mRequestQueue: RequestQueue? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +54,7 @@ class PaymentFragment : Fragment(), View.OnClickListener {
 
 
     private fun initViews() {
+        mRequestQueue = Volley.newRequestQueue(requireContext());
         bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
         sharedPref = activity?.getSharedPreferences("shp", Context.MODE_PRIVATE)
         sharedPref!!.let {
@@ -99,7 +107,8 @@ class PaymentFragment : Fragment(), View.OnClickListener {
             requireActivity().findViewById<LinearLayout>(R.id.payment_dialog_root)
         )
         bottomSheetView!!.findViewById<Button>(R.id.btn_dialog_payment).setOnClickListener {
-            newPayment(bottomSheetView!!.findViewById<EditText>(R.id.edt_amount).text.toString())
+            Payment(bottomSheetView!!.findViewById<EditText>(R.id.edt_amount).text.toString().toLong())
+           // newPayment()
         }
         bottomSheetDialog!!.setContentView(bottomSheetView!!)
         bottomSheetDialog!!.show()
@@ -124,13 +133,18 @@ class PaymentFragment : Fragment(), View.OnClickListener {
 
                 }
                 Status.Failure -> {
-                    Toast.makeText(requireContext(), "خطای پرداخت", Toast.LENGTH_SHORT).show()
+                    Log.d("newPayment: ", it.msg)
                 }
                 Status.Loading -> {
                     //TODO:Show progressbar
                 }
             }
         }
+    }
+
+    private fun Payment(amount: Long) {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.1.3:8080/api/newpay/?user_id=$user_id&amount=$amount"))
+        startActivity(browserIntent)
     }
 
 
