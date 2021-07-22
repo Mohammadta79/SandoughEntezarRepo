@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sandoughentezar.R
 import com.example.sandoughentezar.databinding.PaymentRecordListTemplateBinding
 import com.example.sandoughentezar.models.PaymentModel
+import saman.zamani.persiandate.PersianDate
+import saman.zamani.persiandate.PersianDateFormat
 
 class PaymentRecordsAdapter(
     var context: Context,
@@ -32,9 +34,19 @@ class PaymentRecordsAdapter(
         private var binding = PaymentRecordListTemplateBinding.bind(itemView)
 
         fun bindData(data: PaymentModel) {
+
+
+           var pdformater = PersianDateFormat("Y/m/d")
+            var persianDate = PersianDate()
+            persianDate.shYear = data.date[0]
+            persianDate.shMonth = data.date[1]
+            persianDate.shDay = data.date[2]
+
+
+
             binding.txtAmount.text = (data.amount + "تومان")
-            binding.txtAuthority.text = data.authority.substring(30,36)
-            binding.txtDate.text = data.date
+            binding.txtAuthority.text = data.authority.substring(30, 36)
+            binding.txtDate.text = pdformater.format(persianDate)
         }
     }
 

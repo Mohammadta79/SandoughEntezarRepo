@@ -28,15 +28,30 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.9">
 
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/kalameh_bold"
+            android:text="راه های ارتباطی با صندوق انتظار :"
+            android:textColor="@color/PrimaryColor"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
+
 
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="20sp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView16">
 
 
             <androidx.cardview.widget.CardView
@@ -98,18 +113,33 @@
         </LinearLayout>
 
 
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/kalameh_bold"
+            android:text="آدرس صندوق انتظار :"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/PrimaryColor"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"></TextView>
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/txt_address"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
             android:fontFamily="@font/kalameh_bold"
+            android:gravity="center"
+            app:layout_constraintWidth_percent="0.9"
             android:text="ایران، فارس، شیراز"
             android:textColor="@color/PrimaryText"
             android:textSize="22sp"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="4dp"></TextView>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView17"></TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

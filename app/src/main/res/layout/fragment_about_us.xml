@@ -28,6 +28,7 @@
         app:layout_constraintHeight_percent="0.9">
 
         <TextView
+            android:id="@+id/txt_about_us"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/kalameh_bold"

@@ -22,17 +22,12 @@ class ApiServiceResult @Inject constructor(var apiService: ApiService) {
     suspend fun getDeferredinstallments(params: HashMap<String, String>): Response<ArrayList<InstallmentModel>> =
         apiService.getDeferredinstallments(params)
 
-    suspend fun installmentPay(params: HashMap<String, String>): Response<StringResponseModel> =
-        apiService.installmentPay(params)
-
     suspend fun getUserInfo(params: HashMap<String, String>): Response<UserModel> =
         apiService.getUSerInfo(params)
 
     suspend fun getRecordPayment(params: HashMap<String, String>): Response<ArrayList<PaymentModel>> =
         apiService.getRecordPayment(params)
 
-    suspend fun newPayment(params: HashMap<String, String>): Response<StringResponseModel> =
-        apiService.newPayment(params)
 
     suspend fun getLoanRecord(params: HashMap<String, String>): Response<ArrayList<LoanModel>> =
         apiService.getLoanRecord(params)
@@ -43,8 +38,6 @@ class ApiServiceResult @Inject constructor(var apiService: ApiService) {
     suspend fun getTotalPayment(params: HashMap<String, String>): Response<TotalModel> =
         apiService.getTotalPayment(params)
 
-    suspend fun getLastLoan(params: HashMap<String, String>): Response<TotalModel> =
-        apiService.getLastLoan(params)
 
     suspend fun getMessage(params: HashMap<String, String>): Response<ArrayList<MessageModel>> =
         apiService.getMessage(params)

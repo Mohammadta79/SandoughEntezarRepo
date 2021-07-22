@@ -84,11 +84,13 @@ class MessageDetailsFragment : Fragment() {
             .observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.Success -> {
-                        if (it.data != null) {
+                        if (it.data!!.message.isNotEmpty()) {
                             binding.rootReply.visibility = View.VISIBLE
+                            binding.txtNoReply.visibility = View.GONE
                             binding.txtDateReply.text = it.data.date
                             binding.txtTitleReply.text = it.data.title
                             binding.txtMessageReply.text = it.data.message
+
                         }
                     }
                     Status.Failure -> {

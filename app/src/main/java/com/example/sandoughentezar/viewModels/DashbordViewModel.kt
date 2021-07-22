@@ -22,8 +22,6 @@ import javax.inject.Inject
 class DashbordViewModel @Inject constructor(var repo: DashbordRepo) : ViewModel() {
     private var myScoreLD = MutableLiveData<Resource<ScoreResponseModel>>()
     private var deffearedInstllment = MutableLiveData<Resource<ArrayList<InstallmentModel>>>()
-    private var installmentPayLD = MutableLiveData<Resource<StringResponseModel>>()
-    private var lastLoanLD = MutableLiveData<Resource<TotalModel>>()
     private var totalPaymentLD = MutableLiveData<Resource<TotalModel>>()
 
     fun getMyScore(params: HashMap<String, String>): LiveData<Resource<ScoreResponseModel>> {
@@ -60,22 +58,6 @@ class DashbordViewModel @Inject constructor(var repo: DashbordRepo) : ViewModel(
         return deffearedInstllment
     }
 
-    fun installmentPay(params: HashMap<String, String>): LiveData<Resource<StringResponseModel>> {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                installmentPayLD.postValue(Resource.loading())
-                var response = repo.installmentPay(params)
-                if (response.isSuccessful && response.body() != null) {
-                    installmentPayLD.postValue(Resource.success(response.body()) as Resource<StringResponseModel>?)
-                } else {
-                    installmentPayLD.postValue(Resource.failure(response.message()))
-                }
-            } catch (e: Exception) {
-                installmentPayLD.postValue(Resource.failure(e.toString()))
-            }
-        }
-        return installmentPayLD
-    }
 
     fun getTotalPayment(params: HashMap<String, String>): LiveData<Resource<TotalModel>> {
         viewModelScope.launch(Dispatchers.IO) {
@@ -94,24 +76,6 @@ class DashbordViewModel @Inject constructor(var repo: DashbordRepo) : ViewModel(
         return totalPaymentLD
     }
 
-    fun getLastLoan(params: HashMap<String, String>): LiveData<Resource<TotalModel>> {
-        viewModelScope.launch(Dispatchers.IO) {
-
-            try {
-                lastLoanLD.postValue(Resource.loading())
-                var response = repo.getLastLoan(params)
-                if (response.isSuccessful && response.body() != null) {
-                    lastLoanLD.postValue(Resource.success(response.body()) as Resource<TotalModel>?)
-                } else {
-                    lastLoanLD.postValue(Resource.failure(response.message()))
-                }
-            } catch (e: Exception) {
-                lastLoanLD.postValue(Resource.failure(e.toString()))
-            }
-
-        }
-        return lastLoanLD
-    }
 
 
 }

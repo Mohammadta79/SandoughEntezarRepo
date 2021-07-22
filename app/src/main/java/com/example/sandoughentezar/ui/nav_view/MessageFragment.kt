@@ -50,13 +50,13 @@ class MessageFragment : Fragment(), OnMessageClickListener, View.OnClickListener
 
     private fun getUserParams(): HashMap<String, String> {
         var params = HashMap<String, String>()
-        params["user_id"] = "1"
+        params["user_id"] = user_id
         return params
     }
 
     private fun getNewMessageParams(title: String, message: String): HashMap<String, String> {
         var params = HashMap<String, String>()
-        params["user_id"] = "1"
+        params["user_id"] = user_id
         params["title"] = title
         params["message"] = message
         return params

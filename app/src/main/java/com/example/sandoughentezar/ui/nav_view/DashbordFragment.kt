@@ -87,8 +87,8 @@ class DashbordFragment : Fragment(), View.OnClickListener {
             when (it.status) {
                 Status.Success -> {
                     it.data!!.let { _data ->
-                        binding.txtSlash.text = "/"
-                        binding.txtMyLevel.text = "رتبه" + _data.level
+                   //     binding.txtSlash.text = "/"
+                   //     binding.txtMyLevel.text = "رتبه" + _data.level
                         binding.txtMyScore.text = _data.score + "امتیاز"
                     }
                 }

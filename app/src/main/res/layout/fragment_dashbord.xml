@@ -70,7 +70,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/kalameh_black"
-
                     android:textColor="@color/SecondaryText"
                     android:textSize="20dp"></TextView>
 
@@ -139,8 +138,7 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                     app:layout_constraintEnd_toStartOf="@+id/imageView2"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
                 <TextView
                     android:id="@+id/txt_slash"
@@ -153,8 +151,7 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/txt_my_score"
                     app:layout_constraintEnd_toStartOf="@+id/txt_my_score"
-                    app:layout_constraintTop_toTopOf="@+id/txt_my_score"
-                   />
+                    app:layout_constraintTop_toTopOf="@+id/txt_my_score" />
 
                 <TextView
                     android:id="@+id/txt_my_level"
@@ -167,8 +164,7 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/txt_slash"
                     app:layout_constraintEnd_toStartOf="@+id/txt_slash"
-                    app:layout_constraintTop_toTopOf="@+id/txt_slash"
-                    />
+                    app:layout_constraintTop_toTopOf="@+id/txt_slash" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -216,7 +212,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="160dp"
-                            android:background="#C8FF87">
+                            android:background="#FF8787">
 
                             <TextView
                                 android:id="@+id/txtunit1_in"
@@ -280,7 +276,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="160dp"
-                            android:background="#7B9AFA">
+                            android:background="#8EFA7B">
 
                             <TextView
                                 android:id="@+id/txtunit2_in"
@@ -292,7 +288,7 @@
                                 android:layout_toEndOf="@+id/cardunit2_in"
                                 android:fontFamily="@font/iranyekan_regular"
                                 android:gravity="center"
-                                android:text="پرداختی های من"
+                                android:text="پرداختی های ماهیانه"
                                 android:textColor="@color/black"
                                 android:textSize="15sp" />
 
@@ -375,7 +371,7 @@
                                 android:layout_toEndOf="@+id/cardunit4_in"
                                 android:fontFamily="@font/iranyekan_regular"
                                 android:gravity="center"
-                                android:text="تسهیلات من"
+                                android:text="تسهیلات"
                                 android:textColor="@color/black"
                                 android:textSize="15sp" />
 
@@ -484,254 +480,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <!--    <androidx.cardview.widget.CardView-->
-    <!--        android:id="@+id/cardView"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="100dp"-->
-    <!--        android:layout_marginLeft="2dp"-->
-    <!--        android:elevation="4dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintWidth_percent="0.5">-->
-
-    <!--        <RelativeLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent">-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_alignParentRight="true"-->
-    <!--                android:layout_margin="8dp"-->
-    <!--                android:fontFamily="@font/vazir_medium"-->
-    <!--                android:text="امتیاز من"-->
-    <!--                android:textColor="@color/PrimaryText"></TextView>-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/txt_my_score"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_centerInParent="true"-->
-    <!--                android:fontFamily="@font/vazir_bold"-->
-    <!--                android:text="0"-->
-    <!--                android:textColor="@color/DarkPrimaryColor"-->
-    <!--                android:textSize="18dp"></TextView>-->
-    <!--        </RelativeLayout>-->
-    <!--    </androidx.cardview.widget.CardView>-->
-
-    <!--    <androidx.cardview.widget.CardView-->
-    <!--        android:id="@+id/cardView3"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="200dp"-->
-    <!--        android:layout_marginRight="2dp"-->
-    <!--        android:elevation="4dp"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/cardView"-->
-    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintWidth_percent="0.5">-->
-
-    <!--        <RelativeLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent">-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_alignParentRight="true"-->
-    <!--                android:layout_margin="8dp"-->
-    <!--                android:fontFamily="@font/vazir_medium"-->
-    <!--                android:text="پرداختی من"-->
-    <!--                android:textColor="@color/PrimaryText"></TextView>-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/txt_my_pay"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_centerInParent="true"-->
-    <!--                android:fontFamily="@font/vazir_bold"-->
-    <!--                android:text="0 تومان"-->
-    <!--                android:textColor="@color/DarkPrimaryColor"-->
-    <!--                android:textSize="18dp"></TextView>-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/more_pay"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_below="@id/txt_my_pay"-->
-    <!--                android:layout_centerHorizontal="true"-->
-    <!--                android:layout_marginTop="10dp"-->
-    <!--                android:fontFamily="@font/vazir_medium"-->
-    <!--                android:text="جزییات بیشتر"-->
-    <!--                android:textColor="@color/PrimaryColor"></TextView>-->
-    <!--        </RelativeLayout>-->
-    <!--    </androidx.cardview.widget.CardView>-->
-
-    <!--    <androidx.cardview.widget.CardView-->
-    <!--        android:id="@+id/cardView2"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="100dp"-->
-    <!--        android:layout_marginTop="2dp"-->
-    <!--        android:layout_marginRight="2dp"-->
-    <!--        android:elevation="4dp"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/cardView4"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/cardView3"-->
-    <!--        app:layout_constraintWidth_percent="0.5">-->
-
-    <!--        <RelativeLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent">-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_alignParentRight="true"-->
-    <!--                android:layout_margin="8dp"-->
-    <!--                android:fontFamily="@font/vazir_medium"-->
-    <!--                android:text="جایگاه من"-->
-    <!--                android:textColor="@color/PrimaryText"></TextView>-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/txt_my_level"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_centerInParent="true"-->
-    <!--                android:fontFamily="@font/vazir_bold"-->
-    <!--                android:text="0"-->
-    <!--                android:textColor="@color/DarkPrimaryColor"-->
-    <!--                android:textSize="18dp"></TextView>-->
-    <!--        </RelativeLayout>-->
-    <!--    </androidx.cardview.widget.CardView>-->
-
-    <!--    <androidx.cardview.widget.CardView-->
-    <!--        android:id="@+id/cardView4"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="200dp"-->
-    <!--        android:layout_marginLeft="2dp"-->
-    <!--        android:layout_marginTop="2dp"-->
-    <!--        android:elevation="4dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/cardView"-->
-    <!--        app:layout_constraintWidth_percent="0.5">-->
-
-    <!--        <RelativeLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent">-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_alignParentRight="true"-->
-    <!--                android:layout_margin="8dp"-->
-    <!--                android:fontFamily="@font/vazir_medium"-->
-    <!--                android:text="تسهیلات من"-->
-    <!--                android:textColor="@color/PrimaryText"></TextView>-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/txt_my_loan"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_centerInParent="true"-->
-    <!--                android:fontFamily="@font/vazir_bold"-->
-    <!--                android:text="بدون تسهیلات!"-->
-    <!--                android:textColor="@color/DarkPrimaryColor"-->
-    <!--                android:textSize="18dp"></TextView>-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/txt_more_installment"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_below="@id/txt_my_loan"-->
-    <!--                android:layout_centerHorizontal="true"-->
-    <!--                android:layout_marginTop="10dp"-->
-    <!--                android:fontFamily="@font/vazir_medium"-->
-    <!--                android:text="جزییات بیشتر"-->
-    <!--                android:textColor="@color/PrimaryColor"></TextView>-->
-    <!--        </RelativeLayout>-->
-
-    <!--    </androidx.cardview.widget.CardView>-->
-
-    <!--    <androidx.cardview.widget.CardView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:layout_marginTop="2dp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/cardView2">-->
-
-    <!--        <RelativeLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent">-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/textview"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="اقساط معوقه"-->
-    <!--                android:layout_alignParentRight="true"-->
-    <!--                android:layout_margin="8dp"-->
-    <!--                android:textColor="@color/PrimaryText"-->
-    <!--                android:fontFamily="@font/vazir_medium"></TextView>-->
-
-    <!--            <LinearLayout-->
-    <!--                android:id="@+id/layout_installment"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="50dp"-->
-    <!--                android:layoutDirection="rtl"-->
-    <!--                android:layout_below="@id/textview"-->
-    <!--                android:orientation="horizontal">-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="match_parent"-->
-    <!--                    android:layout_weight="1"-->
-    <!--                    android:gravity="center"-->
-    <!--                    android:fontFamily="@font/vazir_medium"-->
-    <!--                    android:text="شناسه"-->
-    <!--                    android:textColor="@color/PrimaryText"-->
-    <!--                    android:textSize="12dp"></TextView>-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="match_parent"-->
-    <!--                    android:layout_weight="2"-->
-    <!--                    android:gravity="center"-->
-    <!--                    android:fontFamily="@font/vazir_medium"-->
-    <!--                    android:text="تاریخ سررسید"-->
-    <!--                    android:textColor="@color/PrimaryText"-->
-    <!--                    android:textSize="12dp"></TextView>-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="match_parent"-->
-    <!--                    android:layout_weight="2"-->
-    <!--                    android:fontFamily="@font/vazir_medium"-->
-    <!--                    android:gravity="center"-->
-    <!--                    android:text="مبلغ"-->
-    <!--                    android:textColor="@color/PrimaryText"-->
-    <!--                    android:textSize="12dp"></TextView>-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="match_parent"-->
-    <!--                    android:layout_weight="2"-->
-    <!--                    android:gravity="center"-->
-    <!--                    android:text="وضعیت"-->
-    <!--                    android:fontFamily="@font/vazir_medium"-->
-    <!--                    android:textColor="@color/PrimaryText"-->
-    <!--                    android:textSize="12dp"></TextView>-->
-
-
-    <!--            </LinearLayout>-->
-
-    <!--            <androidx.recyclerview.widget.RecyclerView-->
-    <!--                android:id="@+id/installmentRV"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="match_parent"-->
-    <!--                android:layout_below="@id/layout_installment"-->
-    <!--                android:layout_margin="4dp"></androidx.recyclerview.widget.RecyclerView>-->
-
-    <!--        </RelativeLayout>-->
-    <!--    </androidx.cardview.widget.CardView>-->
 </androidx.core.widget.NestedScrollView>

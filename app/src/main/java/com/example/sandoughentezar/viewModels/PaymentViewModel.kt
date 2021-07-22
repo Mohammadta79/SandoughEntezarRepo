@@ -19,7 +19,6 @@ import javax.inject.Inject
 @HiltViewModel
 class PaymentViewModel @Inject constructor(var repo: PaymentRepo) : ViewModel() {
     private var paymentRecordLd = MutableLiveData<Resource<ArrayList<PaymentModel>>>()
-    private var newPaymentLD = MutableLiveData<Resource<StringResponseModel>>()
 
     fun getPaymentRecords(params: HashMap<String, String>): LiveData<Resource<ArrayList<PaymentModel>>> {
         viewModelScope.launch(Dispatchers.IO) {
@@ -37,24 +36,4 @@ class PaymentViewModel @Inject constructor(var repo: PaymentRepo) : ViewModel() 
         }
         return paymentRecordLd
     }
-
-    fun newPayment(params: HashMap<String, String>): LiveData<Resource<StringResponseModel>> {
-
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                newPaymentLD.postValue(Resource.loading())
-                var response = repo.newPayment(params)
-                if (response.isSuccessful && response.body() != null) {
-                    newPaymentLD.postValue(Resource.success(response.body()) as Resource<StringResponseModel>?)
-                } else {
-                    newPaymentLD.postValue(Resource.failure(response.message()))
-                }
-            } catch (e: Exception) {
-                newPaymentLD.postValue(Resource.failure(e.toString()))
-            }
-        }
-        return newPaymentLD
-
-    }
-
 }

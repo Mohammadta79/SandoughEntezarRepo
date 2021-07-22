@@ -13,30 +13,43 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.volley.RequestQueue
-import com.android.volley.toolbox.Volley
 import com.example.sandoughentezar.R
 import com.example.sandoughentezar.adapters.PaymentRecordsAdapter
 import com.example.sandoughentezar.api.state.Status
 import com.example.sandoughentezar.databinding.FragmentPaymentBinding
+import com.example.sandoughentezar.models.PaymentModel
 import com.example.sandoughentezar.viewModels.PaymentViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.wdullaer.materialdatetimepicker.JalaliCalendar
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import dagger.hilt.android.AndroidEntryPoint
+import saman.zamani.persiandate.PersianDate
+import saman.zamani.persiandate.PersianDateFormat
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 @AndroidEntryPoint
-class PaymentFragment : Fragment(), View.OnClickListener {
+class PaymentFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateSetListener {
+    var dpd: DatePickerDialog? = null
+    lateinit var start_date: PersianDate
+    lateinit var end_date: PersianDate
+    lateinit var pdformater: PersianDateFormat
+    var calendarType: DatePickerDialog.Type = DatePickerDialog.Type.JALALI
     private lateinit var binding: FragmentPaymentBinding
     private lateinit var user_id: String
     private val paymentViewModel by viewModels<PaymentViewModel>()
     private var sharedPref: SharedPreferences? = null
     var bottomSheetDialog: BottomSheetDialog? = null
     var bottomSheetView: View? = null
-    private var mRequestQueue: RequestQueue? = null
-
+    private lateinit var payment_list: ArrayList<PaymentModel>
+    private lateinit var filter_list: ArrayList<PaymentModel>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,7 +67,12 @@ class PaymentFragment : Fragment(), View.OnClickListener {
 
 
     private fun initViews() {
-        mRequestQueue = Volley.newRequestQueue(requireContext());
+        payment_list = ArrayList()
+        filter_list = ArrayList()
+        start_date = PersianDate()
+        end_date = PersianDate()
+        pdformater = PersianDateFormat("Y/m/d")
+        setupDatePicker()
         bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
         sharedPref = activity?.getSharedPreferences("shp", Context.MODE_PRIVATE)
         sharedPref!!.let {
@@ -64,6 +82,38 @@ class PaymentFragment : Fragment(), View.OnClickListener {
 
     }
 
+
+    private fun setupDatePicker() {
+        val now: Calendar? = when (calendarType) {
+            DatePickerDialog.Type.GREGORIAN -> Calendar.getInstance()
+            DatePickerDialog.Type.JALALI -> JalaliCalendar.getInstance()
+        }
+        if (dpd == null) {
+            dpd = DatePickerDialog.newInstance(
+                calendarType,
+                this,
+                now!!.get(Calendar.YEAR),
+                now.get(Calendar.MONTH),
+                now.get(Calendar.DAY_OF_MONTH)
+            )
+        } else {
+            dpd!!.calendarType = calendarType
+            dpd!!.initialize(
+                this,
+                now!!.get(Calendar.YEAR),
+                now.get(Calendar.MONTH),
+                now.get(Calendar.DAY_OF_MONTH)
+            )
+        }
+        when (dpd?.calendarType) {
+            DatePickerDialog.Type.GREGORIAN -> dpd!!.setFont(null)
+            DatePickerDialog.Type.JALALI -> {
+                val typeface = ResourcesCompat.getFont(requireContext(), R.font.kalameh_bold)
+                dpd!!.setFont(typeface)
+            }
+        }
+    }
+
     private fun getPaymentRecords() {
         paymentViewModel.getPaymentRecords(getRecordParams()).observe(viewLifecycleOwner) {
             when (it.status) {
@@ -71,9 +121,10 @@ class PaymentFragment : Fragment(), View.OnClickListener {
                     if (it.data!!.size == 0) {
                         binding.txtNoPayment.visibility = View.VISIBLE
                     } else {
+                        payment_list = it.data
                         binding.txtNoPayment.visibility = View.GONE
                         binding.paymentRecordsRV.apply {
-                            adapter = PaymentRecordsAdapter(requireContext(), it.data!!)
+                            adapter = PaymentRecordsAdapter(requireContext(), payment_list)
                             layoutManager = LinearLayoutManager(
                                 requireContext(),
                                 LinearLayoutManager.VERTICAL,
@@ -98,6 +149,41 @@ class PaymentFragment : Fragment(), View.OnClickListener {
             binding.btnNewPay.id -> {
                 setupNewPaymentDialog()
             }
+            binding.txtFilterStartDate.id -> {
+                dpd!!.show(requireActivity().supportFragmentManager, "start_date")
+            }
+            binding.txtFilterEndDate.id -> {
+                dpd!!.show(requireActivity().supportFragmentManager, "end_date")
+            }
+            binding.btnFilterPaymentList.id -> {
+
+                filter_list.clear()
+                payment_list.forEachIndexed { i, _ ->
+
+                    var date = PersianDate()
+                    date.shYear = payment_list[i].date[0]
+                    date.shMonth = payment_list[i].date[1]
+                    date.shDay = payment_list[i].date[2]
+                    if (date.before(start_date) && date.after(end_date)
+                    ) {
+                        filter_list.add(payment_list[i])
+                    }
+                }
+                if (filter_list.isEmpty()) {
+                    binding.txtNoPayment.text = " پرداختی یافت نشد "
+                    binding.txtNoPayment.visibility = View.GONE
+                } else {
+                    binding.paymentRecordsRV.apply {
+                        adapter = PaymentRecordsAdapter(requireContext(), filter_list)
+                        layoutManager = LinearLayoutManager(
+                            requireContext(),
+                            LinearLayoutManager.VERTICAL,
+                            false
+                        )
+                    }
+                }
+
+            }
         }
     }
 
@@ -107,8 +193,11 @@ class PaymentFragment : Fragment(), View.OnClickListener {
             requireActivity().findViewById<LinearLayout>(R.id.payment_dialog_root)
         )
         bottomSheetView!!.findViewById<Button>(R.id.btn_dialog_payment).setOnClickListener {
-            Payment(bottomSheetView!!.findViewById<EditText>(R.id.edt_amount).text.toString().toLong())
-           // newPayment()
+            Payment(
+                bottomSheetView!!.findViewById<EditText>(R.id.edt_amount).text.toString()
+                    .toLong()
+            )
+
         }
         bottomSheetDialog!!.setContentView(bottomSheetView!!)
         bottomSheetDialog!!.show()
@@ -117,47 +206,45 @@ class PaymentFragment : Fragment(), View.OnClickListener {
 
     private fun selectedViews() {
         binding.btnNewPay.setOnClickListener(this)
+        binding.txtFilterStartDate.setOnClickListener(this)
+        binding.txtFilterEndDate.setOnClickListener(this)
+        binding.btnFilterPaymentList.setOnClickListener(this)
     }
 
-    private fun newPayment(amount: String) {
-        paymentViewModel.newPayment(getNewPaymentParam(amount)).observe(viewLifecycleOwner) {
-            when (it.status) {
-                Status.Success -> {
-                    if (it.data!!.status == "ok") {
-                        Toast.makeText(
-                            requireContext(),
-                            "پرداخت با موفقیت انجام شد",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-
-                }
-                Status.Failure -> {
-                    Log.d("newPayment: ", it.msg)
-                }
-                Status.Loading -> {
-                    //TODO:Show progressbar
-                }
-            }
-        }
-    }
 
     private fun Payment(amount: Long) {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.1.3:8080/api/newpay/?user_id=$user_id&amount=$amount"))
+        val browserIntent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("http://192.168.1.3:8080/api/newpay/?user_id=$user_id&amount=$amount")
+        )
         startActivity(browserIntent)
     }
 
 
-    private fun getRecordParams(): HashMap<String, String> {
+    private fun getRecordParams()
+            : HashMap<String, String> {
         var params = HashMap<String, String>()
         params["user_id"] = user_id
         return params
     }
 
-    private fun getNewPaymentParam(amount: String): HashMap<String, String> {
-        var params = HashMap<String, String>()
-        params["user_id"] = user_id
-        params["amount"] = amount
-        return params
+    override fun onDateSet(
+        view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int
+    ) {
+        when (view?.tag) {
+            "start_date" -> {
+
+                start_date.shYear = year
+                start_date.shMonth = monthOfYear + 1
+                start_date.shDay = dayOfMonth
+                binding.txtFilterStartDate.text = pdformater.format(start_date)
+            }
+            "end_date" -> {
+                end_date.shYear = year
+                end_date.shMonth = monthOfYear + 1
+                end_date.shDay = dayOfMonth
+                binding.txtFilterEndDate.text = pdformater.format(end_date)
+            }
+        }
     }
 }

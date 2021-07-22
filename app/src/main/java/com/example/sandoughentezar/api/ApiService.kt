@@ -45,10 +45,6 @@ interface ApiService {
     suspend fun getTotalPayment(@FieldMap params: HashMap<String, String>): Response<TotalModel>
 
 
-    @FormUrlEncoded
-    @POST("lastopenloan/")
-    suspend fun getLastLoan(@FieldMap params: HashMap<String, String>): Response<TotalModel>
-
 
     @FormUrlEncoded
     @POST("getmessages/")
@@ -76,14 +72,6 @@ interface ApiService {
     @POST("score/")
     suspend fun getMyScore(@FieldMap params: HashMap<String, String>): Response<ScoreResponseModel>
 
-
-
-    @GET("installmentpay/")
-    suspend fun installmentPay(@FieldMap params: HashMap<String, String>): Response<StringResponseModel>
-
-
-    @GET("newpay/")
-    suspend fun newPayment(@QueryMap params: HashMap<String, String>): Response<StringResponseModel>
 
 
     @FormUrlEncoded
