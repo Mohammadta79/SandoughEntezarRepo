@@ -17,7 +17,7 @@ object ApiProvider {
     @Provides
     fun provideRetrofit(): Retrofit =
         Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://192.168.1.4:8080/api/").build()
+            .baseUrl("http://192.168.1.3:8080/api/").build()
 
     @Singleton
     @Provides

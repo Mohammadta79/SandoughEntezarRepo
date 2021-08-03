@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/kalameh_bold"
-                android:text="صندوق انتظار"
+                android:text="صندوق قرض الحسنه انتظار"
                 android:textColor="@color/white"
                 android:textSize="26dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,7 @@
                     android:textSize="22sp"></TextView>
 
                 <TextView
-                    android:id="@+id/txt_account_number_dashbord"
+                    android:id="@+id/txt_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txt_name_dashbord"
@@ -73,17 +73,6 @@
                     android:textColor="@color/SecondaryText"
                     android:textSize="20dp"></TextView>
 
-                <TextView
-                    android:id="@+id/txt_my_payment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="20dp"
-                    android:fontFamily="@font/kalameh_black"
-                    android:textColor="@color/PrimaryColor"
-                    android:textSize="20dp"></TextView>
-
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
@@ -91,7 +80,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_marginTop="16dp"
             app:cardBackgroundColor="#FFF29B"
             app:cardCornerRadius="16dp"
@@ -99,73 +88,15 @@
             app:layout_constraintStart_toStartOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/cardView">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/shape_my_score_root"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_myscore"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/iranyekan_bold"
-                    android:text="امتیاز من"
-                    android:textColor="@color/PrimaryText"
-                    android:textSize="18dp"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView2"
-                    app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
-                <TextView
-                    android:id="@+id/txt_my_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/iranyekan_bold"
-                    android:textColor="@color/SecondaryText"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView2"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-                <TextView
-                    android:id="@+id/txt_slash"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
-                    android:fontFamily="@font/iranyekan_bold"
-                    android:textColor="@color/SecondaryText"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/txt_my_score"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_my_score"
-                    app:layout_constraintTop_toTopOf="@+id/txt_my_score" />
-
-                <TextView
-                    android:id="@+id/txt_my_level"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
-                    android:fontFamily="@font/iranyekan_bold"
-                    android:textColor="@color/SecondaryText"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/txt_slash"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_slash"
-                    app:layout_constraintTop_toTopOf="@+id/txt_slash" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/txt_my_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:fontFamily="@font/kalameh_black"
+                android:textColor="@color/PrimaryColor"
+                android:textSize="20dp"></TextView>
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -183,6 +114,22 @@
                 app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"></View>
+
+
+            <ir.alirezabdn.wp7progress.WP10ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:animationDuration="2300"
+                app:indicatorColor="@color/LightPrimaryColor"
+                app:indicatorHeight="7"
+                app:indicatorRadius="5"
+                app:interval="100"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/view" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -372,7 +319,7 @@
                                 android:fontFamily="@font/iranyekan_regular"
                                 android:gravity="center"
                                 android:text="تسهیلات"
-                                android:textColor="@color/black"
+                                android:textColor="@color/white"
                                 android:textSize="15sp" />
 
                             <TextView

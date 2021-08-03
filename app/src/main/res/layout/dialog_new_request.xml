@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_dialog_new_request"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_bottom_sheet"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/kalameh_bold"
+        android:text="ایجاد درخواست تسهیلات"
+        android:textColor="@color/DarkPrimaryColor"
+        android:textSize="20sp"></TextView>
+
+    <EditText
+        android:id="@+id/edt_request_amount"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_edt_login"
+        android:fontFamily="@font/kalameh_bold"
+        android:gravity="right|center"
+        android:inputType="number"
+        android:textSize="16sp"
+        android:hint="مبلغ مورد نیاز (تومان)"
+        android:paddingRight="16dp"></EditText>
+    <EditText
+        android:id="@+id/edt_request_installment"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_edt_login"
+        android:fontFamily="@font/kalameh_bold"
+        android:gravity="right|center"
+        android:inputType="number"
+        android:textSize="16sp"
+        android:hint="تعداد اقساط"
+        android:paddingRight="16dp"></EditText>
+
+    <EditText
+        android:id="@+id/edt_request_details"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_edt_login"
+        android:fontFamily="@font/kalameh_bold"
+        android:gravity="center|right"
+        android:hint="شرح تقاضا"
+        android:lines="5"
+        android:paddingRight="10dp"></EditText>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_create_request"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_btn_login_enable"
+        android:elevation="10dp"
+        android:fontFamily="@font/kalameh_bold"
+        android:text="ایجاد درخواست"
+        android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
+
+</LinearLayout>

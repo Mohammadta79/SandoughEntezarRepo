@@ -2,18 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/DarkPrimaryColor"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/DarkPrimaryColor"
-    tools:context=".ui.nav_view.MessageFragment">
-
+    tools:context=".ui.nav_view.LoanRequestFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/kalameh_bold"
-        android:text="صندوق پیام"
+        android:text="درخواست ها"
         android:textColor="@color/white"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,11 +29,11 @@
 
 
         <TextView
-            android:id="@+id/txt_no_message"
+            android:id="@+id/txt_no_request"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/kalameh_bold"
-            android:text="صندوق پیام خالی است"
+            android:text="درخواستی ثیت نشده است"
             android:textColor="@color/PrimaryText"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +57,7 @@
             />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/messagesRV"
+            android:id="@+id/requestsRV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -69,7 +68,7 @@
             app:layout_constraintTop_toTopOf="parent"></androidx.recyclerview.widget.RecyclerView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_new_message"
+            android:id="@+id/btn_new_request"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -78,7 +77,7 @@
             android:background="@drawable/shape_btn_login_enable"
             android:elevation="10dp"
             android:fontFamily="@font/vazir_medium"
-            android:text="ایجاد پیام جدید"
+            android:text="ایجاد درخواست جدید"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"></androidx.appcompat.widget.AppCompatButton>

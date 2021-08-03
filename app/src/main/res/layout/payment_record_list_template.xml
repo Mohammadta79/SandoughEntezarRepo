@@ -24,8 +24,8 @@
             android:text="2021/07/04"
             android:textColor="@color/PrimaryText"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></TextView>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"></TextView>
 
         <TextView
             android:id="@+id/txt_amount"
@@ -45,14 +45,29 @@
             android:id="@+id/txt_authority"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
             android:fontFamily="@font/kalameh_bold"
             android:gravity="center"
-            android:layout_margin="12dp"
-            android:text="120230523953205"
+            android:text="123456"
             android:textColor="@color/SecondaryText"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"></TextView>
+            app:layout_constraintEnd_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="@+id/textView2"></TextView>
+
+
+        <TextView
+
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:fontFamily="@font/kalameh_bold"
+            android:gravity="center"
+            android:text="شناسه پرداخت : "
+            android:textColor="@color/PrimaryText"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -45,7 +45,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
         when (v!!.id) {
             binding.btnLogin.id -> {
                 if (checkInput()) {
-
                     login()
                 } else {
                     Toast.makeText(
@@ -76,6 +75,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         authViewModel.login(getParams()).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.Success -> {
+                    binding.progressBar.hideProgressBar()
                     when (it.data!!.status) {
                         "ok" -> {
                             var bundle = Bundle()
@@ -96,7 +96,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
                         "fail" -> {
                             Toast.makeText(
                                 requireContext(),
-                                "کد ملی شما اشتباه است",
+                                "کد ملی شما موجود نمی باشد",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -119,10 +119,15 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
                 }
                 Status.Loading -> {
-                    //TODO:Set Progressbar
+                    binding.progressBar.showProgressBar()
                 }
                 Status.Failure -> {
-                    Toast.makeText(requireContext(), "خطا", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.hideProgressBar()
+                    Toast.makeText(
+                        requireContext(),
+                        "خطا در برقراری ارتباط با سرور",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
                 }
             }

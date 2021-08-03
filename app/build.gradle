@@ -75,4 +75,7 @@ dependencies {
 
     //jalali date
     implementation 'com.github.samanzamani:PersianDate:1.1'
+
+    //progressbar
+    implementation 'com.github.shadowalker77:wp7progressbar:1.1.0'
 }

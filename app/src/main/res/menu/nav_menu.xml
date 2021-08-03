@@ -15,6 +15,10 @@
         android:icon="@drawable/ic_asist"
         android:title="شرایط و ضوابط"></item>
     <item
+        android:id="@+id/loanRequestFragment"
+        android:icon="@drawable/ic_request"
+        android:title="درخواست ها"></item>
+    <item
         android:id="@+id/newsFragment"
         android:icon="@drawable/ic_mails"
         android:title="اطلاعیه ها"></item>

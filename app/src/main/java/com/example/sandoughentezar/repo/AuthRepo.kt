@@ -6,7 +6,10 @@ import com.example.sandoughentezar.models.StringResponseModel
 import com.example.sandoughentezar.models.LoginResponseModel
 import com.example.sandoughentezar.models.ValidatePhoneResponseModel
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
+import java.io.File
 import javax.inject.Inject
 
 class AuthRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
@@ -14,8 +17,10 @@ class AuthRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
     suspend fun login(params: HashMap<String, String>): Response<LoginResponseModel> =
         apiServiceResult.login(params)
 
-    suspend fun register(params: HashMap<String, String>): Response<StringResponseModel> =
-        apiServiceResult.register(params)
+    suspend fun register(
+      requestBody: RequestBody
+    ): Response<StringResponseModel> =
+        apiServiceResult.register(requestBody)
 
     suspend fun validatePhone(params: HashMap<String, String>): Response<ValidatePhoneResponseModel> =
         apiServiceResult.validatePhone(params)

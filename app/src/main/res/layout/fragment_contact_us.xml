@@ -28,119 +28,311 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.9">
 
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="10dp"
-            android:fontFamily="@font/kalameh_bold"
-            android:text="راه های ارتباطی با صندوق انتظار :"
-            android:textColor="@color/PrimaryColor"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></TextView>
-
-
-        <LinearLayout
-            android:id="@+id/linearLayout3"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="20sp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16">
+            android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/contact_us_email"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:alpha="1"
-                android:elevation="8dp"
-                app:cardCornerRadius="50dp">
-
-                <ImageView
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout5"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:padding="15dp"
-                    android:src="@drawable/ic_email"
-                    app:tint="@color/DarkPrimaryColor"></ImageView>
-            </androidx.cardview.widget.CardView>
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/contact_us_mobile"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:elevation="8dp"
-                app:cardCornerRadius="50dp">
+                    <TextView
+                        android:id="@+id/txt_admin_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/kalameh_bold"
+                        android:textColor="@color/PrimaryColor"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"></TextView>
 
-                <ImageView
+                    <TextView
+                        android:id="@+id/txt_post_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/kalameh_bold"
+                        android:textColor="@color/SecondaryText"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/txt_admin_1"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_admin_1"></TextView>
+
+                    <LinearLayout
+                        android:id="@+id/root_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20sp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_admin_1">
+
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/contact_us_email_1"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:alpha="1"
+                            android:elevation="8dp"
+                            app:cardCornerRadius="50dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:padding="15dp"
+                                android:src="@drawable/ic_email"
+                                app:tint="@color/DarkPrimaryColor"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/contact_us_mobile_1"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:elevation="8dp"
+                            app:cardCornerRadius="50dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:padding="15dp"
+                                android:src="@drawable/ic_mobile"
+                                app:tint="@color/DarkPrimaryColor"></ImageView>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout6"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:padding="15dp"
-                    android:src="@drawable/ic_mobile"
-                    app:tint="@color/DarkPrimaryColor"></ImageView>
-            </androidx.cardview.widget.CardView>
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/constraintLayout5">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/contact_us_phone"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:elevation="8dp"
-                app:cardCornerRadius="50dp">
+                    <TextView
+                        android:id="@+id/txt_admin_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/kalameh_bold"
+                        android:textColor="@color/PrimaryColor"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"></TextView>
 
-                <ImageView
+                    <TextView
+                        android:id="@+id/txt_post_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/kalameh_bold"
+
+                        android:textColor="@color/SecondaryText"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/txt_admin_2"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_admin_2"></TextView>
+
+                    <LinearLayout
+                        android:id="@+id/root_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20sp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_admin_2">
+
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/contact_us_email_2"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:alpha="1"
+                            android:elevation="8dp"
+                            app:cardCornerRadius="50dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:padding="15dp"
+                                android:src="@drawable/ic_email"
+                                app:tint="@color/DarkPrimaryColor"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/contact_us_mobile_2"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:elevation="8dp"
+                            app:cardCornerRadius="50dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:padding="15dp"
+                                android:src="@drawable/ic_mobile"
+                                app:tint="@color/DarkPrimaryColor"></ImageView>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout7"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:padding="15dp"
-                    android:src="@drawable/ic_phone"
-                    app:tint="@color/DarkPrimaryColor"></ImageView>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/constraintLayout6">
+
+                    <TextView
+                        android:id="@+id/txt_admin_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/kalameh_bold"
+                        android:textColor="@color/PrimaryColor"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+                    <TextView
+                        android:id="@+id/txt_post_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/kalameh_bold"
+                        android:textColor="@color/SecondaryText"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/txt_admin_3"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_admin_3"></TextView>
+
+                    <LinearLayout
+                        android:id="@+id/root_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20sp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_admin_3">
 
 
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:fontFamily="@font/kalameh_bold"
-            android:text="آدرس صندوق انتظار :"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/PrimaryColor"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"></TextView>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/contact_us_email_3"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:alpha="1"
+                            android:elevation="8dp"
+                            app:cardCornerRadius="50dp">
 
-        <TextView
-            android:id="@+id/txt_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
-            android:fontFamily="@font/kalameh_bold"
-            android:gravity="center"
-            app:layout_constraintWidth_percent="0.9"
-            android:text="ایران، فارس، شیراز"
-            android:textColor="@color/PrimaryText"
-            android:textSize="22sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView17"></TextView>
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:padding="15dp"
+                                android:src="@drawable/ic_email"
+                                app:tint="@color/DarkPrimaryColor"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/contact_us_mobile_3"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:elevation="8dp"
+                            app:cardCornerRadius="50dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:padding="15dp"
+                                android:src="@drawable/ic_mobile"
+                                app:tint="@color/DarkPrimaryColor"></ImageView>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/kalameh_bold"
+                    android:text="آدرس موسسه انتظار :"
+                    android:textColor="@color/PrimaryColor"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"></TextView>
+
+                <TextView
+                    android:id="@+id/txt_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:fontFamily="@font/kalameh_bold"
+                    android:gravity="center"
+                    android:paddingBottom="30dp"
+                    android:textColor="@color/PrimaryText"
+                    android:textSize="22sp"
+                    android:layout_marginBottom="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView17"
+                    app:layout_constraintWidth_percent="0.9"></TextView>
+
+                <ir.alirezabdn.wp7progress.WP10ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:animationDuration="2300"
+                    app:indicatorColor="@color/LightPrimaryColor"
+                    app:indicatorHeight="7"
+                    app:indicatorRadius="5"
+                    app:interval="100"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

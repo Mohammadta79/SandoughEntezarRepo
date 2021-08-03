@@ -2,7 +2,11 @@ package com.example.sandoughentezar.api
 
 import com.example.sandoughentezar.models.*
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
+import retrofit2.http.Part
+import java.io.File
 import javax.inject.Inject
 
 class ApiServiceResult @Inject constructor(var apiService: ApiService) {
@@ -10,8 +14,10 @@ class ApiServiceResult @Inject constructor(var apiService: ApiService) {
     suspend fun login(params: HashMap<String, String>): Response<LoginResponseModel> =
         apiService.login(params)
 
-    suspend fun register(params: HashMap<String, String>): Response<StringResponseModel> =
-        apiService.register(params)
+    suspend fun register(
+        requestBody: RequestBody
+    ): Response<StringResponseModel> =
+        apiService.register(requestBody)
 
     suspend fun validatePhone(params: HashMap<String, String>): Response<ValidatePhoneResponseModel> =
         apiService.validatePhone(params)
@@ -52,5 +58,15 @@ class ApiServiceResult @Inject constructor(var apiService: ApiService) {
 
     suspend fun forgotPass(params: HashMap<String, String>): Response<ForgotPassModel> =
         apiService.forgotPassword(params)
+
+    suspend fun getCompanyDetails(): Response<CompanyDetailsModel> = apiService.getCompanyDetails()
+
+    suspend fun getAboutUS(): Response<AboutUsModel> = apiService.getAboutUs()
+
+    suspend fun getRequests(params: HashMap<String, String>): Response<ArrayList<RequestModel>> =
+        apiService.getRequests(params)
+
+    suspend fun newRequest(params: HashMap<String, String>): Response<StringResponseModel> =
+        apiService.newRequest(params)
 }
 

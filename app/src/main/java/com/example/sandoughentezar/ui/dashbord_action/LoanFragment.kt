@@ -46,6 +46,7 @@ class LoanFragment : Fragment(), OnLoanItemClickListener {
         loanViewModel.getLoanRecord(getParams()).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.Success -> {
+                    binding.progressBar.hideProgressBar()
                     if (it.data!!.size == 0) {
                         binding.txtNoLoan.visibility = View.VISIBLE
                     } else {
@@ -63,10 +64,15 @@ class LoanFragment : Fragment(), OnLoanItemClickListener {
 
                 }
                 Status.Failure -> {
-                    Toast.makeText(requireContext(), "خطا", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.hideProgressBar()
+                    Toast.makeText(
+                        requireContext(),
+                        "خطا در برقراری ارتباط با سرور",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 Status.Loading -> {
-                    //TODO:Show progressbar
+                    binding.progressBar.showProgressBar()
                 }
             }
         }

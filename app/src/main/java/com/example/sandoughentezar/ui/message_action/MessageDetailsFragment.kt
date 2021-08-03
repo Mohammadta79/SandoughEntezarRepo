@@ -84,6 +84,7 @@ class MessageDetailsFragment : Fragment() {
             .observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.Success -> {
+                        binding.progressBar.hideProgressBar()
                         if (it.data!!.message.isNotEmpty()) {
                             binding.rootReply.visibility = View.VISIBLE
                             binding.txtNoReply.visibility = View.GONE
@@ -94,10 +95,11 @@ class MessageDetailsFragment : Fragment() {
                         }
                     }
                     Status.Failure -> {
+                        binding.progressBar.hideProgressBar()
 
                     }
                     Status.Loading -> {
-                        //TODO:Show progressbar
+                       binding.progressBar.showProgressBar()
                     }
                 }
 

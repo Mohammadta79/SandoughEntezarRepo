@@ -17,6 +17,9 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -45,9 +48,13 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
         return loginRes
     }
 
-    fun register(params: HashMap<String, String>): LiveData<Resource<StringResponseModel>> {
+    fun register(
+        requestBody: RequestBody
+    ): LiveData<Resource<StringResponseModel>> {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = repo.register(params)
+            val response = repo.register(
+                requestBody
+            )
             registerRes.postValue(Resource.loading())
 
             try {

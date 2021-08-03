@@ -99,5 +99,10 @@
         android:name="com.example.sandoughentezar.ui.dashbord_action.DeffearedInstallmentFragment"
         android:label="fragment_deffeared_installment"
         tools:layout="@layout/fragment_deffeared_installment" />
+    <fragment
+        android:id="@+id/loanRequestFragment"
+        android:name="com.example.sandoughentezar.ui.nav_view.LoanRequestFragment"
+        android:label="fragment_loan_request"
+        tools:layout="@layout/fragment_loan_request" />
 
 </navigation>

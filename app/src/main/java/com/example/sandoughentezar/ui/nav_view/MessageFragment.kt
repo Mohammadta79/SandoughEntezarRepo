@@ -76,6 +76,7 @@ class MessageFragment : Fragment(), OnMessageClickListener, View.OnClickListener
         messageViewModel.getMessage(getUserParams()).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.Success -> {
+                    binding.progressBar.hideProgressBar()
                     if (it.data!!.size == 0) {
                         binding.txtNoMessage.visibility = View.VISIBLE
                     } else {
@@ -93,10 +94,15 @@ class MessageFragment : Fragment(), OnMessageClickListener, View.OnClickListener
 
                 }
                 Status.Failure -> {
-
+                    binding.progressBar.hideProgressBar()
+                    Toast.makeText(
+                        requireContext(),
+                        "خطا در برقراری ارتباط با سرور",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 Status.Loading -> {
-                    //TODO:Show progressbar
+                    binding.progressBar.showProgressBar()
                 }
             }
 
@@ -106,9 +112,9 @@ class MessageFragment : Fragment(), OnMessageClickListener, View.OnClickListener
     override fun onMessageClick(data: MessageModel) {
         var bundle = Bundle()
         bundle.putString("message_id", data.id)
-        bundle.putString("message",data.message)
-        bundle.putString("title",data.title)
-        bundle.putString("date",data.date)
+        bundle.putString("message", data.message)
+        bundle.putString("title", data.title)
+        bundle.putString("date", data.date)
         findNavController().navigate(R.id.action_messageFragment_to_messageDetailsFragment, bundle)
     }
 
@@ -144,6 +150,7 @@ class MessageFragment : Fragment(), OnMessageClickListener, View.OnClickListener
             .observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.Success -> {
+                        binding.progressBar.hideProgressBar()
                         if (it.data!!.status == "ok") {
                             Toast.makeText(
                                 requireContext(),
@@ -151,7 +158,7 @@ class MessageFragment : Fragment(), OnMessageClickListener, View.OnClickListener
                                 Toast.LENGTH_SHORT
                             ).show()
                             bottomSheetDialog!!.dismiss()
-                        }else{
+                        } else {
                             Toast.makeText(
                                 requireContext(),
                                 "خطا در ایجاد پیام",
@@ -160,6 +167,7 @@ class MessageFragment : Fragment(), OnMessageClickListener, View.OnClickListener
                         }
                     }
                     Status.Failure -> {
+                        binding.progressBar.hideProgressBar()
                         Toast.makeText(
                             requireContext(),
                             "خطا در برقراری ارتباط با سرور",
@@ -167,7 +175,7 @@ class MessageFragment : Fragment(), OnMessageClickListener, View.OnClickListener
                         ).show()
                     }
                     Status.Loading -> {
-                        //TODO:Show progressbar
+                        binding.progressBar.showProgressBar()
                     }
                 }
 

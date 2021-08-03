@@ -42,7 +42,6 @@ class LoanDetailsFragment : Fragment(), OnInstallmentClickListener {
     var bottomSheetDialog: BottomSheetDialog? = null
     var bottomSheetView: View? = null
     private val loanViewModel by viewModels<LoanViewModel>()
-    private val dashbordViewModel by viewModels<DashbordViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -114,6 +113,7 @@ class LoanDetailsFragment : Fragment(), OnInstallmentClickListener {
         loanViewModel.getLoanInstallment(getLoanParams()).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.Success -> {
+                    binding.progressBar.hideProgressBar()
                     binding.loanInstallmentRV.apply {
                         adapter = InstallmentAdapter(
                             requireContext(),
@@ -129,10 +129,15 @@ class LoanDetailsFragment : Fragment(), OnInstallmentClickListener {
 
                 }
                 Status.Failure -> {
-                    Toast.makeText(requireContext(), "خطا", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.hideProgressBar()
+                    Toast.makeText(
+                        requireContext(),
+                        "خطا در برقراری ارتباط با سرور",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 Status.Loading -> {
-                    //TODO:Show progressbar
+                    binding.progressBar.showProgressBar()
                 }
             }
         }
@@ -144,22 +149,11 @@ class LoanDetailsFragment : Fragment(), OnInstallmentClickListener {
 
     private fun installmentPay(id: String) {
 
-          val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.1.3:8080/api/installmentpay/?installment_id=$id"))
-                startActivity(browserIntent)
-//        dashbordViewModel.installmentPay(getPaymentParams(id)).observe(viewLifecycleOwner) {
-//            when (it.status) {
-//                Status.Success -> {
-//                    Toast.makeText(requireContext(), "پرداخت با موفقیت انجام شد", Toast.LENGTH_LONG)
-//                        .show()
-//                }
-//                Status.Failure -> {
-//                    Toast.makeText(requireContext(), "خطا در پرداخت", Toast.LENGTH_LONG).show()
-//                }
-//                Status.Loading -> {
-//                    //TODO : Show progressbar
-//                }
-//            }
-//        }
+        val browserIntent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("http://192.168.1.4:8080/api/installmentpay/?installment_id=$id")
+        )
+        startActivity(browserIntent)
     }
 
     private fun getLoanParams(): HashMap<String, String> {
@@ -168,10 +162,5 @@ class LoanDetailsFragment : Fragment(), OnInstallmentClickListener {
         return params
     }
 
-    private fun getPaymentParams(id: String): HashMap<String, String> {
-        var params: HashMap<String, String> = HashMap()
-        params["installment_id"] = id
-        return params
-    }
 
 }

@@ -118,6 +118,7 @@ class PaymentFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDat
         paymentViewModel.getPaymentRecords(getRecordParams()).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.Success -> {
+                    binding.progressBar.hideProgressBar()
                     if (it.data!!.size == 0) {
                         binding.txtNoPayment.visibility = View.VISIBLE
                     } else {
@@ -135,10 +136,11 @@ class PaymentFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDat
 
                 }
                 Status.Failure -> {
-                    Toast.makeText(requireContext(), "خطا", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.hideProgressBar()
+                    Toast.makeText(requireContext(), "خطا در برقراری ارتباط با سرور", Toast.LENGTH_SHORT).show()
                 }
                 Status.Loading -> {
-                    //TODO:Show progressbar
+                    binding.progressBar.showProgressBar()
                 }
             }
         }
@@ -215,7 +217,7 @@ class PaymentFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDat
     private fun Payment(amount: Long) {
         val browserIntent = Intent(
             Intent.ACTION_VIEW,
-            Uri.parse("http://192.168.1.3:8080/api/newpay/?user_id=$user_id&amount=$amount")
+            Uri.parse("http://192.168.1.4:8080/api/newpay/?user_id=$user_id&amount=$amount")
         )
         startActivity(browserIntent)
     }

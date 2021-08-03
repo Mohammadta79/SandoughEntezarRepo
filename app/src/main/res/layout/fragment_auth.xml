@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/kalameh_bold"
-            android:text="به صندوق انتظار خوش آمدید"
+            android:text="به صندوق قرض الحسنه انتظار خوش آمدید"
             android:textColor="@color/white"
             android:textSize="20sp"></TextView>
 

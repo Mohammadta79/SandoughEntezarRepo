@@ -63,6 +63,7 @@ class DeffearedInstallmentFragment : Fragment(), OnInstallmentClickListener {
             .observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.Success -> {
+                        binding.progressBar.hideProgressBar()
                         if (it.data!!.isEmpty()) {
                             binding.txtNoInstalment.visibility = View.VISIBLE
                         } else {
@@ -84,10 +85,16 @@ class DeffearedInstallmentFragment : Fragment(), OnInstallmentClickListener {
 
                     }
                     Status.Failure -> {
-                        Log.d("getDeffearedInstallment", it.msg)
+                        binding.progressBar.hideProgressBar()
+                        Toast.makeText(
+                            requireContext(),
+                            "خطا در برقراری ارتباط با سرور",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                     }
                     Status.Loading -> {
+                        binding.progressBar.showProgressBar()
                         //TODO : Show progressbar
                     }
                 }
@@ -95,22 +102,11 @@ class DeffearedInstallmentFragment : Fragment(), OnInstallmentClickListener {
     }
 
     private fun installmentPay(id: String) {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.1.3:8080/api/installmentpay/?installment_id=$id"))
+        val browserIntent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("http://192.168.1.4:8080/api/installmentpay/?installment_id=$id")
+        )
         startActivity(browserIntent)
-//        dashbordViewModel.installmentPay(getPaymentParams(id)).observe(viewLifecycleOwner) {
-//            when (it.status) {
-//                Status.Success -> {
-//                    Toast.makeText(requireContext(), "پرداخت با موفقیت انجام شد", Toast.LENGTH_LONG)
-//                        .show()
-//                }
-//                Status.Failure -> {
-//                    Toast.makeText(requireContext(), "خطا در پرداخت", Toast.LENGTH_LONG).show()
-//                }
-//                Status.Loading -> {
-//                    //TODO : Show progressbar
-//                }
-//            }
-//        }
     }
 
     private fun getDeaffearedParams(): HashMap<String, String> {
@@ -119,10 +115,5 @@ class DeffearedInstallmentFragment : Fragment(), OnInstallmentClickListener {
         return params
     }
 
-    private fun getPaymentParams(id: String): HashMap<String, String> {
-        var params: HashMap<String, String> = HashMap()
-        params["installment_id"] = id
-        return params
-    }
 
 }

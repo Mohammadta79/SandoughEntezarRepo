@@ -62,7 +62,7 @@
             android:textSize="20sp"
             android:drawableRight="@drawable/ic_copyright"
             android:fontFamily="@font/kalameh_bold"
-            android:text="تمامی حقوق نرم افزار متعلق به صندوق انتظار می باشد"
+            android:text="تمامی حقوق برای موسسه انتظار محفوظ می باشد"
             android:textColor="@color/SecondaryText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

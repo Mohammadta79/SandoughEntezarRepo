@@ -1,9 +1,14 @@
 package com.example.sandoughentezar.api
 
 import com.example.sandoughentezar.models.*
-import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
+import java.io.File
+
 
 interface ApiService {
 
@@ -11,9 +16,10 @@ interface ApiService {
     @POST("login/")
     suspend fun login(@FieldMap params: HashMap<String, String>): Response<LoginResponseModel>
 
-    @FormUrlEncoded
     @POST("register/")
-    suspend fun register(@FieldMap params: HashMap<String, String>): Response<StringResponseModel>
+    suspend fun register(
+        @Body requestBody: RequestBody
+    ): Response<StringResponseModel>
 
     @FormUrlEncoded
     @POST("deferredinstallments/")
@@ -45,7 +51,6 @@ interface ApiService {
     suspend fun getTotalPayment(@FieldMap params: HashMap<String, String>): Response<TotalModel>
 
 
-
     @FormUrlEncoded
     @POST("getmessages/")
     suspend fun getMessage(@FieldMap params: HashMap<String, String>): Response<ArrayList<MessageModel>>
@@ -73,10 +78,22 @@ interface ApiService {
     suspend fun getMyScore(@FieldMap params: HashMap<String, String>): Response<ScoreResponseModel>
 
 
-
     @FormUrlEncoded
     @POST("forgotpass/")
-    suspend fun forgotPassword(@FieldMap params: HashMap<String, String>):Response<ForgotPassModel>
+    suspend fun forgotPassword(@FieldMap params: HashMap<String, String>): Response<ForgotPassModel>
 
 
+    @GET("getcompanydetails/")
+    suspend fun getCompanyDetails(): Response<CompanyDetailsModel>
+
+    @GET("getaboutus/")
+    suspend fun getAboutUs(): Response<AboutUsModel>
+
+    @FormUrlEncoded
+    @POST("getrequests/")
+    suspend fun getRequests(@FieldMap params: HashMap<String, String>): Response<ArrayList<RequestModel>>
+
+    @FormUrlEncoded
+    @POST("newrequest/")
+    suspend fun newRequest(@FieldMap params: HashMap<String, String>):Response<StringResponseModel>
 }

@@ -42,32 +42,40 @@ class ForgotPasswordFragment : Fragment() {
         authViewModel.forgotPass(getParams()).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.Success -> {
-                    if (it.data!!.status == "ok") {
-                        var bundle = Bundle()
-                        bundle.putString("user_id", it.data.user_id)
-                        findNavController().navigate(
-                            R.id.action_forgotPasswordFragment_to_validatePhoneFragment,
-                            bundle
-                        )
-                    } else if (it.data!!.status == "fail") {
-                        Toast.makeText(
-                            requireContext(),
-                            "کد ملی شما در سامانه وجود ندارد، لطف ثبت نام کنید",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    } else if (it.data!!.status == "wait") {
-                        Toast.makeText(
-                            requireContext(),
-                            "پروفایل شما هنوز توسط مدیریت تایید نشده است.",
-                            Toast.LENGTH_LONG
-                        ).show()
+                    binding.progressBar.hideProgressBar()
+                    when (it.data!!.status) {
+                        "ok" -> {
+                            var bundle = Bundle()
+                            bundle.putString("user_id", it.data.user_id)
+                            findNavController().navigate(
+                                R.id.action_forgotPasswordFragment_to_validatePhoneFragment,
+                                bundle
+                            )
+                        }
+                        "fail" -> {
+                            Toast.makeText(
+                                requireContext(),
+                                "کد ملی شما در سامانه وجود ندارد، لطف ثبت نام کنید",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                        "wait" -> {
+                            Toast.makeText(
+                                requireContext(),
+                                "پروفایل شما هنوز توسط مدیریت تایید نشده است.",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
                     }
 
                 }
                 Status.Loading -> {
 
+                    binding.progressBar.showProgressBar()
+
                 }
                 Status.Failure -> {
+                    binding.progressBar.hideProgressBar()
                     Toast.makeText(
                         requireContext(),
                         "خطا در برقراری ارتباط با سرور",

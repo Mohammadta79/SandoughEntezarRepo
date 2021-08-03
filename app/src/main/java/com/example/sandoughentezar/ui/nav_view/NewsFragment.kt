@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sandoughentezar.R
@@ -44,6 +45,7 @@ class NewsFragment : Fragment() {
         newsViewModel.getNews().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.Success -> {
+                    binding.progressBar.hideProgressBar()
                     if (it.data!!.size == 0) {
                         binding.txtNoNews.visibility = View.VISIBLE
                     } else {
@@ -61,10 +63,11 @@ class NewsFragment : Fragment() {
 
                 }
                 Status.Failure -> {
-
+                    binding.progressBar.hideProgressBar()
+                    Toast.makeText(requireContext(),"خطا در برقراری ارتباط با سرور",Toast.LENGTH_SHORT).show()
                 }
                 Status.Loading -> {
-                    //TODO:Show progressbar
+                    binding.progressBar.showProgressBar()
                 }
             }
 

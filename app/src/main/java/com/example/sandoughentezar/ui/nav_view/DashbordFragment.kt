@@ -76,31 +76,31 @@ class DashbordFragment : Fragment(), View.OnClickListener {
             user_id = it.getString("user_id", null).toString()
         }
 
-        getMyScore()
         getMyTotalPay()
         setUserInfo()
 
     }
 
-    private fun getMyScore() {
-        dashbordViewModel.getMyScore(getUserParams()).observe(viewLifecycleOwner) {
-            when (it.status) {
-                Status.Success -> {
-                    it.data!!.let { _data ->
-                   //     binding.txtSlash.text = "/"
-                   //     binding.txtMyLevel.text = "رتبه" + _data.level
-                        binding.txtMyScore.text = _data.score + "امتیاز"
-                    }
-                }
-                Status.Failure -> {
-
-                }
-                Status.Loading -> {
-                    //TODO:Show progressbar
-                }
-            }
-        }
-    }
+//    private fun getMyScore() {
+//        dashbordViewModel.getMyScore(getUserParams()).observe(viewLifecycleOwner) {
+//            when (it.status) {
+//                Status.Success -> {
+//                    binding.progressBar.hideProgressBar()
+//                    it.data!!.let { _data ->
+//                        //     binding.txtSlash.text = "/"
+//                        //     binding.txtMyLevel.text = "رتبه" + _data.level
+//                        binding.txtMyScore.text = _data.score + "امتیاز"
+//                    }
+//                }
+//                Status.Failure -> {
+//                    binding.progressBar.hideProgressBar()
+//                }
+//                Status.Loading -> {
+//                    binding.progressBar.showProgressBar()
+//                }
+//            }
+//        }
+//    }
 
     private fun setUserInfo() {
 
@@ -108,16 +108,19 @@ class DashbordFragment : Fragment(), View.OnClickListener {
 
             when (it.status) {
                 Status.Success -> {
-                    //TODO:get mobile number
+                    binding.progressBar.hideProgressBar()
+
                     binding.txtNameDashbord.text = it.data!!.name
-                    binding.txtAccountNumberDashbord.text =
-                        it.data!!.account_number
+                    binding.txtId.text =
+                        it.data!!.id
                 }
                 Status.Failure -> {
+                    binding.progressBar.hideProgressBar()
                     Log.d("setNavHeader", it.msg)
                 }
                 Status.Loading -> {
-                    //TODO : Show progressbar
+                    binding.progressBar.showProgressBar()
+
                 }
 
             }
@@ -129,15 +132,16 @@ class DashbordFragment : Fragment(), View.OnClickListener {
         dashbordViewModel.getTotalPayment(getUserParams()).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.Success -> {
+                    binding.progressBar.hideProgressBar()
                     if (it.data!!.status == "ok") {
                         binding.txtMyPayment.text = it.data.amount + "تومان"
                     }
                 }
                 Status.Failure -> {
-
+                    binding.progressBar.hideProgressBar()
                 }
                 Status.Loading -> {
-                    //TODO : Show progressbar
+                    binding.progressBar.showProgressBar()
                 }
             }
         }
@@ -149,6 +153,7 @@ class DashbordFragment : Fragment(), View.OnClickListener {
         params["user_id"] = user_id
         return params
     }
+
 
 
 }
