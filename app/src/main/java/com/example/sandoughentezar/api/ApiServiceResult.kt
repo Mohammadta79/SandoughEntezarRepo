@@ -68,5 +68,8 @@ class ApiServiceResult @Inject constructor(var apiService: ApiService) {
 
     suspend fun newRequest(params: HashMap<String, String>): Response<StringResponseModel> =
         apiService.newRequest(params)
+
+    suspend fun requestReply(params: HashMap<String, String>): Response<RequestReplyModel> =
+        apiService.requestReply(params)
 }
 

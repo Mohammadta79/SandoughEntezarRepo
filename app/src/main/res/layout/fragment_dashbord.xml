@@ -29,7 +29,7 @@
                 android:fontFamily="@font/kalameh_bold"
                 android:text="صندوق قرض الحسنه انتظار"
                 android:textColor="@color/white"
-                android:textSize="26dp"
+                android:textSize="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"></TextView>

@@ -340,7 +340,6 @@
                     android:fontFamily="@font/kalameh_bold"
                     android:gravity="right|center"
                     android:hint="شماره شبا *"
-                    android:inputType="number"
                     android:lines="3"
                     android:paddingLeft="12dp"
                     android:paddingRight="16dp"

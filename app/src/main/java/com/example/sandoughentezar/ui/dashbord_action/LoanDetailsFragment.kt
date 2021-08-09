@@ -83,7 +83,7 @@ class LoanDetailsFragment : Fragment(), OnInstallmentClickListener {
     }
 
     private fun setTxtData() {
-        binding.txtAmount.text = amount
+        binding.txtAmount.text = "%,d".format(amount.toLong())
         binding.txtStartDate.text = start_date
     }
 
@@ -95,14 +95,17 @@ class LoanDetailsFragment : Fragment(), OnInstallmentClickListener {
         )
         bottomSheetView!!.findViewById<TextView>(R.id.txt_end_date).text = end_date
         bottomSheetView!!.findViewById<TextView>(R.id.txt_installment_amount).text =
-            installment_amount
+            "%,d".format(installment_amount.toLong())
+
+
         bottomSheetView!!.findViewById<TextView>(R.id.txt_num_of_installment).text =
             num_of_installment
         bottomSheetView!!.findViewById<TextView>(R.id.txt_num_of_installments_paid).text =
             paid_installment
         bottomSheetView!!.findViewById<TextView>(R.id.txt_unpaid_installment).text =
             unpaid_installment
-        bottomSheetView!!.findViewById<TextView>(R.id.txt_reminder_loan).text = loan_reminder
+        bottomSheetView!!.findViewById<TextView>(R.id.txt_reminder_loan).text =
+            "%,d".format(loan_reminder.toLong())
         bottomSheetView!!.findViewById<TextView>(R.id.due_date).text = due_date
         bottomSheetDialog!!.setContentView(bottomSheetView!!)
         bottomSheetDialog!!.show()

@@ -112,7 +112,7 @@ class DashbordFragment : Fragment(), View.OnClickListener {
 
                     binding.txtNameDashbord.text = it.data!!.name
                     binding.txtId.text =
-                        it.data!!.id
+                        it.data!!.national_id
                 }
                 Status.Failure -> {
                     binding.progressBar.hideProgressBar()
@@ -134,7 +134,8 @@ class DashbordFragment : Fragment(), View.OnClickListener {
                 Status.Success -> {
                     binding.progressBar.hideProgressBar()
                     if (it.data!!.status == "ok") {
-                        binding.txtMyPayment.text = it.data.amount + "تومان"
+                        var amount = "%,d".format(it.data.amount.toLong())
+                        binding.txtMyPayment.text = "$amount تومان "
                     }
                 }
                 Status.Failure -> {

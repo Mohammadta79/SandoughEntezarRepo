@@ -96,4 +96,8 @@ interface ApiService {
     @FormUrlEncoded
     @POST("newrequest/")
     suspend fun newRequest(@FieldMap params: HashMap<String, String>):Response<StringResponseModel>
+
+    @FormUrlEncoded
+    @POST("requestreply/")
+    suspend fun requestReply(@FieldMap params: HashMap<String, String>):Response<RequestReplyModel>
 }

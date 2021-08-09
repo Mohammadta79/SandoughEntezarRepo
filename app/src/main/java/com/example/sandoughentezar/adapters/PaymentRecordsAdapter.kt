@@ -44,7 +44,9 @@ class PaymentRecordsAdapter(
 
 
 
-            binding.txtAmount.text = (data.amount + "تومان")
+            var amount = "%,d".format(data.amount.toLong())
+
+            binding.txtAmount.text = "$amount تومان "
             binding.txtAuthority.text = data.authority.substring(30, 36)
             binding.txtDate.text = pdformater.format(persianDate)
         }

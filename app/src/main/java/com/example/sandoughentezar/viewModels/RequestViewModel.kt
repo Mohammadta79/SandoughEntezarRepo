@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sandoughentezar.api.state.Resource
 import com.example.sandoughentezar.models.RequestModel
+import com.example.sandoughentezar.models.RequestReplyModel
 import com.example.sandoughentezar.models.StringResponseModel
 import com.example.sandoughentezar.repo.RequestRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,7 @@ class RequestViewModel @Inject constructor(var repo: RequestRepo) : ViewModel() 
 
     private var requestsLD = MutableLiveData<Resource<ArrayList<RequestModel>>>()
     private var newRequestsLD = MutableLiveData<Resource<StringResponseModel>>()
+    private var replyRequest = MutableLiveData<Resource<RequestReplyModel>>()
 
     fun getRequests(params: HashMap<String, String>): MutableLiveData<Resource<ArrayList<RequestModel>>> {
         viewModelScope.launch(Dispatchers.IO) {
@@ -53,6 +55,24 @@ class RequestViewModel @Inject constructor(var repo: RequestRepo) : ViewModel() 
             }
         }
         return newRequestsLD
+    }
+
+    fun requestReply(params: HashMap<String, String>): MutableLiveData<Resource<RequestReplyModel>> {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                replyRequest.postValue(Resource.loading())
+                var response = repo.requestReply(params)
+                if (response.isSuccessful && response.body() != null) {
+                    replyRequest.postValue(Resource.success(response.body()) as Resource<RequestReplyModel>?)
+                } else {
+                    replyRequest.postValue(Resource.failure(response.message()))
+                }
+
+            } catch (e: Exception) {
+                replyRequest.postValue(Resource.failure(e.toString()))
+            }
+        }
+        return replyRequest
     }
 
 

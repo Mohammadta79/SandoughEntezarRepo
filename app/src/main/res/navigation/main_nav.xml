@@ -103,6 +103,17 @@
         android:id="@+id/loanRequestFragment"
         android:name="com.example.sandoughentezar.ui.nav_view.LoanRequestFragment"
         android:label="fragment_loan_request"
-        tools:layout="@layout/fragment_loan_request" />
+        tools:layout="@layout/fragment_loan_request" >
+        <action
+            android:id="@+id/action_loanRequestFragment_to_loanRequestDetailsFragment"
+            app:destination="@id/loanRequestDetailsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/loanRequestDetailsFragment"
+        android:name="com.example.sandoughentezar.ui.request_action.LoanRequestDetailsFragment"
+        android:label="fragment_loan_request_details"
+        tools:layout="@layout/fragment_loan_request_details" />
 
 </navigation>

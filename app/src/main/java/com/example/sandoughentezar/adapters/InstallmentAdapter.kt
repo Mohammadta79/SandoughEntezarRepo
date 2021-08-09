@@ -40,7 +40,8 @@ class InstallmentAdapter(
         private var binding = DeffearedInstallmentListTemplateBinding.bind(itemView)
 
         fun bindData(data: InstallmentModel) {
-            binding.txtAmount.text = data.amount + "تومان"
+            var amount = "%,d".format(data.amount.toLong())
+            binding.txtAmount.text = "$amount تومان "
             binding.txtDate.text = data.date
             when (data.status) {
                 "1" -> {

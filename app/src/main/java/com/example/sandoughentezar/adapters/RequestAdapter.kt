@@ -32,9 +32,9 @@ class RequestAdapter(
 
         private var binding = RequestListTemplateBinding.bind(itemView)
         fun bindData(data: RequestModel) {
-
+            var amount = "%,d".format(data.amount.toLong())
             binding.txtRequestDetails.text = data.details
-            binding.txtRequestAmount.text = data.amount + " تومان "
+            binding.txtRequestAmount.text = "$amount تومان "
             binding.txtRequestInstallment.text = data.num_of_installments + " قسط "
             binding.txtDate.text = data.date
 

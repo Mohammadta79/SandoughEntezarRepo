@@ -59,13 +59,13 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/requestsRV"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="0dp"
             android:padding="10dp"
-            tools:listitem="@layout/message_list_template"
+            app:layout_constraintBottom_toTopOf="@+id/btn_new_request"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></androidx.recyclerview.widget.RecyclerView>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/message_list_template"></androidx.recyclerview.widget.RecyclerView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_new_request"

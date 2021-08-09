@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sandoughentezar.R
 import com.example.sandoughentezar.adapters.MessageAdapter
@@ -179,12 +180,21 @@ class LoanRequestFragment : Fragment(), View.OnClickListener, OnRequestItemClick
 
     private fun getRequestParams(): HashMap<String, String> {
         var params = HashMap<String, String>()
-        params["user_id"] = user_id
+        params["user_id"] = "1"
         return params
     }
 
     override fun onRequestClick(data: RequestModel) {
-        TODO("Not yet implemented")
+        var bundle = Bundle()
+        bundle.putString("request_id", data.id)
+        bundle.putString("amount", data.amount)
+        bundle.putString("request_message", data.details)
+        bundle.putString("installment", data.num_of_installments)
+        bundle.putString("date", data.date)
+        findNavController().navigate(
+            R.id.action_loanRequestFragment_to_loanRequestDetailsFragment,
+            bundle
+        )
     }
 
 }

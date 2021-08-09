@@ -33,7 +33,8 @@ class LoanRecordsAdapter(
         private val binding = LoanRecordListTemplateBinding.bind(itemView)
 
         fun bindData(data: LoanModel) {
-            binding.txtAmount.text = data.amount + "تومان"
+            var amount = "%,d".format(data.amount.toLong())
+            binding.txtAmount.text = "$amount تومان "
             binding.txtFirstDate.text = data.start_date
             binding.txtLastDate.text = data.end_date
             if (data.status == "0") {
