@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/kalameh_bold"
-            android:text="درخواستی ثیت نشده است"
+            android:text="درخواستی ثبت نشده است"
             android:textColor="@color/PrimaryText"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"

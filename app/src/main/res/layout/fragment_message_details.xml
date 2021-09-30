@@ -140,7 +140,7 @@
                             android:layout_marginRight="10dp"
                             android:layout_marginBottom="4dp"
                             android:fontFamily="@font/vazir_bold"
-                            android:textColor="@color/PrimaryText"
+                            android:textColor="@color/white"
                             android:textSize="14sp"></TextView>
 
                         <View
@@ -163,7 +163,7 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="4dp"
                             android:fontFamily="@font/hamurz"
-                            android:textColor="@color/PrimaryText"
+                            android:textColor="@color/white"
                             android:textSize="16sp"></TextView>
                     </RelativeLayout>
 
@@ -178,7 +178,7 @@
                         android:layout_marginRight="10dp"
                         android:fontFamily="@font/vazir_medium"
                         android:scrollbars="vertical"
-                        android:textColor="@color/PrimaryText"
+                        android:textColor="@color/white"
                         android:textIsSelectable="true"
                         android:textSize="12sp"></TextView>
 

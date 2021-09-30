@@ -3,14 +3,14 @@ package com.example.sandoughentezar.ui.nav_view
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -57,6 +57,42 @@ class LoanRequestFragment : Fragment(), View.OnClickListener, OnRequestItemClick
             R.layout.dialog_new_request,
             requireActivity().findViewById<LinearLayout>(R.id.root_dialog_new_request)
         )
+        bottomSheetView!!.findViewById<EditText>(R.id.edt_request_installment)
+            .addTextChangedListener(object :
+                TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    try {
+                        if (s.toString() == "0"){
+                            bottomSheetView!!.findViewById<TextView>(R.id.txt_installment_request).text = "نا معتبر"
+                        }
+                        else{
+                            var amount =
+                                bottomSheetView!!.findViewById<EditText>(R.id.edt_request_amount).text.toString()
+                            var installment = ((amount.toDouble())/(s.toString().toDouble()))
+                            var ins =  "%,d".format(installment.toLong())
+                            bottomSheetView!!.findViewById<TextView>(R.id.txt_installment_request).text =
+                                "$ins تومان "
+                        }
+
+
+                    } catch (e: Exception) {
+
+                    }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                }
+            })
+        
         bottomSheetView!!.findViewById<Button>(R.id.btn_create_request).setOnClickListener {
             var amount =
                 bottomSheetView!!.findViewById<EditText>(R.id.edt_request_amount).text.toString()

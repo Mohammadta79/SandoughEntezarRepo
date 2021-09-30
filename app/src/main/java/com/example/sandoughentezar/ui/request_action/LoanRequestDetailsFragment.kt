@@ -71,7 +71,7 @@ class LoanRequestDetailsFragment : Fragment() {
 
     private fun setData() {
         binding.txtDate.text = date
-        binding.txtRequestAmount.text = amount
+        binding.txtRequestAmount.text =  "%,d".format(amount.toLong())
         binding.txtRequestInstallment.text = installment
         binding.txtRequestDetails.text = request_message
     }

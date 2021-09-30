@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -60,6 +62,13 @@ class DashbordFragment : Fragment(), View.OnClickListener {
             binding.cardRules.id -> {
                 findNavController().navigate(R.id.action_dashbordFragment_to_statemetFragment)
             }
+            binding.cardMessages.id -> {
+                findNavController().navigate(R.id.action_dashbordFragment_to_messageFragment)
+            }
+            binding.cardMore.id -> {
+                requireActivity().findViewById<DrawerLayout>(R.id.drawer_layout)
+                    .openDrawer(Gravity.RIGHT)
+            }
         }
     }
 
@@ -68,6 +77,8 @@ class DashbordFragment : Fragment(), View.OnClickListener {
         binding.cardMyLoan.setOnClickListener(this)
         binding.cardDeffearedInstallment.setOnClickListener(this)
         binding.cardRules.setOnClickListener(this)
+        binding.cardMessages.setOnClickListener(this)
+        binding.cardMore.setOnClickListener(this)
     }
 
     private fun initViews() {
@@ -154,7 +165,6 @@ class DashbordFragment : Fragment(), View.OnClickListener {
         params["user_id"] = user_id
         return params
     }
-
 
 
 }

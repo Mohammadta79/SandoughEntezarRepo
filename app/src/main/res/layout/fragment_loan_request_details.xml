@@ -127,7 +127,6 @@
                             android:layout_marginRight="4dp"
                             android:fontFamily="@font/kalameh_bold"
                             android:gravity="center"
-                            android:text="3000000 تومان"
                             android:textColor="@color/SecondaryText"
                             android:textSize="16sp"
                             app:layout_constraintEnd_toStartOf="@+id/textView16"
@@ -153,7 +152,6 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/kalameh_bold"
                             android:gravity="center"
-                            android:text="12 قسط"
                             android:textColor="@color/SecondaryText"
                             android:textSize="16sp"
                             app:layout_constraintEnd_toStartOf="@+id/textView17"
@@ -196,7 +194,7 @@
                             android:layout_marginRight="10dp"
                             android:layout_marginBottom="4dp"
                             android:fontFamily="@font/vazir_bold"
-                            android:textColor="@color/PrimaryText"
+                            android:textColor="@color/white"
                             android:textSize="14sp"></TextView>
 
                         <View
@@ -219,7 +217,7 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="4dp"
                             android:fontFamily="@font/hamurz"
-                            android:textColor="@color/PrimaryText"
+                            android:textColor="@color/white"
                             android:textSize="16sp"></TextView>
                     </RelativeLayout>
 
@@ -234,7 +232,7 @@
                         android:layout_marginRight="10dp"
                         android:fontFamily="@font/vazir_medium"
                         android:scrollbars="vertical"
-                        android:textColor="@color/PrimaryText"
+                        android:textColor="@color/white"
                         android:textIsSelectable="true"
                         android:textSize="12sp"></TextView>
 
