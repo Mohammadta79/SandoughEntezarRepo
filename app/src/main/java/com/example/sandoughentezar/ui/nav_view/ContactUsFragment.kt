@@ -135,18 +135,15 @@ class ContactUsFragment : Fragment(), View.OnClickListener {
                 Status.Success -> {
                     binding.progressBar.hideProgressBar()
                     binding.txtAddress.text = it.data!!.address
-                    mobile1 = it.data.mobile1
-                    mobile2 = it.data.mobile2
-                    mobile3 = it.data.mobile3
-                    email1 = it.data.email1
-                    email2 = it.data.email2
-                    email3 = it.data.email3
-                    binding.txtAdmin1.text = it.data.admin1
-                    binding.txtAdmin2.text = it.data.admin2
-                    binding.txtAdmin3.text = it.data.admin3
-                    binding.txtPost1.text = it.data.post1
-                    binding.txtPost2.text = it.data.post2
-                    binding.txtPost3.text = it.data.post3
+                    mobile1 = it.data.boss_phone
+                    mobile2 = it.data.assistant_phone
+                    mobile3 = it.data.helper_phone
+                    email1 = it.data.boss_email
+                    email2 = it.data.assistant_email
+                    email3 = it.data.helper_email
+                    binding.txtAdmin1.text = it.data.boss_name
+                    binding.txtAdmin2.text = it.data.assistant_name
+                    binding.txtAdmin3.text = it.data.helper_name
                 }
                 Status.Loading -> {
                     binding.progressBar.showProgressBar()

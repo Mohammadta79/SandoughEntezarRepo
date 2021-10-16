@@ -80,7 +80,7 @@ class LoanFragment : Fragment(), OnLoanItemClickListener {
 
     private fun getParams(): HashMap<String, String> {
         var params: HashMap<String, String> = HashMap()
-        params["user_id"] = user_id
+        params["member_id"] = user_id
         return params
     }
 

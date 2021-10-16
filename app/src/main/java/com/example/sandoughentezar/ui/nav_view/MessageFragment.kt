@@ -3,7 +3,6 @@ package com.example.sandoughentezar.ui.nav_view
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -50,13 +49,13 @@ class MessageFragment : Fragment(), OnMessageClickListener, View.OnClickListener
 
     private fun getUserParams(): HashMap<String, String> {
         var params = HashMap<String, String>()
-        params["user_id"] = user_id
+        params["member_id"] = user_id
         return params
     }
 
     private fun getNewMessageParams(title: String, message: String): HashMap<String, String> {
         var params = HashMap<String, String>()
-        params["user_id"] = user_id
+        params["member_id"] = user_id
         params["title"] = title
         params["message"] = message
         return params
@@ -151,13 +150,14 @@ class MessageFragment : Fragment(), OnMessageClickListener, View.OnClickListener
                 when (it.status) {
                     Status.Success -> {
                         binding.progressBar.hideProgressBar()
-                        if (it.data!!.status == "ok") {
+                        if (it.data!!.message == "ok") {
                             Toast.makeText(
                                 requireContext(),
                                 "پیام با موفقیت ایجاد شد",
                                 Toast.LENGTH_SHORT
                             ).show()
                             bottomSheetDialog!!.dismiss()
+                            getMessages()
                         } else {
                             Toast.makeText(
                                 requireContext(),

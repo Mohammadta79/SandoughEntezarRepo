@@ -124,6 +124,7 @@ class DashbordFragment : Fragment(), View.OnClickListener {
                     binding.txtNameDashbord.text = it.data!!.name
                     binding.txtId.text =
                         it.data!!.national_id
+                    binding.txtAccountNumber.text = it.data.account_number
                 }
                 Status.Failure -> {
                     binding.progressBar.hideProgressBar()
@@ -162,9 +163,7 @@ class DashbordFragment : Fragment(), View.OnClickListener {
     //params
     private fun getUserParams(): HashMap<String, String> {
         var params: HashMap<String, String> = HashMap()
-        params["user_id"] = user_id
+        params["member_id"] = user_id
         return params
     }
-
-
 }

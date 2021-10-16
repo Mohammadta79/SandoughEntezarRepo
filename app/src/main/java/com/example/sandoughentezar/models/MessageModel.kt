@@ -5,5 +5,5 @@ data class MessageModel(
     var title: String,
     var date: String,
     var message: String,
-    var user_id: String
+    var member_id: String
 )

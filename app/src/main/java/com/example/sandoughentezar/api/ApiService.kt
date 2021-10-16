@@ -27,8 +27,8 @@ interface ApiService {
 
 
     @FormUrlEncoded
-    @POST("userinfo/")
-    suspend fun getUSerInfo(@FieldMap params: HashMap<String, String>): Response<UserModel>
+    @POST("memberinfo/")
+    suspend fun getUserInfo(@FieldMap params: HashMap<String, String>): Response<UserModel>
 
 
     @FormUrlEncoded
@@ -73,6 +73,7 @@ interface ApiService {
     @POST("sms/")
     suspend fun validatePhone(@FieldMap params: HashMap<String, String>): Response<ValidatePhoneResponseModel>
 
+
     @FormUrlEncoded
     @POST("score/")
     suspend fun getMyScore(@FieldMap params: HashMap<String, String>): Response<ScoreResponseModel>
@@ -95,9 +96,9 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("newrequest/")
-    suspend fun newRequest(@FieldMap params: HashMap<String, String>):Response<StringResponseModel>
+    suspend fun newRequest(@FieldMap params: HashMap<String, String>): Response<StringResponseModel>
 
     @FormUrlEncoded
     @POST("requestreply/")
-    suspend fun requestReply(@FieldMap params: HashMap<String, String>):Response<RequestReplyModel>
+    suspend fun requestReply(@FieldMap params: HashMap<String, String>): Response<RequestReplyModel>
 }

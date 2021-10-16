@@ -1,7 +1,5 @@
 package com.example.sandoughentezar.ui.auth
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -72,6 +70,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
             .isBlank() || binding.edtPassword.text.toString().isBlank())
 
     private fun login() {
+        binding.progressBar.showProgressBar()
         authViewModel.login(getParams()).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.Success -> {
@@ -79,7 +78,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
                     when (it.data!!.status) {
                         "ok" -> {
                             var bundle = Bundle()
-                            bundle.putString("user_id", it.data.user_id)
+                            bundle.putString("user_id", it.data.member_id)
                             bundle.putString("mobile", it.data.mobile)
                             findNavController().navigate(
                                 R.id.action_authFragment_to_validatePhoneFragment2,

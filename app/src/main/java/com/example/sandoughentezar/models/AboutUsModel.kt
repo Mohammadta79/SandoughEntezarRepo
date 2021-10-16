@@ -1,3 +1,3 @@
 package com.example.sandoughentezar.models
 
-data class AboutUsModel(var about_us: String)
+data class AboutUsModel(var company_description: String)

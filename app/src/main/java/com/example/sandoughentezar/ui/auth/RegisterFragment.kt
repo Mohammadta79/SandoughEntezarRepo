@@ -103,7 +103,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
 
                     Status.Success -> {
                         binding.progressBar.hideProgressBar()
-                        when (it.data!!.status) {
+                        when (it.data!!.message) {
                             "ok" -> {
                                 setupWaitDialog()
                             }
@@ -117,7 +117,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                             else -> {
                                 Toast.makeText(
                                     requireContext(),
-                                    it.data!!.status,
+                                    it.data!!.message,
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }

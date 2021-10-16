@@ -1,3 +1,3 @@
 package com.example.sandoughentezar.models
 
-data class StringResponseModel(val status: String)
+data class StringResponseModel(val message: String)

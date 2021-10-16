@@ -10,18 +10,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sandoughentezar.R
-import com.example.sandoughentezar.adapters.MessageAdapter
 import com.example.sandoughentezar.adapters.RequestAdapter
 import com.example.sandoughentezar.api.state.Status
 import com.example.sandoughentezar.databinding.FragmentLoanRequestBinding
 import com.example.sandoughentezar.interfaces.OnRequestItemClickListener
 import com.example.sandoughentezar.models.RequestModel
-import com.example.sandoughentezar.ui.dashbord_action.LoanFragmentDirections
 import com.example.sandoughentezar.viewModels.RequestViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,14 +59,14 @@ class LoanRequestFragment : Fragment(), View.OnClickListener, OnRequestItemClick
                 TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     try {
-                        if (s.toString() == "0"){
-                            bottomSheetView!!.findViewById<TextView>(R.id.txt_installment_request).text = "نا معتبر"
-                        }
-                        else{
+                        if (s.toString() == "0") {
+                            bottomSheetView!!.findViewById<TextView>(R.id.txt_installment_request).text =
+                                "نا معتبر"
+                        } else {
                             var amount =
                                 bottomSheetView!!.findViewById<EditText>(R.id.edt_request_amount).text.toString()
-                            var installment = ((amount.toDouble())/(s.toString().toDouble()))
-                            var ins =  "%,d".format(installment.toLong())
+                            var installment = ((amount.toDouble()) / (s.toString().toDouble()))
+                            var ins = "%,d".format(installment.toLong())
                             bottomSheetView!!.findViewById<TextView>(R.id.txt_installment_request).text =
                                 "$ins تومان "
                         }
@@ -92,7 +89,7 @@ class LoanRequestFragment : Fragment(), View.OnClickListener, OnRequestItemClick
 
                 }
             })
-        
+
         bottomSheetView!!.findViewById<Button>(R.id.btn_create_request).setOnClickListener {
             var amount =
                 bottomSheetView!!.findViewById<EditText>(R.id.edt_request_amount).text.toString()
@@ -117,18 +114,22 @@ class LoanRequestFragment : Fragment(), View.OnClickListener, OnRequestItemClick
     }
 
     private fun newRequest(amount: String, installment: String, details: String) {
+        bottomSheetView!!.findViewById<Button>(R.id.btn_create_request).isEnabled = false
         requestViewModel.newRequest(getNewRequestParams(details, amount, installment))
             .observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.Success -> {
+                        bottomSheetView!!.findViewById<Button>(R.id.btn_create_request).isEnabled =
+                            true
                         binding.progressBar.hideProgressBar()
-                        if (it.data!!.status == "ok") {
+                        if (it.data!!.message == "ok") {
                             Toast.makeText(
                                 requireContext(),
                                 "درخواست با موفقیت ایجاد شد",
                                 Toast.LENGTH_SHORT
                             ).show()
                             bottomSheetDialog!!.dismiss()
+                            getRequests()
                         } else {
                             Toast.makeText(
                                 requireContext(),
@@ -138,6 +139,8 @@ class LoanRequestFragment : Fragment(), View.OnClickListener, OnRequestItemClick
                         }
                     }
                     Status.Failure -> {
+                        bottomSheetView!!.findViewById<Button>(R.id.btn_create_request).isEnabled =
+                            true
                         binding.progressBar.hideProgressBar()
                         Toast.makeText(
                             requireContext(),
@@ -146,6 +149,8 @@ class LoanRequestFragment : Fragment(), View.OnClickListener, OnRequestItemClick
                         ).show()
                     }
                     Status.Loading -> {
+                        bottomSheetView!!.findViewById<Button>(R.id.btn_create_request).isEnabled =
+                            false
                         binding.progressBar.showProgressBar()
                     }
                 }
@@ -207,7 +212,7 @@ class LoanRequestFragment : Fragment(), View.OnClickListener, OnRequestItemClick
         installment: String
     ): HashMap<String, String> {
         var params = HashMap<String, String>()
-        params["user_id"] = user_id
+        params["member_id"] = user_id
         params["details"] = details
         params["amount"] = amount
         params["num_of_installments"] = installment
@@ -216,7 +221,7 @@ class LoanRequestFragment : Fragment(), View.OnClickListener, OnRequestItemClick
 
     private fun getRequestParams(): HashMap<String, String> {
         var params = HashMap<String, String>()
-        params["user_id"] = "1"
+        params["member_id"] = user_id
         return params
     }
 

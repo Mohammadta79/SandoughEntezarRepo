@@ -1,17 +1,29 @@
 package com.example.sandoughentezar.models
 
 data class CompanyDetailsModel(
+    var name: String,
+    var description: String,
     var address: String,
-    var admin1: String,
-    var admin2: String,
-    var admin3: String,
-    var post1: String,
-    var post2: String,
-    var post3: String,
-    var mobile1: String,
-    var mobile2: String,
-    var mobile3: String,
-    var email1: String,
-    var email2: String,
-    var email3: String
+    var postal_id: String,
+    var logo: String,
+    var telegram_id: String,
+    var whatsapp_id: String,
+    var instagram_id: String,
+    var twitter_id: String,
+    var email: String,
+    var phone1: String,
+    var phone2: String,
+    var boss_name: String,
+    var assistant_name: String,
+    var helper_name: String,
+    var boss_phone: String,
+    var assistant_phone: String,
+    var helper_phone: String,
+    var boss_email: String,
+    var assistant_email: String,
+    var helper_email: String,
+    var company_name: String,
+    var company_description: String,
+
 )
+

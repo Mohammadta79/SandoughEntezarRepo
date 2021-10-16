@@ -1,12 +1,8 @@
 package com.example.sandoughentezar.api
 
 import com.example.sandoughentezar.models.*
-import kotlinx.coroutines.flow.Flow
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
-import retrofit2.http.Part
-import java.io.File
 import javax.inject.Inject
 
 class ApiServiceResult @Inject constructor(var apiService: ApiService) {
@@ -29,7 +25,7 @@ class ApiServiceResult @Inject constructor(var apiService: ApiService) {
         apiService.getDeferredinstallments(params)
 
     suspend fun getUserInfo(params: HashMap<String, String>): Response<UserModel> =
-        apiService.getUSerInfo(params)
+        apiService.getUserInfo(params)
 
     suspend fun getRecordPayment(params: HashMap<String, String>): Response<ArrayList<PaymentModel>> =
         apiService.getRecordPayment(params)

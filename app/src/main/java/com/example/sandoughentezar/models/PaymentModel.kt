@@ -5,9 +5,9 @@ import java.util.*
 
 data class PaymentModel(
     var id: String,
-    var date: List<Int> ,
+    var date: List<Int>,
     var amount: String,
     var authority: String,
-    var user_id: String,
+    var member_id: String,
     var description:String
 )

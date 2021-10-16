@@ -217,7 +217,7 @@ class PaymentFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDat
     private fun Payment(amount: Long) {
         val browserIntent = Intent(
             Intent.ACTION_VIEW,
-            Uri.parse("http://192.168.1.4:8080/api/newpay/?user_id=$user_id&amount=$amount")
+            Uri.parse("http://192.168.1.5:8080/api/newpay/?member_id=$user_id&amount=$amount")
         )
         startActivity(browserIntent)
     }
@@ -226,7 +226,7 @@ class PaymentFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDat
     private fun getRecordParams()
             : HashMap<String, String> {
         var params = HashMap<String, String>()
-        params["user_id"] = user_id
+        params["member_id"] = user_id
         return params
     }
 

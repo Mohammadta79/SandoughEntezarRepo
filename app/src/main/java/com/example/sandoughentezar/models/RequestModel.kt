@@ -6,5 +6,5 @@ data class RequestModel(
     var details: String,
     var num_of_installments: String,
     var date: String,
-    var user_id: String
+    var member_id: String
 )

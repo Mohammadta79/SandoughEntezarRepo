@@ -38,7 +38,7 @@ class AboutUsFragment : Fragment() {
             when (it.status) {
                 Status.Success -> {
                     binding.progressBar.hideProgressBar()
-                    binding.txtAboutUs.text = it.data!!.about_us
+                    binding.txtAboutUs.text = it.data!!.company_description
                 }
                 Status.Loading -> {
                     binding.progressBar.showProgressBar()

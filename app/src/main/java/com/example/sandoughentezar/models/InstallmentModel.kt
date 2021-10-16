@@ -7,6 +7,6 @@ data class InstallmentModel(
     val date: String,
     val status: String,
     val amount: String,
-    val user_id:String,
+    val member_id:String,
     val loan_id:String
 )

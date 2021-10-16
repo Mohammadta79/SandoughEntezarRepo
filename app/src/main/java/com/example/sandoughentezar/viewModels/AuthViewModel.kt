@@ -11,6 +11,7 @@ import com.example.sandoughentezar.models.StringResponseModel
 import com.example.sandoughentezar.models.LoginResponseModel
 import com.example.sandoughentezar.models.ValidatePhoneResponseModel
 import com.example.sandoughentezar.repo.AuthRepo
+import com.example.sandoughentezar.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
@@ -26,7 +27,7 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
 
     private val loginRes = MutableLiveData<Resource<LoginResponseModel>>()
-    private val registerRes = MutableLiveData<Resource<StringResponseModel>>()
+    private val registerRes = SingleLiveEvent<Resource<StringResponseModel>>()
     private val validatePhoneRes = MutableLiveData<Resource<ValidatePhoneResponseModel>>()
     private val forgotPass = MutableLiveData<Resource<ForgotPassModel>>()
 
@@ -50,7 +51,7 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
 
     fun register(
         requestBody: RequestBody
-    ): LiveData<Resource<StringResponseModel>> {
+    ): SingleLiveEvent<Resource<StringResponseModel>> {
         viewModelScope.launch(Dispatchers.IO) {
             val response = repo.register(
                 requestBody

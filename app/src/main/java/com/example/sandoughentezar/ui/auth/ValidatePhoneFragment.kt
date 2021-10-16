@@ -213,7 +213,7 @@ class ValidatePhoneFragment : Fragment(), View.OnClickListener {
 
     private fun getParams(): HashMap<String, String> {
         var hashMap: HashMap<String, String> = HashMap()
-        hashMap["user_id"] = user_id
+        hashMap["member_id"] = user_id
         return hashMap
     }
 

@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.example.sandoughentezar.R
+import dagger.hilt.android.AndroidEntryPoint
 
 
 class AboutAppFragment : Fragment() {
@@ -46,7 +47,7 @@ class AboutAppFragment : Fragment() {
             }
         requireActivity().findViewById<CardView>(R.id.contact_us_insta_developer)
             .setOnClickListener {
-               instagramIntent("topkook.official")
+                instagramIntent("topkook.official")
             }
         requireActivity().findViewById<CardView>(R.id.contact_us_whatsapp_developer)
             .setOnClickListener {
@@ -54,7 +55,7 @@ class AboutAppFragment : Fragment() {
             }
         requireActivity().findViewById<CardView>(R.id.contact_us_telegram_developer)
             .setOnClickListener {
-              telegramIntent("topkook_ir")
+                telegramIntent("topkook_ir")
             }
         requireActivity().findViewById<TextView>(R.id.txt_about_tk).setOnClickListener {
             val browserIntent = Intent(
@@ -130,7 +131,8 @@ class AboutAppFragment : Fragment() {
         i.data = Uri.parse(url)
         startActivity(i)
     }
-    private fun instagramIntent(instagram_id:String){
+
+    private fun instagramIntent(instagram_id: String) {
         val uri = Uri.parse("http://instagram.com/_u/$instagram_id")
         val likeIng = Intent(Intent.ACTION_VIEW, uri)
 

@@ -11,5 +11,5 @@ data class LoanModel(
     var num_of_paid_installment: String,
     var num_of_unpaid_installment: String,
     var installment_amount: String,
-    var user_id:String
+    var member_id:String
 )

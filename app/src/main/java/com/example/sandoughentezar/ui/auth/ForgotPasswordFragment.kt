@@ -46,7 +46,7 @@ class ForgotPasswordFragment : Fragment() {
                     when (it.data!!.status) {
                         "ok" -> {
                             var bundle = Bundle()
-                            bundle.putString("user_id", it.data.user_id)
+                            bundle.putString("user_id", it.data.member_id)
                             findNavController().navigate(
                                 R.id.action_forgotPasswordFragment_to_validatePhoneFragment,
                                 bundle
