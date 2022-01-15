@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:id="@+id/root_wait"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/shape_bottom_sheet">
 
@@ -10,9 +10,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="30dp"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_bold"
         android:gravity="center"
+        android:padding="20sp"
         android:text="اطلاعات شما برای بررسی به مدیریت ارسال شد.\n ظرف دو روز کاری اطلاعات شما بررسی می شود و پس از تایید، نام کاربری و رمز عبور برای شما پیامک می شود."
         android:textColor="@color/PrimaryText"
-        android:textSize="20sp"></TextView>
+        android:textSize="18sp"></TextView>
 </LinearLayout>

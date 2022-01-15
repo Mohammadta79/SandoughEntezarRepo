@@ -12,10 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_bold"
         android:text="پرداخت جدید"
         android:textColor="@color/PrimaryText"
-        android:textSize="20sp"></TextView>
+        android:textSize="18sp"></TextView>
 
     <EditText
 
@@ -28,7 +28,7 @@
         android:layout_marginRight="35dp"
         android:background="@drawable/shape_edt_login"
         android:drawableLeft="@drawable/ic_money"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_medium"
         android:gravity="right|center"
         android:hint="مبلغ (تومان)"
         android:inputType="number"
@@ -46,7 +46,7 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/shape_btn_login_enable"
         android:elevation="10dp"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_medium"
         android:text="پرداخت"
         android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
 

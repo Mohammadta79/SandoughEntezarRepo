@@ -13,10 +13,10 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_bold"
         android:text="ایجاد پیام جدید"
         android:textColor="@color/DarkPrimaryColor"
-        android:textSize="20sp"></TextView>
+        android:textSize="18sp"></TextView>
 
     <EditText
         android:id="@+id/txt_new_title"
@@ -26,11 +26,11 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/shape_edt_login"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_medium"
         android:gravity="right|center"
-        android:textSize="14sp"
         android:hint="عنوان پیام"
-        android:paddingRight="16dp"></EditText>
+        android:paddingRight="16dp"
+        android:textSize="14sp"></EditText>
 
     <EditText
         android:id="@+id/txt_new_message"
@@ -38,14 +38,14 @@
         android:layout_height="150dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:textSize="16sp"
         android:layout_marginRight="10dp"
         android:background="@drawable/shape_edt_login"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_medium"
         android:gravity="center|right"
         android:hint="متن پیام"
         android:lines="5"
-        android:paddingRight="10dp"></EditText>
+        android:paddingRight="10dp"
+        android:textSize="16sp"></EditText>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_create_message"
@@ -57,7 +57,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/shape_btn_login_enable"
         android:elevation="10dp"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_medium"
         android:text="ایجاد پیام"
         android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
 

@@ -137,7 +137,11 @@ class PaymentFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDat
                 }
                 Status.Failure -> {
                     binding.progressBar.hideProgressBar()
-                    Toast.makeText(requireContext(), "خطا در برقراری ارتباط با سرور", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "خطا در برقراری ارتباط با سرور",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 Status.Loading -> {
                     binding.progressBar.showProgressBar()
@@ -217,7 +221,7 @@ class PaymentFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDat
     private fun Payment(amount: Long) {
         val browserIntent = Intent(
             Intent.ACTION_VIEW,
-            Uri.parse("http://192.168.1.5:8080/api/newpay/?member_id=$user_id&amount=$amount")
+            Uri.parse("https://sandogh.entezarhoco.ir/api/newpay/?member_id=$user_id&amount=$amount")
         )
         startActivity(browserIntent)
     }

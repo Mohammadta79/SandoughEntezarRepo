@@ -1,6 +1,7 @@
 package com.example.sandoughentezar.ui.auth
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import com.example.sandoughentezar.api.state.Status
 import com.example.sandoughentezar.databinding.FragmentLoginBinding
 import com.example.sandoughentezar.viewModels.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.FormBody
+import okhttp3.RequestBody
 
 @AndroidEntryPoint
 class LoginFragment : Fragment(), View.OnClickListener {
@@ -59,10 +62,10 @@ class LoginFragment : Fragment(), View.OnClickListener {
     }
 
     private fun getParams(): HashMap<String, String> {
-        var params: HashMap<String, String> = HashMap()
-        params["username"] = binding.edtNationalId.text.toString()
-        params["password"] = binding.edtPassword.text.toString()
-        return params
+        var map = HashMap<String, String>()
+        map["username"] = binding.edtNationalId.text.toString()
+        map["password"] = binding.edtPassword.text.toString()
+        return map
     }
 
     private fun checkInput(): Boolean =
@@ -71,7 +74,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     private fun login() {
         binding.progressBar.showProgressBar()
-        authViewModel.login(getParams()).observe(viewLifecycleOwner) {
+        authViewModel.login(
+            getParams()
+        ).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.Success -> {
                     binding.progressBar.hideProgressBar()
@@ -112,6 +117,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
                                 "خطا در برقراری ارتباط با سرور",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            Log.d("loginnnn", it.status.toString())
                         }
                     }
 
@@ -127,6 +133,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
                         "خطا در برقراری ارتباط با سرور",
                         Toast.LENGTH_SHORT
                     ).show()
+                    Log.d("loginnnner", it.data.toString())
 
                 }
             }

@@ -104,7 +104,7 @@ class DeffearedInstallmentFragment : Fragment(), OnInstallmentClickListener {
     private fun installmentPay(id: String) {
         val browserIntent = Intent(
             Intent.ACTION_VIEW,
-            Uri.parse("http://192.168.1.5:8080/api/installmentpay/?installment_id=$id")
+            Uri.parse("https://sandogh.entezarhoco.ir/api/installmentpay/?installment_id=$id")
         )
         startActivity(browserIntent)
     }

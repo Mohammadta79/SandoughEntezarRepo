@@ -14,13 +14,19 @@ import javax.inject.Inject
 
 class AuthRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
 
-    suspend fun login(params: HashMap<String, String>): Response<LoginResponseModel> =
-        apiServiceResult.login(params)
+    suspend fun login(map: HashMap<String, String>): Response<LoginResponseModel> =
+        apiServiceResult.login(map)
 
     suspend fun register(
-      requestBody: RequestBody
+        requestBody: RequestBody
     ): Response<StringResponseModel> =
         apiServiceResult.register(requestBody)
+
+    suspend fun uploadImages(
+
+        requestBody: RequestBody
+    ): Response<StringResponseModel> =
+        apiServiceResult.uploadImages( requestBody)
 
     suspend fun validatePhone(params: HashMap<String, String>): Response<ValidatePhoneResponseModel> =
         apiServiceResult.validatePhone(params)

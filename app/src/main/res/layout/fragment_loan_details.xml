@@ -24,10 +24,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:fontFamily="@font/kalameh_bold"
+                android:fontFamily="@font/vazir_bold"
                 android:text="جزییات تسهیلات"
                 android:textColor="@color/white"
-                android:textSize="26dp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"></TextView>
@@ -64,10 +64,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/kalameh_bold"
+                        android:fontFamily="@font/vazir_medium"
                         android:text="مقدار تسهیلات"
                         android:textColor="@color/PrimaryColor"
-                        android:textSize="20sp"></TextView>
+                        android:textSize="16sp"></TextView>
 
                     <TextView
                         android:id="@+id/txt_amount"
@@ -75,10 +75,10 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
-                        android:fontFamily="@font/kalameh_bold"
+                        android:fontFamily="@font/vazir_medium"
                         android:text="15000000"
                         android:textColor="@color/PrimaryText"
-                        android:textSize="20sp"></TextView>
+                        android:textSize="14sp"></TextView>
 
 
                 </LinearLayout>
@@ -88,20 +88,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:gravity="center"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="4dp"
-                        android:fontFamily="@font/kalameh_bold"
-                        android:text="تاریخ اخذ: "
+                        android:fontFamily="@font/vazir_medium"
+                        android:gravity="center"
+                        android:text="تاریخ اخذ"
                         android:textColor="@color/PrimaryColor"
-                        android:textSize="20sp"></TextView>
+                        android:textSize="16sp"></TextView>
 
                     <TextView
                         android:id="@+id/txt_start_date"
@@ -109,10 +109,10 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
-                        android:fontFamily="@font/kalameh_bold"
+                        android:fontFamily="@font/vazir_medium"
                         android:text="2021/07/13"
                         android:textColor="@color/PrimaryText"
-                        android:textSize="20sp"></TextView>
+                        android:textSize="14sp"></TextView>
 
                 </LinearLayout>
 
@@ -120,10 +120,10 @@
                     android:id="@+id/txt_more_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/kalameh_bold"
+                    android:fontFamily="@font/vazir_medium"
                     android:text="مشاهده جزییات بیشتر"
                     android:textColor="@color/PrimaryColor"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -178,10 +178,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:fontFamily="@font/kalameh_bold"
+                    android:fontFamily="@font/vazir_bold"
                     android:text="اقساط"
                     android:textColor="@color/PrimaryColor"
-                    android:textSize="22sp"></TextView>
+                    android:textSize="18sp"></TextView>
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView

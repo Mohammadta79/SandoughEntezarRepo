@@ -7,13 +7,17 @@ import javax.inject.Inject
 
 class ApiServiceResult @Inject constructor(var apiService: ApiService) {
 
-    suspend fun login(params: HashMap<String, String>): Response<LoginResponseModel> =
-        apiService.login(params)
+    suspend fun login(map: HashMap<String, String>): Response<LoginResponseModel> =
+        apiService.login(map)
 
     suspend fun register(
         requestBody: RequestBody
     ): Response<StringResponseModel> =
         apiService.register(requestBody)
+
+    suspend fun uploadImages(
+        requestBody: RequestBody
+    ): Response<StringResponseModel> = apiService.uploadImages(requestBody)
 
     suspend fun validatePhone(params: HashMap<String, String>): Response<ValidatePhoneResponseModel> =
         apiService.validatePhone(params)

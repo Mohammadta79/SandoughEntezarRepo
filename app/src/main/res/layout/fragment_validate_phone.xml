@@ -21,11 +21,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:fontFamily="@font/kalameh_bold"
+            android:fontFamily="@font/vazir_bold"
             android:gravity="center"
             android:text="به صندوق قرض الحسنه انتظار \nخوش آمدید"
             android:textColor="@color/white"
-            android:textSize="20sp"></TextView>
+            android:textSize="18sp"></TextView>
     </RelativeLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,18 +54,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_login"
             app:layout_constraintVertical_bias="0.2" />
+
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:fontFamily="@font/kalameh_bold"
+            android:fontFamily="@font/vazir_bold"
+            android:gravity="center"
             android:lines="3"
             android:text="کد دریافتی را وارد نمایید"
             android:textColor="@color/PrimaryText"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -161,9 +162,11 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_btn_login_enable"
             android:elevation="8dp"
-            android:fontFamily="@font/vazir_medium"
+            android:fontFamily="@font/vazir_bold"
+            android:paddingVertical="10dp"
             android:text="ورود"
             android:textColor="@color/white"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

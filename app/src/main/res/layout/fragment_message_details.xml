@@ -13,10 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_bold"
         android:text="جزییات پیام"
         android:textColor="@color/white"
-        android:textSize="22sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></TextView>
@@ -86,7 +86,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="4dp"
-                            android:fontFamily="@font/hamurz"
+                            android:fontFamily="@font/vazir_medium"
                             android:textColor="@color/PrimaryText"
                             android:textSize="16sp"></TextView>
                     </RelativeLayout>
@@ -190,10 +190,10 @@
             android:id="@+id/txt_no_reply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/kalameh_bold"
+            android:fontFamily="@font/vazir_medium"
             android:text="پاسخی برای این پیام یافت نشد"
             android:textColor="@color/PrimaryText"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -211,8 +211,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

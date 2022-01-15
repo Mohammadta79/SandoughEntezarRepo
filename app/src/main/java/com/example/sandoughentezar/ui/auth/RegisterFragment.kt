@@ -8,6 +8,8 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +17,12 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.transition.AutoTransition
+import androidx.transition.TransitionManager
 import com.example.sandoughentezar.R
 import com.example.sandoughentezar.api.state.Status
 import com.example.sandoughentezar.databinding.FragmentRegisterBinding
@@ -24,8 +30,10 @@ import com.example.sandoughentezar.viewModels.AuthViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.IOException
 import java.util.regex.Pattern
@@ -56,8 +64,66 @@ class RegisterFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        selectedViews()
+        binding.btnNextPage.setOnClickListener(this)
+        binding.txtAccount.setOnClickListener {
+            if (binding.cardAccount.visibility == View.VISIBLE) {
 
+                TransitionManager.beginDelayedTransition(
+                    binding.rootCard,
+                    AutoTransition()
+                )
+                binding.cardAccount.visibility = View.GONE
+            } else {
+                TransitionManager.beginDelayedTransition(
+                    binding.rootCard,
+                    AutoTransition()
+                )
+                binding.cardAccount.visibility = View.VISIBLE
+            }
+        }
+        binding.txtPersonalInfo.setOnClickListener {
+            if (binding.cardPersonal.visibility == View.VISIBLE) {
+
+                TransitionManager.beginDelayedTransition(
+                    binding.rootPersonal,
+                    AutoTransition()
+                )
+                binding.cardPersonal.visibility = View.GONE
+            } else {
+                TransitionManager.beginDelayedTransition(
+                    binding.rootPersonal,
+                    AutoTransition()
+                )
+                binding.cardPersonal.visibility = View.VISIBLE
+            }
+        }
+        binding.txtPassport.setOnClickListener {
+            requestPassportPermission()
+        }
+        binding.txtNationalCard.setOnClickListener {
+            requestCardPermission()
+        }
+        binding.agreementChb.setOnClickListener {
+            if (binding.agreementChb.isChecked) {
+                enableRegister(1)
+            } else {
+                enableRegister(0)
+            }
+        }
+
+    }
+
+    private fun enableRegister(state: Int) {
+        when (state) {
+            0 -> {
+                binding.btnNextPage.isEnabled = false
+                binding.btnNextPage.setBackgroundResource(R.drawable.shape_btn_login_disable)
+            }
+            1 -> {
+                binding.btnNextPage.isEnabled = true
+                binding.btnNextPage.setBackgroundResource(R.drawable.shape_btn_login_enable)
+            }
+        }
     }
 
     private fun setupWaitDialog() {
@@ -68,144 +134,6 @@ class RegisterFragment : Fragment(), View.OnClickListener {
         )
         bottomSheetDialog!!.setContentView(bottomSheetView!!)
         bottomSheetDialog!!.show()
-    }
-
-    private fun register() {
-        if (!checkInput()) {
-            Toast.makeText(
-                requireContext(),
-                "لطفا فیلد های ستاره دار را به درستی وارد نمایید",
-                Toast.LENGTH_SHORT
-            ).show()
-        } else if (!isValidNationalID()) {
-            Toast.makeText(
-                requireContext(),
-                "لطفا کد ملی 10 رقمی خود را به درستی وارد نمایید",
-                Toast.LENGTH_SHORT
-            ).show()
-        } else if (!isValidMobile(binding.edtMobileNumber1.text.toString())) {
-            Toast.makeText(
-                requireContext(),
-                "لطفا شماره موبایل خود را به درستی وارد نمایید",
-                Toast.LENGTH_SHORT
-            ).show()
-        } else if (!isValidPostalCode()) {
-            Toast.makeText(
-                requireContext(),
-                "لطفا کد پستی 10 رقمی خود را به درستی وارد نمایید",
-                Toast.LENGTH_SHORT
-            ).show()
-        } else {
-            authViewModel.register(
-                getBodyParams()
-            ).observe(viewLifecycleOwner) {
-                when (it.status) {
-
-                    Status.Success -> {
-                        binding.progressBar.hideProgressBar()
-                        when (it.data!!.message) {
-                            "ok" -> {
-                                setupWaitDialog()
-                            }
-                            "exist" -> {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "این اطلاعات از قبل ثبت شده است",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                            else -> {
-                                Toast.makeText(
-                                    requireContext(),
-                                    it.data!!.message,
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
-
-
-                    }
-                    Status.Loading -> {
-                        binding.progressBar.showProgressBar()
-                    }
-                    Status.Failure -> {
-                        binding.progressBar.hideProgressBar()
-//                        Toast.makeText(
-//                            requireContext(),
-//                            "خطا در برقراری ارتباط با سرور",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-                        Log.e("register_error_frag", it.msg)
-                    }
-                }
-            }
-        }
-
-    }
-
-
-    private fun checkInput(): Boolean {
-
-        return !(binding.edtFullName.text.isBlank() || binding.edtFullName.text.isBlank() || binding.edtMobileNumber1.text.isBlank()
-                || binding.edtPostalCode.text.isBlank() || binding.edtAddress.text.isBlank() || binding.edtAccountNumber.text.isBlank()
-                || binding.edtCardNumber1.text.isBlank() || binding.edtShaba.text.isBlank() || binding.txtPassport.text.isBlank()
-                || binding.txtNationalCard.text.isBlank())
-    }
-
-    private fun isValidNationalID(): Boolean {
-        return binding.edtNationalId.text.trim().length == 10
-    }
-
-    private fun isValidMobile(phone: String): Boolean {
-        var regex = "^(\\+98|0)?9\\d{9}\$"
-        val pattern: Pattern = Pattern.compile(regex)
-        return pattern.matcher(phone).matches()
-    }
-
-    private fun isValidPostalCode(): Boolean {
-        return binding.edtPostalCode.text.trim().length == 10
-    }
-
-    override fun onClick(v: View?) {
-        when (v!!.id) {
-            binding.btnRegister.id -> {
-                register()
-
-            }
-            binding.agreementChb.id -> {
-                if (binding.agreementChb.isChecked) {
-                    enableRegister(1)
-                } else {
-                    enableRegister(0)
-                }
-            }
-            binding.txtPassport.id -> {
-                requestPassportPermission()
-            }
-            binding.txtNationalCard.id -> {
-                requestCardPermission()
-            }
-        }
-    }
-
-    private fun selectedViews() {
-        binding.btnRegister.setOnClickListener(this)
-        binding.agreementChb.setOnClickListener(this)
-        binding.txtNationalCard.setOnClickListener(this)
-        binding.txtPassport.setOnClickListener(this)
-    }
-
-    private fun enableRegister(state: Int) {
-        when (state) {
-            0 -> {
-                binding.btnRegister.isEnabled = false
-                binding.btnRegister.setBackgroundResource(R.drawable.shape_btn_login_disable)
-            }
-            1 -> {
-                binding.btnRegister.isEnabled = true
-                binding.btnRegister.setBackgroundResource(R.drawable.shape_btn_login_enable)
-            }
-        }
     }
 
     @Suppress("DEPRECATION")
@@ -244,8 +172,6 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     try {
                         var selectedImageUri: Uri? = data.data
-                        // Get the path from the Uri
-                        // Get the path from the Uri
                         val path = getPathFromURI(selectedImageUri)
                         if (path != null) {
                             card_file = File(path)
@@ -345,14 +271,248 @@ class RegisterFragment : Fragment(), View.OnClickListener {
         return res
     }
 
+
+    private fun register() {
+        if (!checkInput()) {
+            Toast.makeText(
+                requireContext(),
+                "لطفا فیلد های ستاره دار را به درستی وارد نمایید",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else if (!isValidNationalID()) {
+            Toast.makeText(
+                requireContext(),
+                "لطفا کد ملی 10 رقمی خود را به درستی وارد نمایید",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else if (!isValidMobile(binding.edtMobileNumber1.text.toString())) {
+            Toast.makeText(
+                requireContext(),
+                "لطفا شماره موبایل خود را به درستی وارد نمایید",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else if (!isValidPostalCode()) {
+            Toast.makeText(
+                requireContext(),
+                "لطفا کد پستی 10 رقمی خود را به درستی وارد نمایید",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else if (binding.edtMobileNumber2.text.isNotBlank() && (!isValidMobile(binding.edtMobileNumber2.text.toString()))) {
+
+            Toast.makeText(
+                requireContext(),
+                "لطفا شماره موبایل دوم خود را به درستی وارد نمایید",
+                Toast.LENGTH_SHORT
+            ).show()
+
+        } else {
+            binding.progressBar.showProgressBar()
+            authViewModel.register(
+                getBodyParams()
+            ).observe(viewLifecycleOwner) {
+                when (it.status) {
+
+                    Status.Success -> {
+                        binding.progressBar.hideProgressBar()
+                        binding.btnNextPage.isEnabled = true
+
+                        when (it.data!!.statusCode) {
+                            200 -> {
+//                            var bundle = Bundle()
+//                            bundle.putString("national_id", national_id)
+//                            findNavController().navigate(
+//                                R.id.action_accountDataFragment2_to_uploadImageFragment2,
+//                                bundle
+//                            )
+                                setupWaitDialog()
+                            }
+                            500 -> {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "این اطلاعات از قبل ثبت شده است",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                            400 -> {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "خطا در تایید اطلاعات وارد شده",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                            else -> {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "خطا در برقراری ارتباط با سرور",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+
+
+                    }
+                    Status.Loading -> {
+                        binding.progressBar.showProgressBar()
+                        binding.btnNextPage.isEnabled = false
+                    }
+                    Status.Failure -> {
+                        binding.progressBar.hideProgressBar()
+                        binding.btnNextPage.isEnabled = true
+                        Toast.makeText(
+                            requireContext(),
+                            "خطا در برقراری ارتباط با سرور",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+//            var bundle = Bundle()
+//            bundle.putString(
+//                "national_id",
+//                binding.edtNationalId.text.toString()
+//            )
+//            bundle.putString(
+//                "name",
+//                binding.edtFullName.text.toString()
+//            )
+//            bundle.putString(
+//                "mobile1",
+//                binding.edtMobileNumber1.text.toString()
+//            )
+//            bundle.putString(
+//                "address",
+//                binding.edtAddress.text.toString()
+//            )
+//            if (binding.edtMobileNumber2.text.isNotBlank()){
+//                bundle.putString(
+//                    "mobile2",
+//                    binding.edtMobileNumber2.text.toString()
+//                )
+//            }
+//            if (binding.edtPhoneNumber.text.isNotBlank()){
+//                bundle.putString(
+//                    "phone",
+//                    binding.edtPhoneNumber.text.toString()
+//                )
+//            }
+//            bundle.putString(
+//                "postalCode",
+//                binding.edtPostalCode.text.toString()
+//            )
+//            findNavController().navigate(
+//                R.id.action_registerFragment_to_accountDataFragment2,
+//                bundle
+//            )
+        }
+    }
+
+
+    private fun checkInput(): Boolean {
+
+        return !(binding.edtFullName.text.isBlank() || binding.edtFullName.text.isBlank() || binding.edtMobileNumber1.text.isBlank()
+                || binding.edtPostalCode.text.isBlank() || binding.edtAddress.text.isBlank() || binding.edtAccountNumber.text.isBlank()
+                || binding.edtCardNumber1.text.isBlank() || binding.edtShaba.text.isBlank())
+//
+    }
+
+//    private fun register() {
+//        if (!checkInput()) {
+//            Toast.makeText(
+//                requireContext(),
+//                "لطفا تمامی فیلدهای ستاره دار را وارد نمایید",
+//                Toast.LENGTH_SHORT
+//            ).show()
+//        }
+//        authViewModel.register(
+//            getBodyParams()
+//        ).observe(viewLifecycleOwner) {
+//            when (it.status) {
+//
+//                Status.Success -> {
+//                   // binding.progressBar.hideProgressBar()
+//                    binding.btnNextPage.isEnabled = true
+//
+//                    when (it.data!!.statusCode) {
+//                        200 -> {
+////                            var bundle = Bundle()
+////                            bundle.putString("national_id", national_id)
+////                            findNavController().navigate(
+////                                R.id.action_accountDataFragment2_to_uploadImageFragment2,
+////                                bundle
+////                            )
+//                        }
+//                        500 -> {
+//                            Toast.makeText(
+//                                requireContext(),
+//                                "این اطلاعات از قبل ثبت شده است",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//                        }
+//                        400 -> {
+//                            Toast.makeText(
+//                                requireContext(),
+//                                "خطا در تایید اطلاعات وارد شده",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//                        }
+//                        else -> {
+//                            Toast.makeText(
+//                                requireContext(),
+//                                "خطا در برقراری ارتباط با سرور",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//                        }
+//                    }
+//
+//
+//                }
+//                Status.Loading -> {
+//                    binding.progressBar.showProgressBar()
+//                    binding.btnRegister.isEnabled = false
+//                }
+//                Status.Failure -> {
+//                    binding.progressBar.hideProgressBar()
+//                    binding.btnRegister.isEnabled = true
+//                    Toast.makeText(
+//                        requireContext(),
+//                        "خطا در برقراری ارتباط با سرور",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
+//            }
+//        }
+//    }
+
+    private fun isValidNationalID(): Boolean {
+        return binding.edtNationalId.text.trim().length == 10
+    }
+
+    private fun isValidMobile(phone: String): Boolean {
+        var regex = "^(\\+98|0)?9\\d{9}\$"
+        val pattern: Pattern = Pattern.compile(regex)
+        return pattern.matcher(phone).matches()
+    }
+
+    private fun isValidPostalCode(): Boolean {
+        return binding.edtPostalCode.text.trim().length == 10
+    }
+
+    override fun onClick(v: View?) {
+        when (v!!.id) {
+            binding.btnNextPage.id -> {
+                register()
+            }
+        }
+    }
+
     private fun getBodyParams(): RequestBody {
 
-        var mobile2: String? = if (binding.edtMobileNumber2.text.isNotBlank()) {
+        var mobile2: String? = if (binding.edtMobileNumber2.text != null) {
             binding.edtMobileNumber2.text.toString()
         } else {
             "null"
         }
-        var phone: String? = if (binding.edtPhoneNumber.text.isNotBlank()) {
+        var phone: String? = if (binding.edtPhoneNumber.text != null) {
             binding.edtPhoneNumber.text.toString()
         } else {
             "null"
@@ -374,28 +534,41 @@ class RegisterFragment : Fragment(), View.OnClickListener {
             .addFormDataPart("account_number", binding.edtAccountNumber.text.toString())
             .addFormDataPart("card1", binding.edtCardNumber1.text.toString())
             .addFormDataPart("shaba", binding.edtShaba.text.toString())
+//            .addPart(
+//                MultipartBody.Part.createFormData(
+//                    "card_image",
+//                    card_file!!.name,
+//                    RequestBody.create(
+//                        "image".toMediaTypeOrNull(),
+//                        card_file!!
+//                    )
+//                )
+//            ).addPart(
+//                MultipartBody.Part.createFormData(
+//                    "passport_image",
+//                    passport_file!!.name,
+//                    RequestBody.create(
+//                        "image".toMediaTypeOrNull(),
+//                        passport_file!!
+//                    )
+//                )
+//            )
+            .addFormDataPart("mobile2", mobile2!!)
+            .addFormDataPart("phone", phone!!)
+            .addFormDataPart("card2", card2!!)
             .addPart(
                 MultipartBody.Part.createFormData(
-                    "card_pic",
+                    "card_image",
                     card_file!!.name,
-                    RequestBody.create(
-                        MediaType.parse("image"),
-                        card_file
-                    )
+                    card_file!!.asRequestBody("image".toMediaTypeOrNull())
                 )
             ).addPart(
                 MultipartBody.Part.createFormData(
-                    "passport_pic",
+                    "passport_image",
                     passport_file!!.name,
-                    RequestBody.create(
-                        MediaType.parse("image"),
-                        passport_file
-                    )
+                    passport_file!!.asRequestBody("image".toMediaTypeOrNull())
                 )
             )
-            .addFormDataPart("mobile2", mobile2)
-            .addFormDataPart("phone", phone)
-            .addFormDataPart("card2", card2)
             .build()
     }
 

@@ -13,10 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_bold"
         android:text="اطلاعات نرم افزار"
         android:textColor="@color/white"
-        android:textSize="22sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></TextView>
@@ -32,10 +32,10 @@
             android:id="@+id/txt_app_tutorial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/kalameh_bold"
+            android:fontFamily="@font/vazir_bold"
             android:text=" ویدیو آموزش استفاده از نرم افزار"
             android:textColor="@color/DarkPrimaryColor"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/txt_about_tk"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -78,11 +78,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/kalameh_bold"
+                    android:fontFamily="@font/vazir_medium"
                     android:gravity="center"
                     android:text="کانال های ارتباطی تاپ کوک"
                     android:textColor="@color/PrimaryColor"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></TextView>
@@ -198,15 +198,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/kalameh_bold"
+            android:fontFamily="@font/vazir_medium"
             android:text="تاپ کوک، توسعه اپلیکیشن های کسب و کار"
             android:textColor="@color/PrimaryText"
             android:textSize="16sp"
-            app:layout_constraintVertical_bias="0.9"
             app:layout_constraintBottom_toTopOf="@+id/textView19"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card1"></TextView>
+            app:layout_constraintTop_toBottomOf="@+id/card1"
+            app:layout_constraintVertical_bias="0.9"></TextView>
 
         <TextView
             android:id="@+id/textView19"

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/register_nav"
+    app:startDestination="@id/registerFragment">
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.sandoughentezar.ui.auth.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_accountDataFragment2"
+            app:destination="@id/accountDataFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountDataFragment2"
+        android:name="com.example.sandoughentezar.ui.auth.AccountDataFragment"
+        android:label="fragment_account_data"
+        tools:layout="@layout/fragment_account_data" >
+        <action
+            android:id="@+id/action_accountDataFragment2_to_uploadImageFragment2"
+            app:destination="@id/uploadImageFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/uploadImageFragment2"
+        android:name="com.example.sandoughentezar.ui.auth.UploadImageFragment"
+        android:label="fragment_upload_image"
+        tools:layout="@layout/fragment_upload_image" />
+</navigation>

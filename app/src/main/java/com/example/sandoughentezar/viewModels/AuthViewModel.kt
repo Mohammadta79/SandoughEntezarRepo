@@ -26,21 +26,21 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
 
-    private val loginRes = MutableLiveData<Resource<LoginResponseModel>>()
+    private val loginRes = SingleLiveEvent<Resource<LoginResponseModel>>()
     private val registerRes = SingleLiveEvent<Resource<StringResponseModel>>()
+    private val uploadImagesLD = SingleLiveEvent<Resource<StringResponseModel>>()
     private val validatePhoneRes = MutableLiveData<Resource<ValidatePhoneResponseModel>>()
     private val forgotPass = MutableLiveData<Resource<ForgotPassModel>>()
 
-    fun login(params: HashMap<String, String>): LiveData<Resource<LoginResponseModel>> {
+    fun login(map: HashMap<String, String>): LiveData<Resource<LoginResponseModel>> {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = repo.login(params)
+            val response = repo.login(map)
             loginRes.postValue(Resource.loading())
-
             try {
                 if (response.isSuccessful && response.body() != null) {
                     loginRes.postValue(Resource.success(response.body()) as Resource<LoginResponseModel>?)
                 } else {
-                    loginRes.postValue(Resource.failure(response.errorBody().toString()))
+                    loginRes.postValue(Resource.failure(response.toString()))
                 }
             } catch (e: Exception) {
                 loginRes.postValue(Resource.failure(e.toString()))
@@ -52,7 +52,7 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
     fun register(
         requestBody: RequestBody
     ): SingleLiveEvent<Resource<StringResponseModel>> {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Main) {
             val response = repo.register(
                 requestBody
             )
@@ -60,11 +60,14 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
 
             try {
                 if (response.isSuccessful && response.body() != null) {
+                    Log.d("register", response.body().toString())
                     registerRes.postValue(Resource.success(response.body()) as Resource<StringResponseModel>)
                 } else {
+                    Log.d("register_error", response.body().toString())
                     registerRes.postValue(Resource.failure(response.errorBody().toString()))
                 }
             } catch (e: Exception) {
+                Log.d("register_exception", e.toString())
                 registerRes.postValue(Resource.failure(e.toString()))
             }
         }
@@ -103,6 +106,26 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
             }
         }
         return forgotPass
+    }
+
+    fun uploadImages(
+
+        requestBody: RequestBody
+    ): SingleLiveEvent<Resource<StringResponseModel>> {
+        viewModelScope.launch(Dispatchers.IO) {
+            uploadImagesLD.postValue(Resource.loading())
+            val response = repo.uploadImages( requestBody)
+            try {
+                if (response.isSuccessful && response.body() != null) {
+                    uploadImagesLD.postValue(Resource.success(response.body()) as Resource<StringResponseModel>?)
+                } else {
+                    uploadImagesLD.postValue(Resource.failure(response.errorBody().toString()))
+                }
+            } catch (e: Exception) {
+                uploadImagesLD.postValue(Resource.failure(e.toString()))
+            }
+        }
+        return uploadImagesLD
     }
 
 

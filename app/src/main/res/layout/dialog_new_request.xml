@@ -13,10 +13,10 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_bold"
         android:text="ایجاد درخواست تسهیلات"
         android:textColor="@color/DarkPrimaryColor"
-        android:textSize="20sp"></TextView>
+        android:textSize="18sp"></TextView>
 
     <EditText
         android:id="@+id/edt_request_amount"
@@ -26,12 +26,13 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/shape_edt_login"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_medium"
         android:gravity="right|center"
-        android:inputType="number"
-        android:textSize="16sp"
         android:hint="مبلغ مورد نیاز (تومان)"
-        android:paddingRight="16dp"></EditText>
+        android:inputType="number"
+        android:paddingRight="16dp"
+        android:textSize="16sp"></EditText>
+
     <EditText
         android:id="@+id/edt_request_installment"
         android:layout_width="match_parent"
@@ -40,12 +41,12 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/shape_edt_login"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_medium"
         android:gravity="right|center"
-        android:inputType="number"
-        android:textSize="16sp"
         android:hint="تعداد اقساطی که توان پرداخت دارم"
-        android:paddingRight="16dp"></EditText>
+        android:inputType="number"
+        android:paddingRight="16dp"
+        android:textSize="16sp"></EditText>
 
     <TextView
         android:id="@+id/txt_installment_request"
@@ -55,26 +56,27 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/shape_custom_txt"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_medium"
         android:gravity="right|center"
-       android:textColor="@color/PrimaryText"
-        android:textSize="16sp"
         android:hint="مقدار هر قسط (تومان)"
-        android:paddingRight="16dp"></TextView>
+        android:paddingRight="16dp"
+        android:textColor="@color/PrimaryText"
+        android:textSize="16sp"></TextView>
+
     <EditText
         android:id="@+id/edt_request_details"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:textSize="16sp"
         android:layout_marginRight="10dp"
         android:background="@drawable/shape_edt_login"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_medium"
         android:gravity="center|right"
         android:hint="شرح تقاضا"
         android:lines="5"
-        android:paddingRight="10dp"></EditText>
+        android:paddingRight="10dp"
+        android:textSize="16sp"></EditText>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_create_request"
@@ -86,7 +88,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/shape_btn_login_enable"
         android:elevation="10dp"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_medium"
         android:text="ایجاد درخواست"
         android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
 

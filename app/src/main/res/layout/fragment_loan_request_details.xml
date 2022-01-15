@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/DarkPrimaryColor"
     tools:context=".ui.request_action.LoanRequestDetailsFragment">
 
@@ -11,10 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:fontFamily="@font/kalameh_bold"
+        android:fontFamily="@font/vazir_bold"
         android:text="جزییات درخواست تسهیلات"
         android:textColor="@color/white"
-        android:textSize="22sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></TextView>
@@ -73,7 +73,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="4dp"
-                            android:fontFamily="@font/hamurz"
+                            android:fontFamily="@font/vazir_medium"
                             android:textColor="@color/PrimaryText"
                             android:textSize="16sp"></TextView>
                     </RelativeLayout>
@@ -83,14 +83,14 @@
                         android:id="@+id/txt_request_details"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:fontFamily="@font/vazir_medium"
-                        android:layout_marginTop="4dp"
                         android:layout_below="@id/layout_title"
-                        android:scrollbars="vertical"
                         android:layout_marginLeft="10dp"
-                        android:textIsSelectable="true"
+                        android:layout_marginTop="4dp"
                         android:layout_marginRight="10dp"
+                        android:fontFamily="@font/vazir_medium"
+                        android:scrollbars="vertical"
                         android:textColor="@color/PrimaryText"
+                        android:textIsSelectable="true"
                         android:textSize="12sp"></TextView>
 
                     <View
@@ -101,10 +101,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:background="@color/DividerColor"></View>
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_below="@id/view2"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/view2">
 
 
                         <TextView
@@ -112,9 +113,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:fontFamily="@font/kalameh_bold"
-                            android:text="مبلغ درخواستی: "
+                            android:fontFamily="@font/vazir_medium"
                             android:gravity="center"
+                            android:text="مبلغ درخواستی: "
                             android:textColor="@color/PrimaryText"
                             android:textSize="16sp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -125,7 +126,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="4dp"
-                            android:fontFamily="@font/kalameh_bold"
+                            android:fontFamily="@font/vazir_medium"
                             android:gravity="center"
                             android:textColor="@color/SecondaryText"
                             android:textSize="16sp"
@@ -138,25 +139,25 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:fontFamily="@font/kalameh_bold"
+                            android:fontFamily="@font/vazir_medium"
                             android:gravity="center"
                             android:text="تعداد اقساط درخواستی: "
                             android:textColor="@color/PrimaryText"
                             android:textSize="16sp"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView16"></TextView>
 
                         <TextView
                             android:id="@+id/txt_request_installment"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/kalameh_bold"
+                            android:fontFamily="@font/vazir_medium"
                             android:gravity="center"
                             android:textColor="@color/SecondaryText"
                             android:textSize="16sp"
                             app:layout_constraintEnd_toStartOf="@+id/textView17"
                             app:layout_constraintTop_toTopOf="@+id/textView17"></TextView>
-
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -193,7 +194,7 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginRight="10dp"
                             android:layout_marginBottom="4dp"
-                            android:fontFamily="@font/vazir_bold"
+                            android:fontFamily="@font/vazir_medium"
                             android:textColor="@color/white"
                             android:textSize="14sp"></TextView>
 
@@ -216,7 +217,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="4dp"
-                            android:fontFamily="@font/hamurz"
+                            android:fontFamily="@font/vazir_medium"
                             android:textColor="@color/white"
                             android:textSize="16sp"></TextView>
                     </RelativeLayout>
@@ -244,10 +245,10 @@
             android:id="@+id/txt_no_reply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/kalameh_bold"
+            android:fontFamily="@font/vazir_medium"
             android:text="پاسخی برای این درخواست یافت نشد"
             android:textColor="@color/PrimaryText"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -265,8 +266,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

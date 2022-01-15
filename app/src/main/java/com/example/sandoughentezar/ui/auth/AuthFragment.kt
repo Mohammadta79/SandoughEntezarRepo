@@ -37,7 +37,7 @@ class AuthFragment : Fragment() {
         override fun getItem(position: Int): Fragment {
             return when (position) {
                 0 -> LoginFragment()
-                1 -> RegisterFragment()
+                1 -> RegisterTemplateFragment()
                 else -> null!!
             }
         }
