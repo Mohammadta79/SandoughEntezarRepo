@@ -1,9 +1,13 @@
 package com.example.sandoughentezar.di
 
+import android.content.Context
 import com.example.sandoughentezar.api.ApiService
+import com.example.sandoughentezar.utils.NetworkConnectionInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -36,8 +40,15 @@ object ApiProvider {
 
     @Singleton
     @Provides
+    fun provideNetworkConnectionInterceptor(@ApplicationContext context: Context): NetworkConnectionInterceptor {
+        return NetworkConnectionInterceptor(context)
+    }
+
+    @Singleton
+    @Provides
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
+        networkConnectionInterceptor: NetworkConnectionInterceptor
     ): OkHttpClient {
         val okHttpClient = OkHttpClient().newBuilder()
         okHttpClient.callTimeout(2, TimeUnit.MINUTES)
@@ -45,6 +56,7 @@ object ApiProvider {
         okHttpClient.readTimeout(2, TimeUnit.MINUTES)
         okHttpClient.writeTimeout(2, TimeUnit.MINUTES)
         okHttpClient.addInterceptor(loggingInterceptor)
+        okHttpClient.addInterceptor(networkConnectionInterceptor)
         okHttpClient.build()
         return okHttpClient.build()
     }

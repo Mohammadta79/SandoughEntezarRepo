@@ -22,25 +22,19 @@ class UserViewModel @Inject constructor(var repo: UserRepo) : ViewModel() {
 
     private var userLD = MutableLiveData<Resource<UserModel>>()
     fun getUSerInfo(params: HashMap<String, String>): LiveData<Resource<UserModel>> {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                userLD.postValue(Resource.loading())
-                var response = repo.getUserInfo(params)
-                if (response.isSuccessful && response.body() != null) {
-                    userLD.postValue(Resource.success(response.body()) as Resource<UserModel>?)
-                }else{
-                    userLD.postValue(Resource.failure(response.message()))
-                }
-
-            } catch (e: Exception) {
-                userLD.postValue(Resource.failure(e.toString()))
+        viewModelScope.launch {
+            userLD.postValue(Resource.loading())
+            repo.getUserInfo(params).flowOn(
+                Dispatchers.IO
+            ).catch { _e ->
+                userLD.postValue(Resource.failure(_e.toString()))
+            }.collect {
+                userLD.postValue(Resource.success(it))
             }
-
 
         }
         return userLD
     }
-
 
 
 }

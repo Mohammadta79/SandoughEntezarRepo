@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class UserRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
 
-    suspend fun getUserInfo(params: HashMap<String, String>): Response<UserModel> =
+    suspend fun getUserInfo(params: HashMap<String, String>): Flow<UserModel> =
         apiServiceResult.getUserInfo(params)
 
 }

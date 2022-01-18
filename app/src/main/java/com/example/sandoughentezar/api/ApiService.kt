@@ -2,6 +2,7 @@ package com.example.sandoughentezar.api
 
 import androidx.media.AudioAttributesCompat
 import com.example.sandoughentezar.models.*
+import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -17,12 +18,12 @@ interface ApiService {
     @POST("/api/login")
     suspend fun login(
         @FieldMap params: HashMap<String, String>
-    ): Response<LoginResponseModel>
+    ): LoginResponseModel
 
     @POST("/api/register_personal_data")
     suspend fun register(
         @Body requestBody: RequestBody
-    ): Response<StringResponseModel>
+    ): StringResponseModel
 
 
     @POST("/api/register/images")
@@ -37,7 +38,7 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("/api/memberinfo")
-    suspend fun getUserInfo(@FieldMap params: HashMap<String, String>): Response<UserModel>
+    suspend fun getUserInfo(@FieldMap params: HashMap<String, String>): UserModel
 
 
     @FormUrlEncoded
@@ -80,7 +81,7 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("/api/sms")
-    suspend fun validatePhone(@FieldMap params: HashMap<String, String>): Response<ValidatePhoneResponseModel>
+    suspend fun validatePhone(@FieldMap params: HashMap<String, String>): ValidatePhoneResponseModel
 
 
     @FormUrlEncoded

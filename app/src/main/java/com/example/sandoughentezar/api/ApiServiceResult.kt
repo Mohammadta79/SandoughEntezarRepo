@@ -1,26 +1,32 @@
 package com.example.sandoughentezar.api
 
 import com.example.sandoughentezar.models.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import okhttp3.RequestBody
 import retrofit2.Response
 import javax.inject.Inject
 
 class ApiServiceResult @Inject constructor(var apiService: ApiService) {
 
-    suspend fun login(map: HashMap<String, String>): Response<LoginResponseModel> =
-        apiService.login(map)
+    suspend fun login(map: HashMap<String, String>): Flow<LoginResponseModel> =
+        flow { emit(apiService.login(map)) }
 
     suspend fun register(
         requestBody: RequestBody
-    ): Response<StringResponseModel> =
-        apiService.register(requestBody)
+    ): Flow<StringResponseModel> = flow { emit(apiService.register(requestBody)) }
+
+
+    suspend fun getUserInfo(params: HashMap<String, String>): Flow<UserModel> =
+        flow { emit(apiService.getUserInfo(params)) }
+
+    suspend fun validatePhone(params: HashMap<String, String>): Flow<ValidatePhoneResponseModel> =
+        flow { emit(apiService.validatePhone(params)) }
 
     suspend fun uploadImages(
         requestBody: RequestBody
     ): Response<StringResponseModel> = apiService.uploadImages(requestBody)
 
-    suspend fun validatePhone(params: HashMap<String, String>): Response<ValidatePhoneResponseModel> =
-        apiService.validatePhone(params)
 
     suspend fun getMyScore(params: HashMap<String, String>): Response<ScoreResponseModel> =
         apiService.getMyScore(params)
@@ -28,8 +34,6 @@ class ApiServiceResult @Inject constructor(var apiService: ApiService) {
     suspend fun getDeferredinstallments(params: HashMap<String, String>): Response<ArrayList<InstallmentModel>> =
         apiService.getDeferredinstallments(params)
 
-    suspend fun getUserInfo(params: HashMap<String, String>): Response<UserModel> =
-        apiService.getUserInfo(params)
 
     suspend fun getRecordPayment(params: HashMap<String, String>): Response<ArrayList<PaymentModel>> =
         apiService.getRecordPayment(params)

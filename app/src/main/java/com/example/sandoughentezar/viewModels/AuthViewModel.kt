@@ -33,18 +33,15 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
     private val forgotPass = MutableLiveData<Resource<ForgotPassModel>>()
 
     fun login(map: HashMap<String, String>): LiveData<Resource<LoginResponseModel>> {
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = repo.login(map)
+        viewModelScope.launch {
             loginRes.postValue(Resource.loading())
-            try {
-                if (response.isSuccessful && response.body() != null) {
-                    loginRes.postValue(Resource.success(response.body()) as Resource<LoginResponseModel>?)
-                } else {
-                    loginRes.postValue(Resource.failure(response.toString()))
+            repo.login(map)
+                .flowOn(Dispatchers.IO)
+                .catch { _e ->
+                    loginRes.postValue(Resource.failure(_e.toString()))
+                }.collect {
+                    loginRes.postValue(Resource.success(it))
                 }
-            } catch (e: Exception) {
-                loginRes.postValue(Resource.failure(e.toString()))
-            }
         }
         return loginRes
     }
@@ -52,41 +49,31 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
     fun register(
         requestBody: RequestBody
     ): SingleLiveEvent<Resource<StringResponseModel>> {
-        viewModelScope.launch(Dispatchers.Main) {
-            val response = repo.register(
-                requestBody
-            )
+        viewModelScope.launch {
             registerRes.postValue(Resource.loading())
-
-            try {
-                if (response.isSuccessful && response.body() != null) {
-                    Log.d("register", response.body().toString())
-                    registerRes.postValue(Resource.success(response.body()) as Resource<StringResponseModel>)
-                } else {
-                    Log.d("register_error", response.body().toString())
-                    registerRes.postValue(Resource.failure(response.errorBody().toString()))
+            repo.register(
+                requestBody
+            ).flowOn(Dispatchers.IO)
+                .catch { _e ->
+                    registerRes.postValue(Resource.failure(_e.toString()))
                 }
-            } catch (e: Exception) {
-                Log.d("register_exception", e.toString())
-                registerRes.postValue(Resource.failure(e.toString()))
-            }
+                .collect {
+                    registerRes.postValue(Resource.success(it))
+                }
         }
         return registerRes
     }
 
     fun validatePhone(params: HashMap<String, String>): LiveData<Resource<ValidatePhoneResponseModel>> {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             validatePhoneRes.postValue(Resource.loading())
-            val response = repo.validatePhone(params)
-            try {
-                if (response.isSuccessful && response.body() != null) {
-                    validatePhoneRes.postValue(Resource.success(response.body()) as Resource<ValidatePhoneResponseModel>?)
-                } else {
-                    validatePhoneRes.postValue(Resource.failure(response.errorBody().toString()))
+            repo.validatePhone(params)
+                .flowOn(Dispatchers.IO)
+                .catch { _e ->
+                    validatePhoneRes.postValue(Resource.failure(_e.toString()))
+                }.collect {
+                    validatePhoneRes.postValue(Resource.success(it))
                 }
-            } catch (e: Exception) {
-                validatePhoneRes.postValue(Resource.failure(e.toString()))
-            }
         }
         return validatePhoneRes
     }
@@ -114,7 +101,7 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
     ): SingleLiveEvent<Resource<StringResponseModel>> {
         viewModelScope.launch(Dispatchers.IO) {
             uploadImagesLD.postValue(Resource.loading())
-            val response = repo.uploadImages( requestBody)
+            val response = repo.uploadImages(requestBody)
             try {
                 if (response.isSuccessful && response.body() != null) {
                     uploadImagesLD.postValue(Resource.success(response.body()) as Resource<StringResponseModel>?)

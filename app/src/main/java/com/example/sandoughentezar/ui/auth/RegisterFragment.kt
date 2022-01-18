@@ -2,22 +2,20 @@ package com.example.sandoughentezar.ui.auth
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -29,7 +27,6 @@ import com.example.sandoughentezar.databinding.FragmentRegisterBinding
 import com.example.sandoughentezar.viewModels.AuthViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -124,6 +121,13 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                 binding.btnNextPage.setBackgroundResource(R.drawable.shape_btn_login_enable)
             }
         }
+    }
+
+    fun isConnected(): Boolean {
+        val connectivityManager =
+            requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val netInfo = connectivityManager.activeNetworkInfo
+        return netInfo != null && netInfo.isConnected
     }
 
     private fun setupWaitDialog() {
@@ -304,7 +308,6 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                 "لطفا شماره موبایل دوم خود را به درستی وارد نمایید",
                 Toast.LENGTH_SHORT
             ).show()
-
         } else {
             binding.progressBar.showProgressBar()
             authViewModel.register(
@@ -318,12 +321,9 @@ class RegisterFragment : Fragment(), View.OnClickListener {
 
                         when (it.data!!.statusCode) {
                             200 -> {
-//                            var bundle = Bundle()
-//                            bundle.putString("national_id", national_id)
-//                            findNavController().navigate(
-//                                R.id.action_accountDataFragment2_to_uploadImageFragment2,
-//                                bundle
-//                            )
+                                findNavController().navigate(
+                                    R.id.action_registerFragment_self,
+                                )
                                 setupWaitDialog()
                             }
                             500 -> {
@@ -366,43 +366,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                     }
                 }
             }
-//            var bundle = Bundle()
-//            bundle.putString(
-//                "national_id",
-//                binding.edtNationalId.text.toString()
-//            )
-//            bundle.putString(
-//                "name",
-//                binding.edtFullName.text.toString()
-//            )
-//            bundle.putString(
-//                "mobile1",
-//                binding.edtMobileNumber1.text.toString()
-//            )
-//            bundle.putString(
-//                "address",
-//                binding.edtAddress.text.toString()
-//            )
-//            if (binding.edtMobileNumber2.text.isNotBlank()){
-//                bundle.putString(
-//                    "mobile2",
-//                    binding.edtMobileNumber2.text.toString()
-//                )
-//            }
-//            if (binding.edtPhoneNumber.text.isNotBlank()){
-//                bundle.putString(
-//                    "phone",
-//                    binding.edtPhoneNumber.text.toString()
-//                )
-//            }
-//            bundle.putString(
-//                "postalCode",
-//                binding.edtPostalCode.text.toString()
-//            )
-//            findNavController().navigate(
-//                R.id.action_registerFragment_to_accountDataFragment2,
-//                bundle
-//            )
+
         }
     }
 
@@ -534,25 +498,6 @@ class RegisterFragment : Fragment(), View.OnClickListener {
             .addFormDataPart("account_number", binding.edtAccountNumber.text.toString())
             .addFormDataPart("card1", binding.edtCardNumber1.text.toString())
             .addFormDataPart("shaba", binding.edtShaba.text.toString())
-//            .addPart(
-//                MultipartBody.Part.createFormData(
-//                    "card_image",
-//                    card_file!!.name,
-//                    RequestBody.create(
-//                        "image".toMediaTypeOrNull(),
-//                        card_file!!
-//                    )
-//                )
-//            ).addPart(
-//                MultipartBody.Part.createFormData(
-//                    "passport_image",
-//                    passport_file!!.name,
-//                    RequestBody.create(
-//                        "image".toMediaTypeOrNull(),
-//                        passport_file!!
-//                    )
-//                )
-//            )
             .addFormDataPart("mobile2", mobile2!!)
             .addFormDataPart("phone", phone!!)
             .addFormDataPart("card2", card2!!)

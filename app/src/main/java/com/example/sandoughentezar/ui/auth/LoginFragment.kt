@@ -1,11 +1,15 @@
 package com.example.sandoughentezar.ui.auth
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -34,7 +38,15 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        changeTextColor(view)
         selectViews()
+        binding.txtAboutApp.setOnClickListener {
+            val browserIntent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://topkook.ir/")
+            )
+            startActivity(browserIntent)
+        }
     }
 
     private fun selectViews() {
@@ -133,11 +145,16 @@ class LoginFragment : Fragment(), View.OnClickListener {
                         "خطا در برقراری ارتباط با سرور",
                         Toast.LENGTH_SHORT
                     ).show()
-                    Log.d("loginnnner", it.data.toString())
 
                 }
             }
 
         }
+    }
+
+    private fun changeTextColor(view: View) {
+        val first = " طراحی و توسعه توسط "
+        val last = "<font color='#0032CC'>تاپ کوک</font>"
+        view.findViewById<TextView>(R.id.txt_about_app).text = Html.fromHtml(first + last)
     }
 }

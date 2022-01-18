@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_registerFragment_to_accountDataFragment2"
             app:destination="@id/accountDataFragment2" />
+        <action
+            android:id="@+id/action_registerFragment_self"
+            app:destination="@id/registerFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountDataFragment2"
