@@ -9,37 +9,42 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.sandoughentezar.R
 import com.example.sandoughentezar.api.state.Status
 import com.example.sandoughentezar.databinding.FragmentValidatePhoneBinding
 import com.example.sandoughentezar.ui.MainActivity
 import com.example.sandoughentezar.viewModels.AuthViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class ValidatePhoneFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentValidatePhoneBinding
     private lateinit var user_id: String
+    private var src: String? = null
     private lateinit var code: String
     private val authViewModel by viewModels<AuthViewModel>()
     private var sharedPreferences: SharedPreferences? = null
-
+    var bottomSheetDialog: BottomSheetDialog? = null
+    var bottomSheetView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             user_id = it["user_id"].toString()
+            src = it["src"].toString()
         }
     }
 
@@ -54,6 +59,16 @@ class ValidatePhoneFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+    }
+
+    private fun setupWaitDialog() {
+        bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        bottomSheetView = layoutInflater.inflate(
+            R.layout.dialog_wait_for_accept,
+            requireActivity().findViewById<LinearLayout>(R.id.root_wait)
+        )
+        bottomSheetDialog!!.setContentView(bottomSheetView!!)
+        bottomSheetDialog!!.show()
     }
 
     private fun setTimer() {
@@ -205,7 +220,7 @@ class ValidatePhoneFragment : Fragment(), View.OnClickListener {
                     binding.progressBar.hideProgressBar()
                 }
                 Status.Loading -> {
-                  binding.progressBar.showProgressBar()
+                    binding.progressBar.showProgressBar()
                 }
             }
         }
@@ -227,16 +242,22 @@ class ValidatePhoneFragment : Fragment(), View.OnClickListener {
                         (binding.edtVerifyCodeFragmentEdt1.text.toString() + binding.edtVerifyCodeFragmentEdt2.text.toString()
                                 + binding.edtVerifyCodeFragmentEdt3.text.toString() + binding.edtVerifyCodeFragmentEdt4.text.toString())
                     if (user_code == code) {
-                        sharedPreferences!!.edit().apply {
-                            putString("user_id", user_id).apply()
-                        }
-                        requireActivity().startActivity(
-                            Intent(
-                                requireActivity(),
-                                MainActivity::class.java
+                        if (src == "register") {
+                            setupWaitDialog()
+                        } else {
+                            sharedPreferences!!.edit().apply {
+                                putString("user_id", user_id).apply()
+                            }
+                            requireActivity().startActivity(
+                                Intent(
+                                    requireActivity(),
+                                    MainActivity::class.java
+                                )
                             )
-                        )
-                        requireActivity().finish()
+                            requireActivity().finish()
+                        }
+
+
                     } else {
                         Toast.makeText(requireContext(), "کد اشتباه است", Toast.LENGTH_SHORT).show()
                     }
@@ -256,5 +277,8 @@ class ValidatePhoneFragment : Fragment(), View.OnClickListener {
 
     private fun selectedViews() {
         binding.btnLogin.setOnClickListener(this)
+
     }
+
+
 }

@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
@@ -79,5 +79,14 @@ dependencies {
 
     //progressbar
     implementation 'com.github.shadowalker77:wp7progressbar:1.1.0'
+
+    //fingerprint
+    implementation "androidx.biometric:biometric-ktx:1.2.0-alpha04"
+
+    //autofill sms
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
+
+
 
 }

@@ -10,6 +10,9 @@ import com.example.sandoughentezar.models.CompanyDetailsModel
 import com.example.sandoughentezar.repo.CompanyDetailsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
@@ -22,35 +25,31 @@ class CompanyDetailsViewModel @Inject constructor(var repo: CompanyDetailsRepo) 
     private var aboutUsLD: MutableLiveData<Resource<AboutUsModel>> = MutableLiveData()
 
     fun getCompanyDetails(): MutableLiveData<Resource<CompanyDetailsModel>> {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             companyDetailsLD.postValue(Resource.loading())
-            try {
-                var response = repo.getCompanyDetails()
-                if (response.isSuccessful && response.body() != null) {
-                    companyDetailsLD.postValue(Resource.success(response.body()) as Resource<CompanyDetailsModel>?)
-                } else {
-                    companyDetailsLD.postValue(Resource.failure(response.message()))
+            repo.getCompanyDetails()
+                .flowOn(Dispatchers.IO)
+                .catch { _e ->
+                    companyDetailsLD.postValue(Resource.failure(_e.toString()))
+                }.collect {
+                    companyDetailsLD.postValue(Resource.success(it))
+
                 }
-            } catch (e: Exception) {
-                companyDetailsLD.postValue(Resource.failure(e.toString()))
-            }
         }
         return companyDetailsLD
     }
 
     fun getAboutUs(): MutableLiveData<Resource<AboutUsModel>> {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             aboutUsLD.postValue(Resource.loading())
-            try {
-                var response = repo.getAboutUS()
-                if (response.isSuccessful && response.body() != null) {
-                    aboutUsLD.postValue(Resource.success(response.body()) as Resource<AboutUsModel>?)
-                } else {
-                    aboutUsLD.postValue(Resource.failure(response.message()))
+            repo.getAboutUS()
+                .flowOn(Dispatchers.IO)
+                .catch { _e ->
+                    aboutUsLD.postValue(Resource.failure(_e.toString()))
+                }.collect {
+                    aboutUsLD.postValue(Resource.success(it))
+
                 }
-            } catch (e: Exception) {
-                aboutUsLD.postValue(Resource.failure(e.toString()))
-            }
         }
         return aboutUsLD
     }

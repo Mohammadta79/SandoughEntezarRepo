@@ -6,10 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sandoughentezar.api.state.Resource
-import com.example.sandoughentezar.models.ForgotPassModel
-import com.example.sandoughentezar.models.StringResponseModel
-import com.example.sandoughentezar.models.LoginResponseModel
-import com.example.sandoughentezar.models.ValidatePhoneResponseModel
+import com.example.sandoughentezar.models.*
 import com.example.sandoughentezar.repo.AuthRepo
 import com.example.sandoughentezar.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,7 +24,7 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
 
     private val loginRes = SingleLiveEvent<Resource<LoginResponseModel>>()
-    private val registerRes = SingleLiveEvent<Resource<StringResponseModel>>()
+    private val registerRes = SingleLiveEvent<Resource<RegisterResponseModel>>()
     private val uploadImagesLD = SingleLiveEvent<Resource<StringResponseModel>>()
     private val validatePhoneRes = MutableLiveData<Resource<ValidatePhoneResponseModel>>()
     private val forgotPass = MutableLiveData<Resource<ForgotPassModel>>()
@@ -48,7 +45,7 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
 
     fun register(
         requestBody: RequestBody
-    ): SingleLiveEvent<Resource<StringResponseModel>> {
+    ): SingleLiveEvent<Resource<RegisterResponseModel>> {
         viewModelScope.launch {
             registerRes.postValue(Resource.loading())
             repo.register(
@@ -79,18 +76,15 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
     }
 
     fun forgotPass(params: HashMap<String, String>): LiveData<Resource<ForgotPassModel>> {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             forgotPass.postValue(Resource.loading())
-            val response = repo.forgotPass(params)
-            try {
-                if (response.isSuccessful && response.body() != null) {
-                    forgotPass.postValue(Resource.success(response.body()) as Resource<ForgotPassModel>?)
-                } else {
-                    forgotPass.postValue(Resource.failure(response.errorBody().toString()))
+            repo.forgotPass(params)
+                .flowOn(Dispatchers.IO)
+                .catch { _e ->
+                    forgotPass.postValue(Resource.failure(_e.toString()))
+                }.collect {
+                    forgotPass.postValue(Resource.success(it))
                 }
-            } catch (e: Exception) {
-                forgotPass.postValue(Resource.failure(e.toString()))
-            }
         }
         return forgotPass
     }
@@ -99,18 +93,17 @@ class AuthViewModel @Inject constructor(var repo: AuthRepo) : ViewModel() {
 
         requestBody: RequestBody
     ): SingleLiveEvent<Resource<StringResponseModel>> {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             uploadImagesLD.postValue(Resource.loading())
-            val response = repo.uploadImages(requestBody)
-            try {
-                if (response.isSuccessful && response.body() != null) {
-                    uploadImagesLD.postValue(Resource.success(response.body()) as Resource<StringResponseModel>?)
-                } else {
-                    uploadImagesLD.postValue(Resource.failure(response.errorBody().toString()))
+
+            repo.uploadImages(requestBody)
+                .flowOn(Dispatchers.IO)
+                .catch { _e ->
+                    uploadImagesLD.postValue(Resource.failure(_e.toString()))
                 }
-            } catch (e: Exception) {
-                uploadImagesLD.postValue(Resource.failure(e.toString()))
-            }
+                .collect {
+                    uploadImagesLD.postValue(Resource.success(it))
+                }
         }
         return uploadImagesLD
     }

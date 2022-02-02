@@ -23,17 +23,17 @@ interface ApiService {
     @POST("/api/register_personal_data")
     suspend fun register(
         @Body requestBody: RequestBody
-    ): StringResponseModel
+    ): RegisterResponseModel
 
 
     @POST("/api/register/images")
     suspend fun uploadImages(
         @Body requestBody: RequestBody
-    ): Response<StringResponseModel>
+    ): StringResponseModel
 
     @FormUrlEncoded
     @POST("/api/deferredinstallments")
-    suspend fun getDeferredinstallments(@FieldMap params: HashMap<String, String>): Response<ArrayList<InstallmentModel>>
+    suspend fun getDeferredinstallments(@FieldMap params: HashMap<String, String>): ArrayList<InstallmentModel>
 
 
     @FormUrlEncoded
@@ -43,40 +43,40 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("/api/paymentrecord")
-    suspend fun getRecordPayment(@FieldMap params: HashMap<String, String>): Response<ArrayList<PaymentModel>>
+    suspend fun getRecordPayment(@FieldMap params: HashMap<String, String>): ArrayList<PaymentModel>
 
 
     @FormUrlEncoded
     @POST("/api/loanrecord")
-    suspend fun getLoanRecord(@FieldMap params: HashMap<String, String>): Response<ArrayList<LoanModel>>
+    suspend fun getLoanRecord(@FieldMap params: HashMap<String, String>): ArrayList<LoanModel>
 
 
     @FormUrlEncoded
     @POST("/api/loaninstallment")
-    suspend fun getLoanInstallment(@FieldMap params: HashMap<String, String>): Response<ArrayList<InstallmentModel>>
+    suspend fun getLoanInstallment(@FieldMap params: HashMap<String, String>): ArrayList<InstallmentModel>
 
 
     @FormUrlEncoded
     @POST("/api/totalpayment")
-    suspend fun getTotalPayment(@FieldMap params: HashMap<String, String>): Response<TotalModel>
+    suspend fun getTotalPayment(@FieldMap params: HashMap<String, String>): TotalModel
 
 
     @FormUrlEncoded
     @POST("/api/getmessages")
-    suspend fun getMessage(@FieldMap params: HashMap<String, String>): Response<ArrayList<MessageModel>>
+    suspend fun getMessage(@FieldMap params: HashMap<String, String>): ArrayList<MessageModel>
 
     @FormUrlEncoded
     @POST("/api/getreply")
-    suspend fun getReply(@FieldMap params: HashMap<String, String>): Response<ReplyModel>
+    suspend fun getReply(@FieldMap params: HashMap<String, String>): ReplyModel
 
 
     @FormUrlEncoded
     @POST("/api/newmessage")
-    suspend fun newMessage(@FieldMap params: HashMap<String, String>): Response<StringResponseModel>
+    suspend fun newMessage(@FieldMap params: HashMap<String, String>): StringResponseModel
 
 
     @GET("/api/news")
-    suspend fun getNews(): Response<ArrayList<NewsModel>>
+    suspend fun getNews(): ArrayList<NewsModel>
 
 
     @FormUrlEncoded
@@ -91,24 +91,24 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("/api/forgotpass")
-    suspend fun forgotPassword(@FieldMap params: HashMap<String, String>): Response<ForgotPassModel>
+    suspend fun forgotPassword(@FieldMap params: HashMap<String, String>): ForgotPassModel
 
 
     @GET("/api/getcompanydetails")
-    suspend fun getCompanyDetails(): Response<CompanyDetailsModel>
+    suspend fun getCompanyDetails(): CompanyDetailsModel
 
     @GET("/api/getaboutus")
-    suspend fun getAboutUs(): Response<AboutUsModel>
+    suspend fun getAboutUs(): AboutUsModel
 
     @FormUrlEncoded
     @POST("/api/getrequests")
-    suspend fun getRequests(@FieldMap params: HashMap<String, String>): Response<ArrayList<RequestModel>>
+    suspend fun getRequests(@FieldMap params: HashMap<String, String>): ArrayList<RequestModel>
 
     @FormUrlEncoded
     @POST("/api/newrequest")
-    suspend fun newRequest(@FieldMap params: HashMap<String, String>): Response<StringResponseModel>
+    suspend fun newRequest(@FieldMap params: HashMap<String, String>): StringResponseModel
 
     @FormUrlEncoded
     @POST("/api/requestreply")
-    suspend fun requestReply(@FieldMap params: HashMap<String, String>): Response<RequestReplyModel>
+    suspend fun requestReply(@FieldMap params: HashMap<String, String>): RequestReplyModel
 }

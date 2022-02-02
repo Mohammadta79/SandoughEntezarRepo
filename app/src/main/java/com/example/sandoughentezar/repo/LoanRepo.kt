@@ -9,9 +9,9 @@ import javax.inject.Inject
 
 class LoanRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
 
-    suspend fun getLoanRecord(params: HashMap<String, String>): Response<ArrayList<LoanModel>> =
+    suspend fun getLoanRecord(params: HashMap<String, String>): Flow<ArrayList<LoanModel>> =
         apiServiceResult.getLoanRecord(params)
 
-    suspend fun getLoanInstallment(params: HashMap<String, String>): Response<ArrayList<InstallmentModel>> =
+    suspend fun getLoanInstallment(params: HashMap<String, String>): Flow<ArrayList<InstallmentModel>> =
         apiServiceResult.getLoanInstallment(params)
 }

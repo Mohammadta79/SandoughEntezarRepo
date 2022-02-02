@@ -22,6 +22,12 @@
         android:id="@+id/newsFragment"
         android:icon="@drawable/ic_mails"
         android:title="اطلاعیه ها"></item>
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_setting"
+        android:title="تنظیمات"></item>
+
     <item
         android:id="@+id/aboutUsFragment"
         android:icon="@drawable/ic_about_us"

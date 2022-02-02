@@ -1,10 +1,7 @@
 package com.example.sandoughentezar.repo
 
 import com.example.sandoughentezar.api.ApiServiceResult
-import com.example.sandoughentezar.models.ForgotPassModel
-import com.example.sandoughentezar.models.StringResponseModel
-import com.example.sandoughentezar.models.LoginResponseModel
-import com.example.sandoughentezar.models.ValidatePhoneResponseModel
+import com.example.sandoughentezar.models.*
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -19,18 +16,18 @@ class AuthRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
 
     suspend fun register(
         requestBody: RequestBody
-    ): Flow<StringResponseModel> =
+    ): Flow<RegisterResponseModel> =
         apiServiceResult.register(requestBody)
 
     suspend fun uploadImages(
 
         requestBody: RequestBody
-    ): Response<StringResponseModel> =
+    ): Flow<StringResponseModel> =
         apiServiceResult.uploadImages(requestBody)
 
     suspend fun validatePhone(params: HashMap<String, String>): Flow<ValidatePhoneResponseModel> =
         apiServiceResult.validatePhone(params)
 
-    suspend fun forgotPass(params: HashMap<String, String>): Response<ForgotPassModel> =
+    suspend fun forgotPass(params: HashMap<String, String>): Flow<ForgotPassModel> =
         apiServiceResult.forgotPass(params)
 }

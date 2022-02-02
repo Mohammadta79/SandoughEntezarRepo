@@ -1,93 +1,91 @@
-package com.example.sandoughentezar.ui.auth
+package com.example.sandoughentezar.ui.nav_view
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.net.Uri
 import android.os.Bundle
-import android.text.Html
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import androidx.transition.AutoTransition
+import androidx.transition.TransitionManager
 import com.example.sandoughentezar.R
 import com.example.sandoughentezar.api.state.Status
-import com.example.sandoughentezar.databinding.FragmentLoginBinding
+import com.example.sandoughentezar.databinding.FragmentSettingsBinding
 import com.example.sandoughentezar.ui.MainActivity
 import com.example.sandoughentezar.viewModels.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.FormBody
-import okhttp3.RequestBody
 import java.util.concurrent.Executor
 
 @AndroidEntryPoint
-class LoginFragment : Fragment(), View.OnClickListener {
+class SettingsFragment : Fragment() {
 
+    private lateinit var binding: FragmentSettingsBinding
     private val authViewModel by viewModels<AuthViewModel>()
-    private lateinit var binding: FragmentLoginBinding
-    private var sharedPreferences: SharedPreferences? = null
-
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
+    private var sharedPreferences: SharedPreferences? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupBiometic()
-        biometricPrompt.authenticate(promptInfo)
-        changeTextColor(view)
-        selectViews()
         sharedPreferences = requireActivity().getSharedPreferences("shp", Context.MODE_PRIVATE)
-        binding.txtAboutApp.setOnClickListener {
-            val browserIntent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://topkook.ir/")
-            )
-            startActivity(browserIntent)
+        binding.txtFingerPrint.setOnClickListener {
+            animateFingerCard()
         }
         binding.btnFingerprint.setOnClickListener {
-            biometricPrompt.authenticate(promptInfo)
+            if (checkInput()) {
+                biometricPrompt.authenticate(promptInfo)
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "لطفا فیلدها را با دقت پر کنید",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
         }
     }
 
-    private fun selectViews() {
-        binding.btnLogin.setOnClickListener(this)
-        binding.txtForgotPass.setOnClickListener(this)
-    }
+    private fun checkInput(): Boolean =
+        !(binding.edtNationalId.text.toString()
+            .isBlank() || binding.edtPassword.text.toString().isBlank())
 
-    override fun onClick(v: View?) {
-        when (v!!.id) {
-            binding.btnLogin.id -> {
-                if (checkInput()) {
-                    login()
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "لطفا تمامی فیلد ها را وارد نمایید",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-            binding.txtForgotPass.id -> {
-                findNavController().navigate(R.id.action_authFragment_to_forgotPasswordFragment)
-            }
+    private fun animateFingerCard() {
+        if (binding.cardFinger.visibility == View.VISIBLE) {
+            TransitionManager.beginDelayedTransition(
+                binding.rootFinger,
+                AutoTransition()
+            )
+            binding.cardFinger.visibility = View.GONE
+        } else {
+            TransitionManager.beginDelayedTransition(
+                binding.rootFinger,
+                AutoTransition()
+            )
+            binding.cardFinger.visibility = View.VISIBLE
         }
     }
 
@@ -97,10 +95,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
         map["password"] = binding.edtPassword.text.toString()
         return map
     }
-
-    private fun checkInput(): Boolean =
-        !(binding.edtNationalId.text.toString()
-            .isBlank() || binding.edtPassword.text.toString().isBlank())
 
     private fun login() {
         binding.progressBar.showProgressBar()
@@ -113,15 +107,18 @@ class LoginFragment : Fragment(), View.OnClickListener {
                         "ok" -> {
                             binding.progressBar.hideProgressBar()
                             sharedPreferences!!.edit().apply {
-                                putString("user_id", it.data.member_id).apply()
-                            }
-                            requireActivity().startActivity(
-                                Intent(
-                                    requireActivity(),
-                                    MainActivity::class.java
+                                putString(
+                                    "login_username",
+                                    binding.edtNationalId.text.toString()
                                 )
-                            )
-                            requireActivity().finish()
+                                putString("login_password", binding.edtPassword.text.toString())
+
+                            }.apply()
+                            Toast.makeText(
+                                requireContext(),
+                                "اثر انگشت شما با موفقیت تعریف شد",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                         "waiting" -> {
                             binding.progressBar.hideProgressBar()
@@ -193,15 +190,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
                     result: BiometricPrompt.AuthenticationResult
                 ) {
                     super.onAuthenticationSucceeded(result)
-                    binding.edtNationalId.setText(
-                        sharedPreferences!!.getString("login_username", null)
-                    )
-                    binding.edtPassword.setText(
-                        sharedPreferences!!.getString(
-                            "login_password",
-                            null
-                        )
-                    )
                     login()
                 }
 
@@ -213,15 +201,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
         promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("سنسور اثر انگشت")
-            .setSubtitle("با استفاده از سنسور اثر انگشت وارد شوید")
+            .setSubtitle("با استفاده از سنسور اثر انگشت اطلاعات خود را ثبت کنید")
             .setNegativeButtonText("بستن")
             .build()
 
     }
 
-    private fun changeTextColor(view: View) {
-        val first = " طراحی و توسعه توسط "
-        val last = "<font color='#0032CC'>تاپ کوک</font>"
-        view.findViewById<TextView>(R.id.txt_about_app).text = Html.fromHtml(first + last)
-    }
+
 }

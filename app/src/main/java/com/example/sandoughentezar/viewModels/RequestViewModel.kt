@@ -10,6 +10,9 @@ import com.example.sandoughentezar.models.StringResponseModel
 import com.example.sandoughentezar.repo.RequestRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,55 +25,46 @@ class RequestViewModel @Inject constructor(var repo: RequestRepo) : ViewModel() 
     private var replyRequest = MutableLiveData<Resource<RequestReplyModel>>()
 
     fun getRequests(params: HashMap<String, String>): MutableLiveData<Resource<ArrayList<RequestModel>>> {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                requestsLD.postValue(Resource.loading())
-                var response = repo.getRequests(params)
-                if (response.isSuccessful && response.body() != null) {
-                    requestsLD.postValue(Resource.success(response.body()) as Resource<ArrayList<RequestModel>>?)
-                } else {
-                    requestsLD.postValue(Resource.failure(response.message()))
+        viewModelScope.launch {
+            requestsLD.postValue(Resource.loading())
+            repo.getRequests(params)
+                .flowOn(Dispatchers.IO)
+                .catch { _e ->
+                    requestsLD.postValue(Resource.failure(_e.toString()))
+                }.collect {
+                    requestsLD.postValue(Resource.success(it))
                 }
-
-            } catch (e: Exception) {
-                requestsLD.postValue(Resource.failure(e.toString()))
-            }
         }
         return requestsLD
     }
 
     fun newRequest(params: HashMap<String, String>): MutableLiveData<Resource<StringResponseModel>> {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                newRequestsLD.postValue(Resource.loading())
-                var response = repo.newRequest(params)
-                if (response.isSuccessful && response.body() != null) {
-                    newRequestsLD.postValue(Resource.success(response.body()) as Resource<StringResponseModel>?)
-                } else {
-                    newRequestsLD.postValue(Resource.failure(response.message()))
-                }
+        viewModelScope.launch {
 
-            } catch (e: Exception) {
-                newRequestsLD.postValue(Resource.failure(e.toString()))
-            }
+            newRequestsLD.postValue(Resource.loading())
+            repo.newRequest(params)
+                .flowOn(Dispatchers.IO)
+                .catch { _e ->
+                    newRequestsLD.postValue(Resource.failure(_e.toString()))
+                }.collect {
+                    newRequestsLD.postValue(Resource.success(it))
+
+                }
         }
         return newRequestsLD
     }
 
     fun requestReply(params: HashMap<String, String>): MutableLiveData<Resource<RequestReplyModel>> {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                replyRequest.postValue(Resource.loading())
-                var response = repo.requestReply(params)
-                if (response.isSuccessful && response.body() != null) {
-                    replyRequest.postValue(Resource.success(response.body()) as Resource<RequestReplyModel>?)
-                } else {
-                    replyRequest.postValue(Resource.failure(response.message()))
-                }
+        viewModelScope.launch {
 
-            } catch (e: Exception) {
-                replyRequest.postValue(Resource.failure(e.toString()))
-            }
+            replyRequest.postValue(Resource.loading())
+            repo.requestReply(params)
+                .flowOn(Dispatchers.IO)
+                .catch { _e ->
+                    replyRequest.postValue(Resource.failure(_e.toString()))
+                }.collect {
+                    replyRequest.postValue(Resource.success(it))
+                }
         }
         return replyRequest
     }

@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class PaymentRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
 
-    suspend fun getRecordPayment(params: HashMap<String, String>): Response<ArrayList<PaymentModel>> =
+    suspend fun getRecordPayment(params: HashMap<String, String>): Flow<ArrayList<PaymentModel>> =
         apiServiceResult.getRecordPayment(params)
 
 }

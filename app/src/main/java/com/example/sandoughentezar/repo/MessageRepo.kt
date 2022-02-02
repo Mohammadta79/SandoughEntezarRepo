@@ -10,12 +10,12 @@ import javax.inject.Inject
 
 class MessageRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
 
-    suspend fun getMessage(params: HashMap<String, String>): Response<ArrayList<MessageModel>> =
+    suspend fun getMessage(params: HashMap<String, String>): Flow<ArrayList<MessageModel>> =
         apiServiceResult.getMessage(params)
 
-    suspend fun newMessage(params: HashMap<String, String>): Response<StringResponseModel> =
+    suspend fun newMessage(params: HashMap<String, String>): Flow<StringResponseModel> =
         apiServiceResult.newMessage(params)
 
-    suspend fun getReply(params: HashMap<String, String>): Response<ReplyModel> =
+    suspend fun getReply(params: HashMap<String, String>): Flow<ReplyModel> =
         apiServiceResult.getReply(params)
 }

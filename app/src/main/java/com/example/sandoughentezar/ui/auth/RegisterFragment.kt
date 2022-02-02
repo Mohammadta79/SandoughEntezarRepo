@@ -321,10 +321,16 @@ class RegisterFragment : Fragment(), View.OnClickListener {
 
                         when (it.data!!.statusCode) {
                             200 -> {
+
+                                var bundle = Bundle()
+                                bundle.putString("user_id", it.data.member_id)
+                                bundle.putString("src", "register")
+                                bundle.putString("mobile", binding.edtMobileNumber1.text.toString())
                                 findNavController().navigate(
-                                    R.id.action_registerFragment_self,
+                                    R.id.action_authFragment_to_validatePhoneFragment2,
+                                    bundle
                                 )
-                                setupWaitDialog()
+
                             }
                             500 -> {
                                 Toast.makeText(

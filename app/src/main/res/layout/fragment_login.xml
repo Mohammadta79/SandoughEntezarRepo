@@ -78,7 +78,7 @@
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_login"
+        android:layout_below="@id/edt_national_id"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         app:animationDuration="2300"
@@ -111,4 +111,14 @@
         android:textColor="@color/black"
         android:textSize="14sp"></TextView>
 
+    <ImageView
+        android:id="@+id/btn_fingerprint"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:padding="8dp"
+        android:src="@drawable/ic_fingerprint"
+        app:tint="@color/AccentColor"></ImageView>
 </RelativeLayout>

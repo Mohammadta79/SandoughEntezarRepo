@@ -22,18 +22,15 @@ class NewsViewModel @Inject constructor(var repo: NewsRepo) : ViewModel() {
     private var newsLD = MutableLiveData<Resource<ArrayList<NewsModel>>>()
 
     fun getNews(): LiveData<Resource<ArrayList<NewsModel>>> {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                newsLD.postValue(Resource.loading())
-                var response = repo.getNews()
-                if (response.isSuccessful && response.body() != null) {
-                    newsLD.postValue(Resource.success(response.body()) as Resource<ArrayList<NewsModel>>?)
-                } else {
-                    newsLD.postValue(Resource.failure(response.message()))
+        viewModelScope.launch {
+            newsLD.postValue(Resource.loading())
+            repo.getNews()
+                .flowOn(Dispatchers.IO)
+                .catch { _e ->
+                    newsLD.postValue(Resource.failure(_e.toString()))
+                }.collect {
+                    newsLD.postValue(Resource.success(it))
                 }
-            } catch (e: Exception) {
-                newsLD.postValue(Resource.failure(e.toString()))
-            }
         }
         return newsLD
     }

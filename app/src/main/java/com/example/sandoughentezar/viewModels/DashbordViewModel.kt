@@ -42,40 +42,33 @@ class DashbordViewModel @Inject constructor(var repo: DashbordRepo) : ViewModel(
     }
 
     fun getDeffearedInstllment(params: HashMap<String, String>): LiveData<Resource<ArrayList<InstallmentModel>>> {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                deffearedInstllment.postValue(Resource.loading())
-                val response = repo.getDeferredinstallments(params)
-                if (response.isSuccessful && response.body() != null) {
-                    deffearedInstllment.postValue(Resource.success(response.body()) as Resource<ArrayList<InstallmentModel>>?)
-                } else {
-                    deffearedInstllment.postValue(Resource.failure(response.errorBody().toString()))
+        viewModelScope.launch {
+            deffearedInstllment.postValue(Resource.loading())
+            repo.getDeferredinstallments(params)
+                .flowOn(Dispatchers.IO)
+                .catch { _e ->
+                    deffearedInstllment.postValue(Resource.failure(_e.toString()))
+                }.collect {
+                    deffearedInstllment.postValue(Resource.success(it))
                 }
-            } catch (e: Exception) {
-                deffearedInstllment.postValue(Resource.failure(e.toString()))
-            }
         }
         return deffearedInstllment
     }
 
 
     fun getTotalPayment(params: HashMap<String, String>): LiveData<Resource<TotalModel>> {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                totalPaymentLD.postValue(Resource.loading())
-                var response = repo.getTotalPayment(params)
-                if (response.isSuccessful && response.body() != null) {
-                    totalPaymentLD.postValue(Resource.success(response.body()) as Resource<TotalModel>?)
-                } else {
-                    totalPaymentLD.postValue(Resource.failure(response.message()))
+        viewModelScope.launch {
+            totalPaymentLD.postValue(Resource.loading())
+            repo.getTotalPayment(params)
+                .flowOn(Dispatchers.IO)
+                .catch { _e ->
+                    totalPaymentLD.postValue(Resource.failure(_e.toString()))
+                }.collect {
+                    totalPaymentLD.postValue(Resource.success(it))
                 }
-            } catch (e: Exception) {
-                totalPaymentLD.postValue(Resource.failure(e.toString()))
-            }
         }
         return totalPaymentLD
     }
-
 
 
 }

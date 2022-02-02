@@ -120,5 +120,10 @@
         android:name="com.example.sandoughentezar.ui.request_action.LoanRequestDetailsFragment"
         android:label="fragment_loan_request_details"
         tools:layout="@layout/fragment_loan_request_details" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.sandoughentezar.ui.nav_view.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

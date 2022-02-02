@@ -21,18 +21,16 @@ class PaymentViewModel @Inject constructor(var repo: PaymentRepo) : ViewModel() 
     private var paymentRecordLd = MutableLiveData<Resource<ArrayList<PaymentModel>>>()
 
     fun getPaymentRecords(params: HashMap<String, String>): LiveData<Resource<ArrayList<PaymentModel>>> {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                paymentRecordLd.postValue(Resource.loading())
-                var response = repo.getRecordPayment(params)
-                if (response.isSuccessful && response.body() != null) {
-                    paymentRecordLd.postValue(Resource.success(response.body()) as Resource<ArrayList<PaymentModel>>?)
-                } else {
-                    paymentRecordLd.postValue(Resource.failure(response.message()))
+        viewModelScope.launch {
+            paymentRecordLd.postValue(Resource.loading())
+            repo.getRecordPayment(params)
+                .flowOn(Dispatchers.IO)
+                .catch { _e ->
+                    paymentRecordLd.postValue(Resource.failure(_e.toString()))
                 }
-            } catch (e: Exception) {
-                paymentRecordLd.postValue(Resource.failure(e.toString()))
-            }
+                .collect {
+                    paymentRecordLd.postValue(Resource.success(it))
+                }
         }
         return paymentRecordLd
     }

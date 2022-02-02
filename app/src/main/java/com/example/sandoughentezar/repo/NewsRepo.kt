@@ -8,5 +8,5 @@ import javax.inject.Inject
 
 class NewsRepo @Inject constructor(var apiServiceResult: ApiServiceResult) {
 
-    suspend fun getNews(): Response<ArrayList<NewsModel>> = apiServiceResult.getNews()
+    suspend fun getNews(): Flow<ArrayList<NewsModel>> = apiServiceResult.getNews()
 }
