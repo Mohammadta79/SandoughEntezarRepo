@@ -10,6 +10,7 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -347,6 +348,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                                 ).show()
                             }
                             else -> {
+                                Log.d("register_log", it.toString())
                                 Toast.makeText(
                                     requireContext(),
                                     "خطا در برقراری ارتباط با سرور",
@@ -362,6 +364,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                         binding.btnNextPage.isEnabled = false
                     }
                     Status.Failure -> {
+                        Log.d("register_log", it.toString())
                         binding.progressBar.hideProgressBar()
                         binding.btnNextPage.isEnabled = true
                         Toast.makeText(

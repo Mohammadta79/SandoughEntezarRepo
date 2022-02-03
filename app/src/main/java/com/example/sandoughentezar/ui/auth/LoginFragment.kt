@@ -51,7 +51,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupBiometic()
-        biometricPrompt.authenticate(promptInfo)
         changeTextColor(view)
         selectViews()
         sharedPreferences = requireActivity().getSharedPreferences("shp", Context.MODE_PRIVATE)

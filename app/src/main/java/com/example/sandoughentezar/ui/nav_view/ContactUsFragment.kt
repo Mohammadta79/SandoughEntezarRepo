@@ -50,7 +50,11 @@ class ContactUsFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             binding.contactUsEmail1.id -> {
-                sendEmail(email1!!)
+                try {
+                    sendEmail(email1!!)
+                }catch (e:Exception){
+
+                }
             }
             binding.contactUsMobile1.id -> {
                 if (ContextCompat.checkSelfPermission(
@@ -63,13 +67,24 @@ class ContactUsFragment : Fragment(), View.OnClickListener {
                         1
                     )
                 } else {
-                    callMobileNumber(mobile1!!)
+                    try {
+                        callMobileNumber(mobile1!!)
+                    } catch (e: Exception) {
+
+                    }
+
                 }
             }
             binding.contactUsEmail2.id -> {
-                sendEmail(email2!!)
+                try {
+                    sendEmail(email2!!)
+                }catch (e:Exception){
+
+                }
+
             }
             binding.contactUsMobile2.id -> {
+
                 if (ContextCompat.checkSelfPermission(
                         requireActivity(), Manifest.permission.CALL_PHONE
                     ) != PackageManager.PERMISSION_GRANTED
@@ -80,11 +95,19 @@ class ContactUsFragment : Fragment(), View.OnClickListener {
                         1
                     )
                 } else {
-                    callMobileNumber(mobile2!!)
+                    try {
+                        callMobileNumber(mobile2!!)
+                    }catch (e:Exception){
+
+                    }
                 }
             }
             binding.contactUsEmail3.id -> {
-                sendEmail(email3!!)
+                try {
+                    sendEmail(email3!!)
+                }catch (e:Exception){
+
+                }
             }
             binding.contactUsMobile3.id -> {
                 if (ContextCompat.checkSelfPermission(
@@ -97,7 +120,12 @@ class ContactUsFragment : Fragment(), View.OnClickListener {
                         1
                     )
                 } else {
-                    callMobileNumber(mobile3!!)
+                    try {
+                        callMobileNumber(mobile3!!)
+                    }catch (e:Exception){
+
+                    }
+
                 }
             }
         }
@@ -113,37 +141,52 @@ class ContactUsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun callMobileNumber(mobile: String) {
-        val callIntent = Intent(Intent.ACTION_CALL)
-        callIntent.data = Uri.parse("tel:$mobile")
-        requireActivity().startActivity(callIntent)
+        try {
+            val callIntent = Intent(Intent.ACTION_CALL)
+            callIntent.data = Uri.parse("tel:$mobile")
+            requireActivity().startActivity(callIntent)
+        } catch (e: Exception) {
+
+        }
+
     }
 
 
     private fun sendEmail(email: String) {
-        val intent = Intent(Intent.ACTION_SENDTO)
-        intent.data =
-            Uri.parse("mailto:$email")
-        intent.putExtra(Intent.EXTRA_SUBJECT, " موسسه انتظار")
-        if (intent.resolveActivity(requireActivity().packageManager) != null) {
-            startActivity(intent)
+        try {
+            val intent = Intent(Intent.ACTION_SENDTO)
+            intent.data =
+                Uri.parse("mailto:$email")
+            intent.putExtra(Intent.EXTRA_SUBJECT, " موسسه انتظار")
+            if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                startActivity(intent)
+            }
+        } catch (e: Exception) {
+
         }
+
     }
 
     private fun getDetails() {
         viewModel.getCompanyDetails().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.Success -> {
-                    binding.progressBar.hideProgressBar()
-                    binding.txtAddress.text = it.data!!.address
-                    mobile1 = it.data.boss_phone
-                    mobile2 = it.data.assistant_phone
-                    mobile3 = it.data.helper_phone
-                    email1 = it.data.boss_email
-                    email2 = it.data.assistant_email
-                    email3 = it.data.helper_email
-                    binding.txtAdmin1.text = it.data.boss_name
-                    binding.txtAdmin2.text = it.data.assistant_name
-                    binding.txtAdmin3.text = it.data.helper_name
+                    try {
+                        binding.progressBar.hideProgressBar()
+                        binding.txtAddress.text = it.data!!.address
+                        mobile1 = it.data.boss_phone
+                        mobile2 = it.data.assistant_phone
+                        mobile3 = it.data.helper_phone
+                        email1 = it.data.boss_email
+                        email2 = it.data.assistant_email
+                        email3 = it.data.helper_email
+                        binding.txtAdmin1.text = it.data.boss_name
+                        binding.txtAdmin2.text = it.data.assistant_name
+                        binding.txtAdmin3.text = it.data.helper_name
+                    } catch (e: Exception) {
+
+                    }
+
                 }
                 Status.Loading -> {
                     binding.progressBar.showProgressBar()

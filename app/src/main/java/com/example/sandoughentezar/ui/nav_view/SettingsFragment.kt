@@ -97,7 +97,6 @@ class SettingsFragment : Fragment() {
     }
 
     private fun login() {
-        binding.progressBar.showProgressBar()
         authViewModel.login(
             getParams()
         ).observe(viewLifecycleOwner) {
@@ -105,7 +104,6 @@ class SettingsFragment : Fragment() {
                 Status.Success -> {
                     when (it.data!!.status) {
                         "ok" -> {
-                            binding.progressBar.hideProgressBar()
                             sharedPreferences!!.edit().apply {
                                 putString(
                                     "login_username",
@@ -121,7 +119,6 @@ class SettingsFragment : Fragment() {
                             ).show()
                         }
                         "waiting" -> {
-                            binding.progressBar.hideProgressBar()
                             Toast.makeText(
                                 requireContext(),
                                 "اطلاعات شما هنوز توسط مدیر تایید نشده است",
@@ -129,7 +126,6 @@ class SettingsFragment : Fragment() {
                             ).show()
                         }
                         "fail" -> {
-                            binding.progressBar.hideProgressBar()
                             Toast.makeText(
                                 requireContext(),
                                 "کد ملی شما موجود نمی باشد",
@@ -145,7 +141,6 @@ class SettingsFragment : Fragment() {
                             ).show()
                         }
                         else -> {
-                            binding.progressBar.hideProgressBar()
                             Toast.makeText(
                                 requireContext(),
                                 "خطا در برقراری ارتباط با سرور",
@@ -158,10 +153,8 @@ class SettingsFragment : Fragment() {
 
                 }
                 Status.Loading -> {
-                    binding.progressBar.showProgressBar()
                 }
                 Status.Failure -> {
-                    binding.progressBar.hideProgressBar()
                     Toast.makeText(
                         requireContext(),
                         "خطا در برقراری ارتباط با سرور",
