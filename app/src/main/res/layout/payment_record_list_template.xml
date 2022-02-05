@@ -23,7 +23,7 @@
             android:gravity="center"
             android:text="2021/07/04"
             android:textColor="@color/PrimaryText"
-            android:textSize="16sp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"></TextView>
 
@@ -35,7 +35,7 @@
             android:gravity="center"
             android:text=" 500000 تومان"
             android:textColor="@color/PrimaryText"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
             android:gravity="center"
             android:text="123456"
             android:textColor="@color/SecondaryText"
-            android:textSize="18sp"
+            android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@+id/textView2"
             app:layout_constraintTop_toTopOf="@+id/textView2"></TextView>
 
@@ -65,7 +65,7 @@
             android:gravity="center"
             android:text="شناسه پرداخت : "
             android:textColor="@color/PrimaryText"
-            android:textSize="18sp"
+            android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"></TextView>
 

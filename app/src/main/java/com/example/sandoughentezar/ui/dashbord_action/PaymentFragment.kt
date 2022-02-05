@@ -5,7 +5,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,7 @@ import com.example.sandoughentezar.adapters.PaymentRecordsAdapter
 import com.example.sandoughentezar.api.state.Status
 import com.example.sandoughentezar.databinding.FragmentPaymentBinding
 import com.example.sandoughentezar.models.PaymentModel
+import com.example.sandoughentezar.utils.NumberTextWatcherForThousand
 import com.example.sandoughentezar.viewModels.PaymentViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.wdullaer.materialdatetimepicker.JalaliCalendar
@@ -29,7 +31,6 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import dagger.hilt.android.AndroidEntryPoint
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -79,6 +80,7 @@ class PaymentFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDat
             user_id = it.getString("user_id", null).toString()
         }
         getPaymentRecords()
+
 
     }
 
@@ -198,13 +200,17 @@ class PaymentFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDat
             R.layout.dialog_paymant,
             requireActivity().findViewById<LinearLayout>(R.id.payment_dialog_root)
         )
+        val edtNewPayment = bottomSheetView!!.findViewById<EditText>(R.id.edt_amount)
+        edtNewPayment.addTextChangedListener(NumberTextWatcherForThousand(edtNewPayment))
         bottomSheetView!!.findViewById<Button>(R.id.btn_dialog_payment).setOnClickListener {
             Payment(
-                bottomSheetView!!.findViewById<EditText>(R.id.edt_amount).text.toString()
+                NumberTextWatcherForThousand.trimCommaOfString(edtNewPayment.text.toString())
                     .toLong()
             )
 
         }
+
+
         bottomSheetDialog!!.setContentView(bottomSheetView!!)
         bottomSheetDialog!!.show()
     }
